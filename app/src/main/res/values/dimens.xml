@@ -3,4 +3,9 @@
     <dimen name="tab_height">48dp</dimen>
     <dimen name="padding_left_right">16dp</dimen>
     <dimen name="tab_icon_size">24dp</dimen>
+
+    <dimen name="bar_text">18sp</dimen>
+    <dimen name="main_text">16sp</dimen>
+    <dimen name="list_name_text">14sp</dimen>
+    <dimen name="description_text">12sp</dimen>
 </resources>

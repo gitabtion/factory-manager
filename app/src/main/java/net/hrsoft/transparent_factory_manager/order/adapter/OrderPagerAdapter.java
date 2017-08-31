@@ -35,7 +35,7 @@ public class OrderPagerAdapter extends FragmentPagerAdapter {
                 mCurrentFragment = toBeStartOrderFragment;
                 break;
             case OrderContentFragment.ENDED:
-                mCurrentFragment = endedOrderFragment;
+                mCurrentFragment =endedOrderFragment;
                 break;
             default:
                 break;
@@ -53,13 +53,13 @@ public class OrderPagerAdapter extends FragmentPagerAdapter {
      */
     private void initVariable(){
         if (processingOrderFragment == null){
-            processingOrderFragment = new OrderContentFragment();
+            processingOrderFragment = new OrderContentFragment(OrderContentFragment.PROCESSING);
         }
         if (toBeStartOrderFragment == null){
-            toBeStartOrderFragment = new OrderContentFragment();
+            toBeStartOrderFragment = new OrderContentFragment(OrderContentFragment.TO_BE_START);
         }
         if (endedOrderFragment == null){
-            endedOrderFragment = new  OrderContentFragment();
+            endedOrderFragment = new  OrderContentFragment(OrderContentFragment.ENDED);
         }
     }
 

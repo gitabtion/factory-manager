@@ -19,7 +19,7 @@ public final class Config {
     /**
      * APP Server 网络请求BaseUrl
      */
-    public static final String APP_SERVER_BASE_URL = "http://nuedc.hrsoft.net/api/";
+    public static final String APP_SERVER_BASE_URL = "http://192.168.1.229:3010/";
 
     /**
      * APP Server 网络请求连接超时时间，单位：s
@@ -30,5 +30,6 @@ public final class Config {
      * 启动页面到首页启动延时，单位：毫秒
      */
     public static final int SPLASH_GO_MAIN_DELAY = 1500;
+    public static final int CLIENT_ID = 1;
 
 }

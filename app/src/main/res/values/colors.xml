@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#FF3955</color>
 
     <color name="white">#FFFFFF</color>
 
-    <color name="divider">#9FA8DA</color>
+    <color name="divider">#DEDEDE</color>
     <color name="title">#4A4A4A</color>
     <color name="subtitle">#9B9B9B</color>
+
+    <color name="black">#000000</color>
+    <color name="text_warning">#FF3955</color>
+    <color name="progress_high">#1CC9CC</color>
+    <color name="progress_medium">#FFBE14</color>
+    <color name="black_primary">#212121</color>
+
 </resources>

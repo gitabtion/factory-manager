@@ -39,7 +39,6 @@ public class GsonResponseBodyConverter<T> implements Converter<ResponseBody,T> {
             return gson.fromJson(response,type);
         }else {
             //定义错误响应体，并通过抛出自定义异常传递错误码及错误信息
-
             ResultException errorResult = gson.fromJson(response,ResultException.class);
             throw errorResult;
         }

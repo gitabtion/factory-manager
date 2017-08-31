@@ -10,13 +10,13 @@ import java.io.IOException;
 
 public class ResultException extends IOException {
     private int code;
-    private String msg;
+    private String data;
 
 
 
-    public ResultException(int code, String msg) {
+    public ResultException(int code, String data) {
         this.code = code;
-        this.msg = msg;
+        this.data = data;
     }
 
     public int getCode() {
@@ -27,11 +27,11 @@ public class ResultException extends IOException {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getData() {
+        return data;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setData(String data) {
+        this.data = data;
     }
 }

@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.activities.NoBarActivity;
-import net.hrsoft.transparent_factory_manager.home.HomeFragment;
-import net.hrsoft.transparent_factory_manager.mine.MineFragment;
+import net.hrsoft.transparent_factory_manager.home.fragments.HomeFragment;
+import net.hrsoft.transparent_factory_manager.mine.fragments.MineFragment;
 import net.hrsoft.transparent_factory_manager.order.fragments.OrderFragment;
 
 import butterknife.BindView;
@@ -127,18 +127,26 @@ public class MainActivity extends NoBarActivity {
         txtTabMenuHome.setTextColor(getResources().getColor(R.color.subtitle));
         txtTabMenuOrder.setTextColor(getResources().getColor(R.color.subtitle));
         txtTabMenuMine.setTextColor(getResources().getColor(R.color.subtitle));
+
+        imgTabMenuHome.setImageResource(R.drawable.img_home_primary);
+        imgTabMenuOrder.setImageResource(R.drawable.img_order_primary);
+        imgTabMenuMine.setImageResource(R.drawable.img_mine_primary);
+
     }
 
     private void changeHomeMenuStatus(){
         clearChoiceStatus();
-        txtTabMenuHome.setTextColor(getResources().getColor(R.color.colorPrimary));
+        imgTabMenuHome.setImageResource(R.drawable.img_home_selected);
+        txtTabMenuHome.setTextColor(getResources().getColor(R.color.white));
     }
     private void changeOrderMenuStatus(){
         clearChoiceStatus();
-        txtTabMenuOrder.setTextColor(getResources().getColor(R.color.colorPrimary));
+        imgTabMenuOrder.setImageResource(R.drawable.img_order_selected);
+        txtTabMenuOrder.setTextColor(getResources().getColor(R.color.white));
     }
     private void changMineMenuStatus(){
         clearChoiceStatus();
-        txtTabMenuMine.setTextColor(getResources().getColor(R.color.colorPrimary));
+        imgTabMenuMine.setImageResource(R.drawable.img_mine_selected);
+        txtTabMenuMine.setTextColor(getResources().getColor(R.color.white));
     }
 }

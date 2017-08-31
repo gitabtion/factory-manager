@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.github.mikephil.charting.formatter.IFillFormatter;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -17,9 +19,11 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public static final int HEADER_ITEM = 2;
     public static final int FOOTER_ITEM = 1;
     public static final int DATA_ITEM = 0;
     protected boolean hasRefreshFooter = false;
+    protected boolean hasHeader = false;
     private List<Data> dataList;
     protected Context context;
     protected LayoutInflater inflater;
@@ -91,6 +95,10 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
         this.hasRefreshFooter = hasRefreshFooter;
     }
 
+    public void setHasHeader(boolean hasHeader) {
+        this.hasHeader = hasHeader;
+    }
+
     /**
      * 获取当前列表的数据
      */
@@ -114,12 +122,36 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
      */
     @Override
     public int getItemViewType(int position) {
-        if (!hasRefreshFooter) {
+//        if (!hasRefreshFooter) {
+//            return super.getItemViewType(position);
+//        } else if (position < dataList.size()) {
+//            return DATA_ITEM;
+//        } else {
+//            return FOOTER_ITEM;
+//        }
+
+        if ((!hasHeader) && (!hasRefreshFooter)) {
             return super.getItemViewType(position);
-        } else if (position < dataList.size()) {
-            return DATA_ITEM;
+        } else if (hasRefreshFooter && hasHeader) {
+            if (position == 0) {
+                return HEADER_ITEM;
+            } else if (position < (dataList.size() + 1)) {
+                return DATA_ITEM;
+            } else {
+                return FOOTER_ITEM;
+            }
+        } else if (hasHeader) {
+            if (position == 0) {
+                return HEADER_ITEM;
+            } else {
+                return DATA_ITEM;
+            }
         } else {
-            return FOOTER_ITEM;
+            if (position < dataList.size()) {
+                return DATA_ITEM;
+            } else {
+                return FOOTER_ITEM;
+            }
         }
     }
 
@@ -132,8 +164,19 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        if (position < dataList.size()) {
+        if ((!hasHeader)&&position<dataList.size()) {
             Data data = dataList.get(position);
+            ((ViewHolder<Data>) holder).bind(data);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemClickedListener != null) {
+                        onItemClickedListener.onItemClicked(dataList.get(position), (ViewHolder) holder);
+                    }
+                }
+            });
+        }else if (hasHeader&&(position<dataList.size()+1)&&position>0){
+            Data data = dataList.get(position-1);
             ((ViewHolder<Data>) holder).bind(data);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -153,8 +196,15 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
      */
     @Override
     public int getItemCount() {
-        if (!hasRefreshFooter) {
+//        if (!hasRefreshFooter) {
+//            return dataList == null ? 0 : dataList.size();
+//        } else {
+//            return dataList == null ? 1 : dataList.size() + 1;
+//        }
+        if ((!hasHeader) && (!hasRefreshFooter)) {
             return dataList == null ? 0 : dataList.size();
+        } else if (hasHeader && hasRefreshFooter) {
+            return dataList == null ? 2 : dataList.size() + 2;
         } else {
             return dataList == null ? 1 : dataList.size() + 1;
         }
@@ -190,6 +240,16 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
     public abstract static class RefreshFooterHolder extends RecyclerView.ViewHolder {
 
         public RefreshFooterHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
+    /**
+     * Header holder
+     */
+    public abstract static class HeaderHolder extends RecyclerView.ViewHolder {
+        public HeaderHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

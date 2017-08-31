@@ -7,6 +7,7 @@
                 android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
+        android:elevation="4dp"
         android:id="@+id/toolbar"
         app:navigationIcon="@drawable/ic_back"
         style="@style/toolbar"

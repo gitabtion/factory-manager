@@ -11,7 +11,7 @@
         android:id="@+id/ly_tab_menu"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="56dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -22,9 +22,10 @@
                 android:id="@+id/img_tab_menu_home"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@drawable/img_home_primary"/>
 
             <TextView
+                android:textSize="@dimen/list_name_text"
                 android:textColor="#9b9b9b"
                 android:id="@+id/txt_tab_menu_home"
                 android:layout_width="wrap_content"
@@ -41,9 +42,11 @@
                 android:id="@+id/img_tab_menu_order"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@drawable/img_order_primary"/>
 
             <TextView
+                android:textColor="@color/subtitle"
+                android:textSize="@dimen/list_name_text"
                 android:id="@+id/txt_tab_menu_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,9 +63,11 @@
                 android:id="@+id/img_tab_menu_mine"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@drawable/img_mine_primary"/>
 
             <TextView
+                android:textColor="@color/subtitle"
+                android:textSize="@dimen/list_name_text"
                 android:id="@+id/txt_tab_menu_mine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,6 +84,8 @@
         android:background="@color/divider"/>
 
     <FrameLayout
+        android:layout_above="@+id/tab_menu_divider"
+        android:background="#f2f2f2"
         android:id="@+id/frame_main_container"
         android:fitsSystemWindows="false"
         android:layout_width="match_parent"
