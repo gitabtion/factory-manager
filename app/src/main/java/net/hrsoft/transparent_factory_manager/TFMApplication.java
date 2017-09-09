@@ -2,8 +2,10 @@ package net.hrsoft.transparent_factory_manager;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 
+import net.hrsoft.transparent_factory_manager.account.activities.LoginActivity;
 import net.hrsoft.transparent_factory_manager.utils.CacheUtil;
 
 import java.util.ArrayList;
@@ -119,6 +121,8 @@ public class TFMApplication extends Application {
      */
     public void exitAccount() {
         removeAllActivity();
-        // TODO: 2017/7/25 到登录页面 ,清理缓存
+        getCacheUtil().clear();
+        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+        startActivity(intent);
     }
 }

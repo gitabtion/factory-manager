@@ -42,9 +42,6 @@ public class SplitProcedureActivity extends ToolBarActivity {
     protected void initView() {
         setActivityTitle("工序拆分");
         procedureModels = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            procedureModels.add(new ProcedureModel());
-        }
         ProcedureAdapter adapter = new ProcedureAdapter(this, procedureModels);
         adapter.setHasHeader(true);
         recProcedure.setAdapter(adapter);
@@ -61,5 +58,8 @@ public class SplitProcedureActivity extends ToolBarActivity {
     public void onViewClicked() {
         Intent intent = new Intent(this,CreateProcedureActivity.class);
         startActivity(intent);
+    }
+
+    private void initRecSwipe(){
     }
 }

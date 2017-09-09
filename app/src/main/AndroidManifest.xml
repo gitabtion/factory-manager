@@ -24,6 +24,10 @@
         <activity android:name=".order.activities.SplitProcedureActivity"/>
         <activity android:name=".order.activities.CreateProcedureActivity"/>
         <activity android:name=".order.activities.SelectGroupActivity"/>
-
+        <activity android:name=".mine.activities.WorkGroupManageActivity"/>
+        <activity android:name=".order.activities.ProcedureInfoActivity"/>
+        <activity android:name=".order.activities.OrderInfoActivity"/>
+        <activity android:name=".mine.activities.UpdateUserInfoActivity"/>
+        <activity android:name=".mine.activities.AddLeaderActivity"/>
     </application>
 </manifest>

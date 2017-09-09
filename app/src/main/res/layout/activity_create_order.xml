@@ -29,7 +29,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher_round"
+                    android:src="@drawable/ic_order"
                     android:layout_columnSpan="1"/>
                 <android.support.design.widget.TextInputLayout
                     android:layout_height="48dp"
@@ -51,7 +51,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher_round"
+                    android:src="@drawable/ic_name"
                     android:layout_columnSpan="1"/>
                 <android.support.design.widget.TextInputLayout
                     android:layout_marginTop="8dp"
@@ -71,7 +71,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher_round"
+                    android:src="@drawable/ic_count"
                     android:layout_columnSpan="1"/>
                 <android.support.design.widget.TextInputLayout
                     android:layout_marginTop="8dp"
@@ -91,7 +91,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher_round"
+                    android:src="@drawable/ic_date"
                     android:layout_columnSpan="1"/>
 
                 <LinearLayout
@@ -125,7 +125,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher_round"
+                    android:src="@drawable/ic_date"
                     android:layout_columnSpan="1"/>
 
 

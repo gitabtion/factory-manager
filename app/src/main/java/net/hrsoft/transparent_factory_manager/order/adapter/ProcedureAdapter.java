@@ -38,13 +38,18 @@ public class ProcedureAdapter extends BaseRecyclerViewAdapter<ProcedureModel> {
         return null;
     }
 
-    class HeaderItemHolder extends HeaderHolder {
+    static class HeaderItemHolder extends HeaderHolder {
         public HeaderItemHolder(View itemView) {
             super(itemView);
         }
+
+        @Override
+        protected void onBind(Object o) {
+
+        }
     }
 
-    class DataItemHolder extends ViewHolder {
+    static class DataItemHolder extends ViewHolder {
         public DataItemHolder(View itemView) {
             super(itemView);
         }

@@ -99,6 +99,7 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
         this.hasHeader = hasHeader;
     }
 
+
     /**
      * 获取当前列表的数据
      */
@@ -248,11 +249,21 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
     /**
      * Header holder
      */
-    public abstract static class HeaderHolder extends RecyclerView.ViewHolder {
+    public abstract static class HeaderHolder<Data> extends RecyclerView.ViewHolder {
+        private Data mData;
+
         public HeaderHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+        void bind(Data data) {
+            mData = data;
+            onBind(data);
+        }
+
+        //绑定数据
+        protected abstract void onBind(Data data);
     }
 
     /**

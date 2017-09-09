@@ -5,9 +5,10 @@
                 android:orientation="vertical">
 
     <android.support.design.widget.TabLayout
+        android:paddingTop="25dp"
         android:id="@+id/tab_order"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/tab_height"
+        android:layout_height="73dp"
         android:background="@color/white"
         android:elevation="4dp"
         android:outlineProvider="bounds">
@@ -25,7 +26,7 @@
         android:id="@+id/fab_add_order"
         android:padding="32dp"
         android:src="@drawable/ic_add"
-        android:layout_margin="36dp"
+        android:layout_margin="24dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_width="56dp"

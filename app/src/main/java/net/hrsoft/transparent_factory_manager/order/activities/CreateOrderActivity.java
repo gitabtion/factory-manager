@@ -5,13 +5,16 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
+import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
@@ -64,8 +67,7 @@ public class CreateOrderActivity extends ToolBarActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 txtOrderStartTime.setText(+year+"."+(month+1)+"."+dayOfMonth);
-                ToastUtil.showToast(TimeUtil.setStringToStamp(txtOrderStartTime.getText().toString(),TimeUtil
-                        .DATA_ORDER_FORMAT)+"--");
+                SnackbarUtil.showSnackbar(getWindow().getDecorView(),"选择了"+txtOrderStartTime.getText());
             }
         },TimeUtil.getNowYear(),TimeUtil.getNowMonth(),TimeUtil.getDayOfMonth()).show();
     }

@@ -5,9 +5,10 @@
               android:orientation="vertical">
 
     <LinearLayout
+        android:paddingTop="25dp"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:layout_height="81dp"
+        android:background="@color/white"
         android:elevation="4dp"
         android:gravity="center"
         android:outlineProvider="background">
@@ -15,12 +16,12 @@
         <Spinner
             android:id="@+id/spinner_home_order_list"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_left_right"/>
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 

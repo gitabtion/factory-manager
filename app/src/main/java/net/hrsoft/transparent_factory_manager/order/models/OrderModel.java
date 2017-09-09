@@ -9,16 +9,19 @@ import net.hrsoft.transparent_factory_manager.base.models.BaseModel;
  */
 
 public class OrderModel extends BaseModel{
-    private int id;
-    private String title;
-    private int status;
-    private int type;
-    private String description;
-    private String orderCode;
-    private String totalCount;
-    private String customerInfo;
-    private String startTime;
-    private String endTime;
+    protected int id;
+    protected String title;
+    protected int status;
+    protected int type;
+    protected String description;
+    protected String orderCode;
+    protected String totalCount;
+    protected String customerInfo;
+    protected String startTime;
+    protected String endTime;
+
+    public OrderModel() {
+    }
 
     public OrderModel(String title) {
         this.title = title;

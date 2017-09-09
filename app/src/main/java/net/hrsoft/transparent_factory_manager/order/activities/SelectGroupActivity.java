@@ -6,13 +6,12 @@ import android.support.v7.widget.RecyclerView;
 
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
+import net.hrsoft.transparent_factory_manager.mine.models.GroupModel;
 import net.hrsoft.transparent_factory_manager.order.adapter.GroupListAdapter;
-import net.hrsoft.transparent_factory_manager.order.models.GroupModel;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author abtion.

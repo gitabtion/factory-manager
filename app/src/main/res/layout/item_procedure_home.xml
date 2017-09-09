@@ -20,6 +20,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/txt_procedure_name"
                 android:textSize="@dimen/main_text"
                 android:textColor="@color/progress_high"
                 android:text="工序一：泥团"
@@ -27,6 +28,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/txt_group_name"
                 android:textColor="@color/title"
                 android:textSize="@dimen/main_text"
                 android:text="物料组"

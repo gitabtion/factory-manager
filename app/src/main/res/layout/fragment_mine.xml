@@ -5,9 +5,9 @@
               android:orientation="vertical">
 
     <LinearLayout
+        android:background="@drawable/bg_mine"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:layout_height="203dp"
         android:elevation="2dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -15,6 +15,7 @@
         android:paddingTop="24dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:visibility="gone"
             android:id="@+id/img_avatar"
             android:layout_width="56dp"
             android:layout_height="56dp"
@@ -26,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="刘明傻逼"
-            android:textColor="@color/title"
+            android:textColor="@color/white"
             android:textSize="@dimen/main_text"/>
 
         <TextView
@@ -35,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="15600000000"
-            android:textColor="@color/title"
+            android:textColor="@color/white"
             android:textSize="@dimen/main_text"/>
 
     </LinearLayout>
@@ -52,6 +53,7 @@
         android:background="@color/divider"/>
 
     <RelativeLayout
+        android:visibility="gone"
         android:elevation="2dp"
         android:outlineProvider="background"
         android:id="@+id/rl_personal_info"

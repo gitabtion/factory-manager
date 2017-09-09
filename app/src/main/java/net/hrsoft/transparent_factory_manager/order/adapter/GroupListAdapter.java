@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
-import net.hrsoft.transparent_factory_manager.order.models.GroupModel;
+import net.hrsoft.transparent_factory_manager.mine.models.GroupModel;
+
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class GroupListAdapter extends BaseRecyclerViewAdapter<GroupModel> {
         View view = inflater.inflate(R.layout.item_group,parent,false);
         return new ItemHolder(view);
     }
-    class ItemHolder extends ViewHolder<GroupModel> {
+    static class ItemHolder extends ViewHolder<GroupModel> {
         public ItemHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

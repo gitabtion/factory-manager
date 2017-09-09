@@ -24,7 +24,6 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-    /** 进度窗 */
     protected ProgressDialog progressDialog;
 
     @Override
@@ -49,9 +48,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 执行init 方法之前的处理
      */
     protected void preInit() {
-        // progressDialog 统一定义
         progressDialog = new ProgressDialog(this);
-        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(false);
     }
 
     /**
@@ -118,54 +116,5 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 显示progressDialog
-     *
-     * @param message 显示信息
-     */
-    protected void showProgressDialog(String message) {
-        if (!isDestroyed() && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-        progressDialog.setMessage(message);
-        Utility.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressDialog.show();
-            }
-        });
-    }
-
-    /**
-     * 显示progressDialog
-     *
-     * @param resId 显示信息资源ID
-     */
-    protected void showProgressDialog(@StringRes int resId) {
-        String message = getString(resId);
-        showProgressDialog(message);
-    }
-
-    /**
-     * 取消ProgressDialog
-     */
-    protected void disMissProgressDialog() {
-        if (!isDestroyed() && progressDialog.isShowing()) {
-            Utility.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    progressDialog.dismiss();
-                }
-            });
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-        super.onDestroy();
-    }
 
 }

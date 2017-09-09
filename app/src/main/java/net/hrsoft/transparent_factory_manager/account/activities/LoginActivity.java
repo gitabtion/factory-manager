@@ -1,17 +1,25 @@
 package net.hrsoft.transparent_factory_manager.account.activities;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 
 import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.TFMApplication;
 import net.hrsoft.transparent_factory_manager.account.models.LoginRequest;
+import net.hrsoft.transparent_factory_manager.account.models.LoginResponse;
+import net.hrsoft.transparent_factory_manager.base.activities.NoBarActivity;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
+import net.hrsoft.transparent_factory_manager.common.constants.CacheKey;
 import net.hrsoft.transparent_factory_manager.main.MainActivity;
 import net.hrsoft.transparent_factory_manager.network.APIResponse;
 import net.hrsoft.transparent_factory_manager.network.DataCallback;
 import net.hrsoft.transparent_factory_manager.network.RestClient;
+import net.hrsoft.transparent_factory_manager.utils.ProgressDialogUtil;
 import net.hrsoft.transparent_factory_manager.utils.RegexUtil;
+import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
 import butterknife.BindView;
@@ -26,7 +34,7 @@ import retrofit2.Response;
  * email caiheng@hrsoft.net
  */
 
-public class LoginActivity extends ToolBarActivity {
+public class LoginActivity extends NoBarActivity {
     @BindView(R.id.edit_account)
     TextInputEditText editAccount;
     @BindView(R.id.edit_password)
@@ -45,8 +53,11 @@ public class LoginActivity extends ToolBarActivity {
 
     @Override
     protected void initView() {
-        setActivityTitle("实干家定制版");
-        getToolbar().setNavigationIcon(null);
+        if (TFMApplication.getInstance().getCacheUtil().getString(CacheKey.TOKEN)!=null){
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
@@ -57,25 +68,38 @@ public class LoginActivity extends ToolBarActivity {
 
     @OnClick(R.id.btn_login)
     public void onBtnLoginClicked() {
-//        if (isDataTrue()){
-//            loginRequest = new LoginRequest(editAccount.getText().toString().trim(),editPassword.getText().toString()
-//                    .trim());
-//
-//            RestClient.getService().login(loginRequest).enqueue(new DataCallback<APIResponse>() {
-//
-//                @Override
-//                public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
+        if (isDataTrue()){
+
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("请稍候");
+            progressDialog.show();
+            loginRequest = new LoginRequest(editAccount.getText().toString().trim(),editPassword.getText().toString()
+                    .trim());
+
+            RestClient.getService().login(loginRequest).enqueue(new DataCallback<APIResponse<LoginResponse>>() {
+                @Override
+                public void onDataResponse(Call<APIResponse<LoginResponse>> call, Response<APIResponse<LoginResponse
+                                        >> response) {
+
+                    TFMApplication.getInstance().getCacheUtil().putString(CacheKey.TOKEN,response.body().getData().getToken());
+                    TFMApplication.getInstance().getCacheUtil().putSerializableObj(CacheKey.USER,response.body()
+                            .getData().getUser());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-//                }
-//
-//                @Override
-//                public void onDataFailure(Call<APIResponse> call, Throwable t) {
-//                    ToastUtil.showToast("error");
-//                }
-//            });
-//        }
+                }
+
+                @Override
+                public void onDataFailure(Call<APIResponse<LoginResponse>> call, Throwable t) {
+                    SnackbarUtil.showSnackbar(getWindow().getDecorView(),"网络连接失败，请稍后再试");
+                }
+
+                @Override
+                public void dismissDialog() {
+                    progressDialog.dismiss();
+                }
+            });
+        }
 
     }
 

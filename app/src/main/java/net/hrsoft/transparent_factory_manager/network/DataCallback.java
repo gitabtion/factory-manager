@@ -1,6 +1,9 @@
 package net.hrsoft.transparent_factory_manager.network;
 
+import android.app.ProgressDialog;
+
 import net.hrsoft.transparent_factory_manager.common.exceptions.ResultException;
+import net.hrsoft.transparent_factory_manager.utils.ProgressDialogUtil;
 import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
 import retrofit2.Call;
@@ -20,17 +23,21 @@ public abstract class DataCallback<T> implements Callback<T> {
 
     public abstract void onDataFailure(Call<T> call, Throwable t);
 
+    public abstract void dismissDialog();
 
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
+        dismissDialog();
         onDataResponse(call, response);
     }
 
     @Override
     public void onFailure(Call<T> call, Throwable t) {
         if (t instanceof ResultException) {
+            dismissDialog();
             GlobalAPIErrorHandler.handler((ResultException) t);
         } else {
+            dismissDialog();
             onDataFailure(call, t);
         }
     }

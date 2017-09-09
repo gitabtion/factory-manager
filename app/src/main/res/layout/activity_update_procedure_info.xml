@@ -32,7 +32,7 @@
                     android:layout_height="24dp"
                     android:layout_columnSpan="1"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher_round"/>
+                    android:src="@drawable/ic_order"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                     android:layout_columnSpan="1"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="8dp"
-                    android:src="@mipmap/ic_launcher_round"/>
+                    android:src="@drawable/ic_count"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_column="1"
@@ -98,7 +98,7 @@
                     android:layout_columnSpan="1"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="8dp"
-                    android:src="@mipmap/ic_launcher_round"/>
+                    android:src="@drawable/ic_date"/>
 
                 <LinearLayout
                     android:layout_columnSpan="2"
@@ -136,7 +136,7 @@
                     android:layout_columnSpan="1"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="8dp"
-                    android:src="@mipmap/ic_launcher_round"/>
+                    android:src="@drawable/ic_date"/>
 
 
                 <LinearLayout
@@ -175,7 +175,7 @@
                     android:layout_columnSpan="1"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="8dp"
-                    android:src="@mipmap/ic_launcher_round"/>
+                    android:src="@drawable/ic_group"/>
 
 
                 <LinearLayout

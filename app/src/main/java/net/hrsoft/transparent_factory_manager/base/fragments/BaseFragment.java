@@ -74,37 +74,6 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void loadData();
 
-    /**
-     * 显示progressDialog
-     *
-     * @param message 显示信息
-     */
-    protected void showProgressDialog(String message) {
-        if (!getActivity().isDestroyed() && !isHidden() && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-        progressDialog.setMessage(message);
-        progressDialog.show();
-    }
-
-    /**
-     * 显示progressDialog
-     *
-     * @param resId 显示信息资源ID
-     */
-    protected void showProgressDialog(@StringRes int resId) {
-        String message = getString(resId);
-        showProgressDialog(message);
-    }
-
-    /**
-     * 取消ProgressDialog
-     */
-    protected void disMissProgressDialog() {
-        if (!getActivity().isDestroyed() && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-    }
 
     /**
      * 获取当前Fragment的RootView
