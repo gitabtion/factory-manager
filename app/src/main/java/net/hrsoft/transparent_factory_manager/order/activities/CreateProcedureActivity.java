@@ -1,11 +1,9 @@
 package net.hrsoft.transparent_factory_manager.order.activities;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatSeekBar;
-import android.support.v7.widget.LinearLayoutManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -19,7 +17,6 @@ import net.hrsoft.transparent_factory_manager.mine.models.GroupModel;
 import net.hrsoft.transparent_factory_manager.network.APIResponse;
 import net.hrsoft.transparent_factory_manager.network.DataCallback;
 import net.hrsoft.transparent_factory_manager.network.RestClient;
-import net.hrsoft.transparent_factory_manager.order.adapter.ProcedureAdapter;
 import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
 import net.hrsoft.transparent_factory_manager.order.models.UpdateProcedureRequest;
 import net.hrsoft.transparent_factory_manager.order.models.WeightModel;
@@ -31,7 +28,6 @@ import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
@@ -46,7 +42,7 @@ import retrofit2.Response;
  */
 
 public class CreateProcedureActivity extends ToolBarActivity {
-    @BindView(R.id.edit_total_count)
+    @BindView(R.id.edit_procedure_total_count)
     TextInputEditText editTotalCount;
     @BindView(R.id.edit_standard)
     TextInputEditText editStandard;
@@ -168,6 +164,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
                 updateProcedureRequest.setWeights(weightModels);
                 createProcedure();
             } else {
+                updateProcedureRequest.setWeight(1);
                 createProcedure();
             }
         } else if (procedureModels == null) {
@@ -190,7 +187,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
         updateProcedureRequest.setStartTime(txtProcedureStartTime.getText().toString().trim());
         updateProcedureRequest.setEndTime(txtProcedureEndTime.getText().toString().trim());
         updateProcedureRequest.setStandard(editStandard.getText().toString().trim());
-        updateProcedureRequest.setTotalCount(Integer.getInteger(editTotalCount.getText().toString().trim()));
+        updateProcedureRequest.setTotalCount(Integer.valueOf(editTotalCount.getText().toString().trim()));
         updateProcedureRequest.setOrderId(orderModel.getId());
         updateProcedureRequest.setWorkGroupId(groupModel.getId());
         updateProcedureRequest.setWeight(((double) seekWeight.getProgress()) / 100);

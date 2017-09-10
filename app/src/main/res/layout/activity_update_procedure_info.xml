@@ -69,7 +69,7 @@
                     android:layout_row="1">
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/edit_total_count"
+                        android:id="@+id/edit_procedure_total_count"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="数量"
