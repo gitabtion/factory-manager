@@ -16,6 +16,7 @@ import net.hrsoft.transparent_factory_manager.network.DataCallback;
 import net.hrsoft.transparent_factory_manager.network.RestClient;
 import net.hrsoft.transparent_factory_manager.order.adapter.ProcedureAdapter;
 import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
+import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 
 import java.util.ArrayList;
 
@@ -37,6 +38,7 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
     @BindView(R.id.swipe_split_procedure)
     SwipeRefreshLayout swipeSplitProcedure;
     private ArrayList<ProcedureModel> procedureModels;
+    public static final String PROCEDURES = "procedures";
 
     @BindView(R.id.rec_procedure)
     RecyclerView recProcedure;
@@ -56,6 +58,8 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
     @Override
     protected void initView() {
         setActivityTitle("工序拆分");
+        getProcedure();
+        initRecSwipe();
     }
 
     @Override
@@ -67,6 +71,9 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
     @OnClick(R.id.btn_create_procedure)
     public void onViewClicked() {
         Intent intent = new Intent(this, CreateProcedureActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(CreateOrderActivity.CREATE_ORDER,orderModel);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -76,7 +83,7 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
         swipeSplitProcedure.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                getProcedure();
             }
         });
     }
@@ -96,12 +103,14 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
 
             @Override
             public void onDataFailure(Call<APIResponse<GetProcedureResponse>> call, Throwable t) {
-
+                SnackbarUtil.showSnackbar(getWindow().getDecorView(),"网络连接失败，请稍后再试");
             }
 
             @Override
             public void dismissDialog() {
-
+                if (swipeSplitProcedure.isRefreshing()){
+                    swipeSplitProcedure.setRefreshing(false);
+                }
             }
         });
     }
@@ -110,4 +119,5 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
     public void onItemClicked(ProcedureModel procedureModel, BaseRecyclerViewAdapter.ViewHolder holder) {
 
     }
+
 }

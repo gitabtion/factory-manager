@@ -2,6 +2,8 @@ package net.hrsoft.transparent_factory_manager.order.models;
 
 import net.hrsoft.transparent_factory_manager.base.models.BaseModel;
 
+import java.util.ArrayList;
+
 /**
  * @author abtion.
  * @since 17/9/10 17:50.
@@ -18,6 +20,15 @@ public class UpdateProcedureRequest extends BaseModel {
     private int workGroupId;
     private String startTime;
     private String endTime;
+    private ArrayList<WeightModel> weights;
+
+    public ArrayList<WeightModel> getWeights() {
+        return weights;
+    }
+
+    public void setWeights(ArrayList<WeightModel> weights) {
+        this.weights = weights;
+    }
 
     public UpdateProcedureRequest() {
     }
@@ -106,4 +117,5 @@ public class UpdateProcedureRequest extends BaseModel {
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
+
 }
