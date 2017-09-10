@@ -2,6 +2,10 @@ package net.hrsoft.transparent_factory_manager.home.models;
 
 import net.hrsoft.transparent_factory_manager.base.models.BaseModel;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 /**
  * @author abtion.
  * @since 17/9/5 10:48.
@@ -9,17 +13,21 @@ import net.hrsoft.transparent_factory_manager.base.models.BaseModel;
  */
 
 public class GetProcedureResponse extends BaseModel {
-    private ProcedureModel[] procedures;
+    private ArrayList<ProcedureModel> procedures;
 
-    public GetProcedureResponse(ProcedureModel[] procedures) {
+    public GetProcedureResponse(ArrayList<ProcedureModel> procedures) {
         this.procedures = procedures;
     }
 
-    public ProcedureModel[] getProcedures() {
+    public ArrayList<ProcedureModel> getProcedures() {
         return procedures;
     }
 
-    public void setProcedures(ProcedureModel[] procedures) {
+    public void setProcedures(ArrayList<ProcedureModel> procedures) {
         this.procedures = procedures;
+    }
+
+    public void addAll(Collection<ProcedureModel> procedureModelCollections){
+        this.procedures.addAll(procedureModelCollections);
     }
 }

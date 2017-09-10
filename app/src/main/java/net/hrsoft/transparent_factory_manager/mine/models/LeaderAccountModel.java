@@ -14,6 +14,7 @@ public class LeaderAccountModel extends BaseModel {
     private String mobile;
     private String password;
 
+
     public LeaderAccountModel(String name, String mobile, String password) {
         this.name = name;
         this.mobile = mobile;

@@ -122,7 +122,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onDataResponse(Call<APIResponse<GetProcedureResponse>> call, Response<APIResponse<GetProcedureResponse>> response) {
                 procedureModels.clear();
-                Collections.addAll(procedureModels,response.body().getData().getProcedures());
+                procedureModels = response.body().getData().getProcedures();
                 HomeProcedureAdapter adapter = new HomeProcedureAdapter(getContext(),procedureModels,orderModel);
                 adapter.setHasHeader(true);
                 recHomeProcedure.setAdapter(adapter);

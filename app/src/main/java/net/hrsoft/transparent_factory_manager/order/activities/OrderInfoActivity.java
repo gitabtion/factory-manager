@@ -81,7 +81,7 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
                     (Call<APIResponse<GetProcedureResponse>> call, Response<APIResponse<GetProcedureResponse>>
                             response) {
                 procedureModels.clear();
-                Collections.addAll(procedureModels, response.body().getData().getProcedures());
+                procedureModels = response.body().getData().getProcedures();
                 OrderInfoAdapter adapter = new
                         OrderInfoAdapter(OrderInfoActivity.this, procedureModels, orderModel);
                 adapter.setHasHeader(true);

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_work_group_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.CardView
+                    app:cardCornerRadius="8dp"
+                    android:layout_margin="@dimen/padding_left_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:padding="@dimen/padding_left_right"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textColor="@color/title"
+                                android:textSize="@dimen/list_name_text"
+                                android:id="@+id/txt_leader_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:textColor="@color/title"
+                                android:textSize="@dimen/list_name_text"
+                                android:layout_alignParentRight="true"
+                                android:id="@+id/txt_group_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:textColor="@color/subtitle"
+                            android:textSize="@dimen/description_text"
+                            android:id="@+id/txt_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rec_work_group_procedure"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <TextView
+        android:id="@+id/btn_select"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="@dimen/padding_left_right"
+        android:layout_marginLeft="@dimen/padding_left_right"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_btn"
+        android:textColor="@color/white"
+        android:text="选择该班组"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+</RelativeLayout>

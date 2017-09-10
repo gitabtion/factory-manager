@@ -4,144 +4,160 @@
                                             android:orientation="vertical"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent">
+
     <android.support.v7.widget.CardView
-        app:cardCornerRadius="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="@dimen/padding_left_right"
         android:layout_marginRight="@dimen/padding_left_right"
-        android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="8dp">
 
         <LinearLayout
-            android:padding="@dimen/padding_left_right"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_left_right">
 
             <GridLayout
-                android:orientation="horizontal"
-                android:columnCount="4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:columnCount="4"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_columnSpan="1"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_order"
-                    android:layout_columnSpan="1"/>
+                    android:src="@drawable/ic_order"/>
+
                 <android.support.design.widget.TextInputLayout
-                    android:layout_height="48dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="16dp"
                     android:layout_width="match_parent"
-                    android:layout_columnSpan="3">
+                    android:layout_height="48dp"
+                    android:layout_columnSpan="3"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp">
+
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/edit_order_name"
-                        android:textSize="@dimen/list_name_text"
-                        android:hint="订单名称"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:hint="订单名称"
+                        android:textSize="@dimen/list_name_text"/>
 
 
                 </android.support.design.widget.TextInputLayout>
+
                 <ImageView
-                    android:layout_marginTop="8dp"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_columnSpan="1"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_name"
-                    android:layout_columnSpan="1"/>
-                <android.support.design.widget.TextInputLayout
                     android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_name"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_columnSpan="3"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_columnSpan="3">
+                    android:layout_marginTop="8dp">
+
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/edit_order_client_name"
-                        android:textSize="@dimen/list_name_text"
-                        android:hint="客户名称"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:hint="客户名称"
+                        android:textSize="@dimen/list_name_text"/>
                 </android.support.design.widget.TextInputLayout>
+
                 <ImageView
-                    android:layout_marginTop="8dp"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_columnSpan="1"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_count"
-                    android:layout_columnSpan="1"/>
-                <android.support.design.widget.TextInputLayout
                     android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_count"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_columnSpan="3"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_columnSpan="3">
+                    android:layout_marginTop="8dp">
+
                     <android.support.design.widget.TextInputEditText
-                        android:textSize="@dimen/list_name_text"
-                        android:hint="订单数量"
+                        android:id="@+id/edit_total_count"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:hint="订单数量"
+                        android:textSize="@dimen/list_name_text"/>
                 </android.support.design.widget.TextInputLayout>
 
                 <ImageView
-                    android:layout_marginTop="8dp"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_columnSpan="1"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_date"
-                    android:layout_columnSpan="1"/>
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_date"/>
 
                 <LinearLayout
-                    android:layout_marginTop="8dp"
+                    android:layout_columnSpan="2"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:layout_columnSpan="2">
-                    <TextView
-                        android:text="订单开始时间："
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                    android:layout_marginTop="8dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="订单开始时间："/>
+
+                    <TextView
                         android:id="@+id/txt_order_start_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="2017.08.01"/>
 
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/btn_order_start_time_select"
-                    android:textColor="@color/white"
-                    android:background="@drawable/bg_btn"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text=" 修  改 "/>
-                <ImageView
                     android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_btn"
+                    android:padding="8dp"
+                    android:text=" 修  改 "
+                    android:textColor="@color/white"/>
+
+                <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_columnSpan="1"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_date"
-                    android:layout_columnSpan="1"/>
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_date"/>
 
 
                 <LinearLayout
-                    android:layout_marginTop="8dp"
+                    android:layout_columnSpan="2"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:layout_columnSpan="2">
-                    <TextView
-                        android:text="订单结束时间："
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                    android:layout_marginTop="8dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="订单结束时间："/>
+
+                    <TextView
                         android:id="@+id/txt_order_end_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="2017.08.01"/>
 
@@ -149,16 +165,54 @@
 
                 <TextView
                     android:id="@+id/btn_order_end_time_select"
-                    android:textColor="@color/white"
-                    android:background="@drawable/bg_btn"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text=" 修  改 "/>
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_btn"
+                    android:padding="8dp"
+                    android:text=" 修  改 "
+                    android:textColor="@color/white"/>
 
             </GridLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_type"/>
+
+                <RadioGroup
+                    android:id="@+id/radio_group_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="24dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_in"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="内部订单"
+                        android:textColor="@color/title"/>
+
+                    <RadioButton
+                        android:id="@+id/radio_out"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="外部订单"
+                        android:textColor="@color/title"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -173,7 +227,7 @@
         android:layout_weight="1">
 
         <EditText
-            android:id="@+id/edit_add_on"
+            android:id="@+id/edit_description"
             android:gravity="left|top"
             android:hint="备注："
             android:padding="8dp"

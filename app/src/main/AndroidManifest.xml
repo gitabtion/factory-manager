@@ -29,5 +29,6 @@
         <activity android:name=".order.activities.OrderInfoActivity"/>
         <activity android:name=".mine.activities.UpdateUserInfoActivity"/>
         <activity android:name=".mine.activities.AddLeaderActivity"/>
+        <activity android:name=".order.activities.WorkGroupInfoActivity"/>
     </application>
 </manifest>
