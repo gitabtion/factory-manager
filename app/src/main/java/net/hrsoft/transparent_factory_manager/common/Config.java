@@ -19,7 +19,7 @@ public final class Config {
     /**
      * APP Server 网络请求BaseUrl
      */
-    public static final String APP_SERVER_BASE_URL = "http://192.168.1.104:3003/";
+    public static final String APP_SERVER_BASE_URL = "http://192.168.0.101:3010/";
 
     /**
      * APP Server 网络请求连接超时时间，单位：s
@@ -31,5 +31,12 @@ public final class Config {
      */
     public static final int SPLASH_GO_MAIN_DELAY = 1500;
     public static final int CLIENT_ID = 1;
+
+    /**
+     * activity间信息传递
+     */
+    public static final String ORDER = "order";
+    public static final String PROCEDURE = "procedure";
+    public static final String PROCEDURES = "procedures";
 
 }

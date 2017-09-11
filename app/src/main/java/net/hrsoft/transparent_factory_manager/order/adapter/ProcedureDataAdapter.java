@@ -50,8 +50,8 @@ public class ProcedureDataAdapter extends BaseRecyclerViewAdapter<ProcedureDataM
         @Override
         protected void onBind(ProcedureDataModel procedureDataModel) {
             txtProcedureEndTime.setText(procedureDataModel.getEndTime()==null?"N/A":procedureDataModel.getEndTime());
-            txtItemSuccessCount.setText(procedureDataModel.getSuccessCount()+"");
-            txtProcedureTotalCount.setText(procedureDataModel.getTotalCount()+"");
+            txtItemSuccessCount.setText(String.valueOf(procedureDataModel.getSuccessCount()));
+            txtProcedureTotalCount.setText(String.valueOf(procedureDataModel.getTotalCount()));
             txtProcedureLeaderName.setText(procedureDataModel.getLeaderName()==null?"N/A":procedureDataModel.getLeaderName());
         }
     }

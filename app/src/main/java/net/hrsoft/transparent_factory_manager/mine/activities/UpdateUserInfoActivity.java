@@ -90,7 +90,7 @@ public class UpdateUserInfoActivity extends ToolBarActivity {
         } else if (editPassword.getText().toString().trim().length() < 6) {
             showError(editPassword, "密码不得少于6位");
             flag = false;
-        } else if (editName.getText().equals("")) {
+        } else if (editName.getText().length()==0) {
             showError(editName, "姓名不能为空");
             flag = false;
         }
@@ -106,6 +106,7 @@ public class UpdateUserInfoActivity extends ToolBarActivity {
             @Override
             public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
                 ToastUtil.showToast("修改成功，请刷新页面");
+                finish();
             }
 
             @Override

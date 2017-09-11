@@ -1,7 +1,6 @@
 package net.hrsoft.transparent_factory_manager.order.activities;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.widget.DatePicker;
@@ -17,45 +16,44 @@ import net.hrsoft.transparent_factory_manager.network.APIResponse;
 import net.hrsoft.transparent_factory_manager.network.DataCallback;
 import net.hrsoft.transparent_factory_manager.network.RestClient;
 import net.hrsoft.transparent_factory_manager.order.models.CreateOrderRequest;
-import net.hrsoft.transparent_factory_manager.order.models.CreateOrderResponse;
 import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
+import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Response;
 
 /**
  * @author abtion.
- * @since 17/8/29 18:04.
+ * @since 17/9/11 17:42.
  * email caiheng@hrsoft.net
  */
 
-public class CreateOrderActivity extends ToolBarActivity {
-
-
+public class UpdateOrderActivity extends ToolBarActivity {
+    @BindView(R.id.edit_order_name)
+    TextInputEditText editOrderName;
+    @BindView(R.id.edit_order_client_name)
+    TextInputEditText editOrderClientName;
     @BindView(R.id.edit_total_count)
     TextInputEditText editTotalCount;
-
+    @BindView(R.id.txt_order_start_time)
+    TextView txtOrderStartTime;
+    @BindView(R.id.txt_order_end_time)
+    TextView txtOrderEndTime;
     @BindView(R.id.radio_in)
     RadioButton radioIn;
     @BindView(R.id.radio_out)
     RadioButton radioOut;
     @BindView(R.id.radio_group_type)
     RadioGroup radioGroupType;
-
-    @BindView(R.id.edit_order_name)
-    TextInputEditText editOrderName;
-    @BindView(R.id.edit_order_client_name)
-    TextInputEditText editOrderClientName;
-    @BindView(R.id.txt_order_start_time)
-    TextView txtOrderStartTime;
-    @BindView(R.id.txt_order_end_time)
-    TextView txtOrderEndTime;
     @BindView(R.id.edit_description)
-    EditText editAddOn;
+    EditText editDescription;
+    @BindView(R.id.btn_update_order_done)
+    TextView btnDoneToCreateProcedure;
 
     private CreateOrderRequest createOrderRequest;
     private OrderModel orderModel;
@@ -68,55 +66,20 @@ public class CreateOrderActivity extends ToolBarActivity {
     @Override
     protected void initVariable() {
         createOrderRequest = new CreateOrderRequest();
-        orderModel = new OrderModel();
+        Bundle bundle = getIntent().getExtras();
+        orderModel = (OrderModel) bundle.getSerializable(Config.ORDER);
     }
 
     @Override
     protected void initView() {
-        setActivityTitle("创建订单");
-        radioIn.setChecked(true);
+        btnDoneToCreateProcedure.setText("确认修改");
+        setActivityTitle("修改订单信息");
+        bindView();
     }
 
     @Override
     protected void loadData() {
-    }
 
-    /**
-     * 选择订单开始时间按钮点击事件
-     */
-    @OnClick(R.id.btn_order_start_time_select)
-    public void onBtnOrderStartTimeSelectClicked() {
-        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                txtOrderStartTime.setText(+year + "-" + (month + 1) + "-" + dayOfMonth);
-                SnackbarUtil.showSnackbar(getWindow().getDecorView(), "选择了" + txtOrderStartTime.getText());
-            }
-        }, TimeUtil.getNowYear(), TimeUtil.getNowMonth(), TimeUtil.getDayOfMonth()).show();
-    }
-
-    /**
-     * 结束订单开始时间按钮点击事件
-     */
-    @OnClick(R.id.btn_order_end_time_select)
-    public void onBtnOrderEndTimeSelectClicked() {
-
-        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                txtOrderEndTime.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
-            }
-        }, TimeUtil.getNowYear(), TimeUtil.getNowMonth(), TimeUtil.getDayOfMonth()).show();
-    }
-
-    /**
-     * 确认按钮点击事件
-     */
-    @OnClick(R.id.btn_update_order_done)
-    public void onBtnDoneToCreateProcedureClicked() {
-        if (isDataTrue()){
-            createOrder();
-        }
     }
 
     /**
@@ -147,7 +110,7 @@ public class CreateOrderActivity extends ToolBarActivity {
     private void bindData() {
         createOrderRequest.setTotalCount(editTotalCount.getText().toString());
         createOrderRequest.setCustomerInfo(editOrderClientName.getText().toString().trim());
-        createOrderRequest.setDescription(editAddOn.getText().toString().trim());
+        createOrderRequest.setDescription(editDescription.getText().toString().trim());
         createOrderRequest.setEndTime(txtOrderEndTime.getText().toString().trim());
         createOrderRequest.setStartTime(txtOrderStartTime.getText().toString().trim());
         createOrderRequest.setTitle(editOrderName.getText().toString().trim());
@@ -157,37 +120,65 @@ public class CreateOrderActivity extends ToolBarActivity {
             createOrderRequest.setType(1);
         }
 
-        orderModel.setCustomerInfo(createOrderRequest.getCustomerInfo());
-        orderModel.setDescription(createOrderRequest.getDescription());
-        orderModel.setEndTime(createOrderRequest.getEndTime());
-        orderModel.setStartTime(createOrderRequest.getStartTime());
-        orderModel.setTitle(createOrderRequest.getTitle());
-        orderModel.setType(createOrderRequest.getType());
-        orderModel.setTotalCount(createOrderRequest.getTotalCount());
     }
 
-    private void createOrder() {
-        bindData();
+    private void bindView() {
+        txtOrderEndTime.setText(orderModel.getEndTime());
+        txtOrderStartTime.setText(orderModel.getStartTime());
+        editDescription.setText(orderModel.getDescription());
+        editOrderClientName.setText(orderModel.getCustomerInfo());
+        editOrderName.setText(orderModel.getTitle());
+        editTotalCount.setText(orderModel.getTotalCount());
+        if (orderModel.getType() == 0) {
+            radioIn.setChecked(true);
+        } else {
+            radioOut.setChecked(true);
+        }
+    }
+
+
+    @OnClick(R.id.btn_order_start_time_select)
+    public void onBtnOrderStartTimeSelectClicked() {
+        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                txtOrderStartTime.setText(+year + "-" + (month + 1) + "-" + dayOfMonth);
+                SnackbarUtil.showSnackbar(getWindow().getDecorView(), "选择了" + txtOrderStartTime.getText());
+            }
+        }, TimeUtil.getNowYear(), TimeUtil.getNowMonth(), TimeUtil.getDayOfMonth()).show();
+    }
+
+    @OnClick(R.id.btn_order_end_time_select)
+    public void onBtnOrderEndTimeSelectClicked() {
+        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                txtOrderEndTime.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+            }
+        }, TimeUtil.getNowYear(), TimeUtil.getNowMonth(), TimeUtil.getDayOfMonth()).show();
+    }
+
+    @OnClick(R.id.btn_update_order_done)
+    public void onBtnDoneToCreateProcedureClicked() {
+        if (isDataTrue()) {
+            updateOrder();
+        }
+    }
+
+    private void updateOrder() {
         progressDialog.setMessage("请稍候");
         progressDialog.show();
-
-        RestClient.getService().createOrder(createOrderRequest).enqueue(new DataCallback<APIResponse<CreateOrderResponse>>() {
+        bindData();
+        RestClient.getService().updateOrder(orderModel.getId(), createOrderRequest).enqueue(new DataCallback<APIResponse>() {
 
             @Override
-            public void onDataResponse(Call<APIResponse<CreateOrderResponse>> call,
-                                       Response<APIResponse<CreateOrderResponse>> response) {
-                orderModel.setId(response.body().getData().getOrderId());
-                orderModel.setOrderCode(response.body().getData().getOrderCode());
-                Intent intent = new Intent(CreateOrderActivity.this, SplitProcedureActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(Config.ORDER,orderModel);
-                intent.putExtras(bundle);
-                startActivity(intent);
+            public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
+                ToastUtil.showToast("修改成功，请刷新页面");
                 finish();
             }
 
             @Override
-            public void onDataFailure(Call<APIResponse<CreateOrderResponse>> call, Throwable t) {
+            public void onDataFailure(Call<APIResponse> call, Throwable t) {
                 SnackbarUtil.showSnackbar(getWindow().getDecorView(), "网络连接失败，请稍后再试");
             }
 
@@ -199,6 +190,5 @@ public class CreateOrderActivity extends ToolBarActivity {
             }
         });
     }
-
 
 }

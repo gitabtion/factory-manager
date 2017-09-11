@@ -4,6 +4,7 @@ import net.hrsoft.transparent_factory_manager.account.models.LoginRequest;
 import net.hrsoft.transparent_factory_manager.account.models.LoginResponse;
 import net.hrsoft.transparent_factory_manager.account.models.UserModel;
 import net.hrsoft.transparent_factory_manager.home.models.GetProcedureResponse;
+import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
 import net.hrsoft.transparent_factory_manager.mine.models.CreateLeaderRequest;
 import net.hrsoft.transparent_factory_manager.mine.models.GetGroupLIstResponse;
 import net.hrsoft.transparent_factory_manager.mine.models.LeaderAccountModel;
@@ -13,8 +14,10 @@ import net.hrsoft.transparent_factory_manager.mine.models.UpdateUserNameModel;
 import net.hrsoft.transparent_factory_manager.order.models.CreateOrderRequest;
 import net.hrsoft.transparent_factory_manager.order.models.CreateOrderResponse;
 import net.hrsoft.transparent_factory_manager.order.models.CurrentOrderModel;
+import net.hrsoft.transparent_factory_manager.order.models.GetProcedureDataResponse;
 import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
 import net.hrsoft.transparent_factory_manager.order.models.OrderResponse;
+import net.hrsoft.transparent_factory_manager.order.models.ProcedureDataModel;
 import net.hrsoft.transparent_factory_manager.order.models.UpdateProcedureRequest;
 
 import retrofit2.Call;
@@ -91,6 +94,25 @@ public interface APIService {
     @POST("order")
     Call<APIResponse<CreateOrderResponse>> createOrder(@Body CreateOrderRequest createOrderRequest);
 
+    //创建工序
     @POST("procedure/add")
     Call<APIResponse> createProcedure(@Body UpdateProcedureRequest updateProcedureRequest);
+
+    //修改工序详情
+    @PUT("procedure/update/{procedureId}")
+    Call<APIResponse> updateProcedure(@Path("procedureId") int procedureId, @Body UpdateProcedureRequest
+            updateProcedureRequest);
+
+    //更新订单信息
+    @PUT("order/{orderId}")
+    Call<APIResponse> updateOrder(@Path("orderId") int orderId, @Body CreateOrderRequest createOrderRequest);
+
+    //获取工序数据
+    @GET("procedure/{procedureId}/logs")
+    Call<APIResponse<GetProcedureDataResponse>> getProcedureData(@Path("procedureId") int procedureId);
+
+    //获取工序详情
+    @GET("procedure/detail/{procedureId}")
+    Call<APIResponse<ProcedureModel>> getProcedureInfo(@Path("procedureId")int procedureId);
+
 }

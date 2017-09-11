@@ -63,7 +63,7 @@
                 android:paddingTop="12dp">
 
                 <TextView
-                    android:textSize="@dimen/list_name_text"
+                    android:textSize="@dimen/description_text"
                     android:id="@+id/txt_home_start_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                     android:background="@color/progress_high"/>
 
                 <TextView
-                    android:textSize="@dimen/list_name_text"
+                    android:textSize="@dimen/description_text"
                     android:id="@+id/txt_home_end_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

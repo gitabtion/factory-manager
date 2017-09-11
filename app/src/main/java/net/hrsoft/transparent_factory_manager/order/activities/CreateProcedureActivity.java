@@ -1,6 +1,7 @@
 package net.hrsoft.transparent_factory_manager.order.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatSeekBar;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
+import net.hrsoft.transparent_factory_manager.common.Config;
 import net.hrsoft.transparent_factory_manager.home.models.GetProcedureResponse;
 import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
 import net.hrsoft.transparent_factory_manager.mine.models.GroupModel;
@@ -54,7 +56,6 @@ public class CreateProcedureActivity extends ToolBarActivity {
     private CompositeDisposable compositeDisposable;
     private GroupModel groupModel;
     private UpdateProcedureRequest updateProcedureRequest;
-    private String time_last = " 00:00:00";
     private OrderModel orderModel;
     private ArrayList<ProcedureModel> procedureModels;
     private ArrayList<WeightModel> weightModels;
@@ -79,8 +80,9 @@ public class CreateProcedureActivity extends ToolBarActivity {
     protected void initVariable() {
         updateProcedureRequest = new UpdateProcedureRequest();
         Bundle bundle = getIntent().getExtras();
-        orderModel = (OrderModel) bundle.getSerializable(CreateOrderActivity.CREATE_ORDER);
+        orderModel = (OrderModel) bundle.getSerializable(Config.ORDER);
         weightModels = new ArrayList<>();
+        getProcedure();
     }
 
     @Override
@@ -150,10 +152,12 @@ public class CreateProcedureActivity extends ToolBarActivity {
 
             }
         });
+        Intent intent = new Intent(this,SelectGroupActivity.class);
+        startActivity(intent);
     }
 
 
-    @OnClick(R.id.btn_done_to_create_procedure)
+    @OnClick(R.id.btn_update_done)
     public void onBtnDoneToCreateProcedureClicked() {
         if (procedureModels != null && isDataTrue()) {
             if (procedureModels.size() != 0) {
@@ -190,11 +194,14 @@ public class CreateProcedureActivity extends ToolBarActivity {
         updateProcedureRequest.setTotalCount(Integer.valueOf(editTotalCount.getText().toString().trim()));
         updateProcedureRequest.setOrderId(orderModel.getId());
         updateProcedureRequest.setWorkGroupId(groupModel.getId());
-        updateProcedureRequest.setWeight(((double) seekWeight.getProgress()) / 100);
+        if (procedureModels!=null&&procedureModels.size()!=0){
+            updateProcedureRequest.setWeight(((double) seekWeight.getProgress())/100);
+        }else if (procedureModels!=null){
+            updateProcedureRequest.setWeight(1);
+        }
     }
 
     private void createProcedure() {
-        // TODO: 17/9/11 蜜汁跳转bug
         bindData();
         progressDialog.setMessage("请稍候");
         progressDialog.show();
@@ -203,7 +210,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
             @Override
             public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
                 ToastUtil.showToast("添加成功，请刷新页面");
-//                finish();
+                finish();
             }
 
             @Override
@@ -245,6 +252,9 @@ public class CreateProcedureActivity extends ToolBarActivity {
         } else if (editStandard.getText().length() == 0) {
             showError(editStandard, "单位不可为空");
             flag = false;
+        }else if (groupModel==null){
+            SnackbarUtil.showSnackbar(getWindow().getDecorView(),"请选择选择班组");
+            flag = false;
         }
         return flag;
     }
@@ -258,6 +268,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
             @Override
             public void onDataResponse(Call<APIResponse<GetProcedureResponse>> call, Response<APIResponse<GetProcedureResponse>> response) {
                 procedureModels = response.body().getData().getProcedures();
+                updateProcedureRequest.setWeight(((double) seekWeight.getProgress())/100);
             }
 
             @Override
@@ -276,6 +287,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
     }
 
     private void initSeekBar() {
+        seekWeight.setProgress(100);
         seekWeight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -284,13 +296,19 @@ public class CreateProcedureActivity extends ToolBarActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                if (procedureModels!=null && procedureModels.size()==0){
+                    seekBar.setProgress(100);
+                }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                if (procedureModels!=null && procedureModels.size()==0){
+                    seekBar.setProgress(100);
+                }
             }
         });
     }
+
+    // TODO: 17/9/11 权重设置存在一定出现bug可能，需改逻辑
 }

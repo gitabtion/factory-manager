@@ -80,13 +80,13 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
         initSwipe();
         switch (type) {
             case OrderContentFragment.PROCESSING:
-                getCurrentList(page, 20, REFRESH_STATUS);
+                getCurrentList(page, 100, REFRESH_STATUS);
                 break;
             case OrderContentFragment.TO_BE_START:
-                getUnstartList(page, 20, REFRESH_STATUS);
+                getUnstartList(page, 100, REFRESH_STATUS);
                 break;
             case OrderContentFragment.ENDED:
-                getEndedList(page, 20, REFRESH_STATUS);
+                getEndedList(page, 100, REFRESH_STATUS);
                 break;
             default:
                 break;
@@ -247,13 +247,13 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
                 swipeOrderContent.setRefreshing(true);
                 switch (type) {
                     case OrderContentFragment.PROCESSING:
-                        getCurrentList(page, 20, REFRESH_STATUS);
+                        getCurrentList(page, 100, REFRESH_STATUS);
                         break;
                     case OrderContentFragment.TO_BE_START:
-                        getUnstartList(page, 20, REFRESH_STATUS);
+                        getUnstartList(page, 100, REFRESH_STATUS);
                         break;
                     case OrderContentFragment.ENDED:
-                        getEndedList(page, 20, REFRESH_STATUS);
+                        getEndedList(page, 100, REFRESH_STATUS);
                         break;
                     default:
                         break;

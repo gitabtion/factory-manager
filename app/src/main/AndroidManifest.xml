@@ -30,5 +30,7 @@
         <activity android:name=".mine.activities.UpdateUserInfoActivity"/>
         <activity android:name=".mine.activities.AddLeaderActivity"/>
         <activity android:name=".order.activities.WorkGroupInfoActivity"/>
+        <activity android:name=".order.activities.UpdateOrderActivity"/>
+        <activity android:name=".order.activities.UpdateProcedureActivity"/>
     </application>
 </manifest>

@@ -1,5 +1,6 @@
 package net.hrsoft.transparent_factory_manager.base.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -11,6 +12,9 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.common.Config;
+import net.hrsoft.transparent_factory_manager.order.activities.OrderInfoActivity;
+import net.hrsoft.transparent_factory_manager.order.activities.UpdateOrderActivity;
 
 /**
  * @author abtion.
@@ -56,6 +60,7 @@ public abstract class ToolBarActivity extends BaseActivity {
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
+
         }
     }
 
@@ -97,4 +102,5 @@ public abstract class ToolBarActivity extends BaseActivity {
     protected void onBackBtnOnclick() {
         this.finish();
     }
+
 }

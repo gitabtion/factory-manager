@@ -183,7 +183,7 @@ public abstract class BaseRecyclerViewAdapter<Data> extends RecyclerView.Adapter
                 @Override
                 public void onClick(View view) {
                     if (onItemClickedListener != null) {
-                        onItemClickedListener.onItemClicked(dataList.get(position), (ViewHolder) holder);
+                        onItemClickedListener.onItemClicked(dataList.get(position-1), (ViewHolder) holder);
                     }
                 }
             });

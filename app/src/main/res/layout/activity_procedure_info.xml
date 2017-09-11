@@ -6,6 +6,12 @@
               android:focusable="true"
               android:focusableInTouchMode="true">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_procedure_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -234,4 +240,5 @@
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

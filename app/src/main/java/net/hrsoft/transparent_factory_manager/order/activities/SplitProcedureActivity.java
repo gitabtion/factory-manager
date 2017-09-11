@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
+import net.hrsoft.transparent_factory_manager.common.Config;
 import net.hrsoft.transparent_factory_manager.home.models.GetProcedureResponse;
 import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
 import net.hrsoft.transparent_factory_manager.network.APIResponse;
@@ -21,7 +22,6 @@ import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -33,15 +33,13 @@ import retrofit2.Response;
  */
 
 public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyclerViewAdapter
-        .OnItemClicked<ProcedureModel>{
-    private OrderModel orderModel;
+        .OnItemClicked<ProcedureModel> {
     @BindView(R.id.swipe_split_procedure)
     SwipeRefreshLayout swipeSplitProcedure;
-    private ArrayList<ProcedureModel> procedureModels;
-    public static final String PROCEDURES = "procedures";
-
     @BindView(R.id.rec_procedure)
     RecyclerView recProcedure;
+    private ArrayList<ProcedureModel> procedureModels;
+    private OrderModel orderModel;
 
     @Override
     protected int getLayoutId() {
@@ -52,7 +50,7 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
     protected void initVariable() {
         procedureModels = new ArrayList<>();
         Bundle bundle = getIntent().getExtras();
-        orderModel = (OrderModel) bundle.getSerializable(CreateOrderActivity.CREATE_ORDER);
+        orderModel = (OrderModel) bundle.getSerializable(Config.ORDER);
     }
 
     @Override
@@ -67,16 +65,21 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
 
     }
 
-
+    /**
+     * 确认创建工序按钮点击事件
+     */
     @OnClick(R.id.btn_create_procedure)
     public void onViewClicked() {
         Intent intent = new Intent(this, CreateProcedureActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(CreateOrderActivity.CREATE_ORDER,orderModel);
+        bundle.putSerializable(Config.ORDER, orderModel);
         intent.putExtras(bundle);
         startActivity(intent);
     }
 
+    /**
+     * 初始化下拉刷新控件
+     */
     private void initRecSwipe() {
         swipeSplitProcedure.setRefreshing(true);
         swipeSplitProcedure.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
@@ -88,13 +91,18 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
         });
     }
 
-    private void getProcedure(){
+    /**
+     * 获取当前订单下的工序列表
+     */
+    private void getProcedure() {
         RestClient.getService().getOrderProcedure(orderModel.getId()).enqueue(new DataCallback<APIResponse<GetProcedureResponse>>() {
 
             @Override
-            public void onDataResponse(Call<APIResponse<GetProcedureResponse>> call, Response<APIResponse<GetProcedureResponse>> response) {
+            public void onDataResponse(Call<APIResponse<GetProcedureResponse>> call,
+                                       Response<APIResponse<GetProcedureResponse>> response) {
                 procedureModels = response.body().getData().getProcedures();
-                ProcedureAdapter adapter = new ProcedureAdapter(SplitProcedureActivity.this, procedureModels,orderModel);
+                ProcedureAdapter adapter = new ProcedureAdapter(SplitProcedureActivity.this, procedureModels,
+                        orderModel);
                 adapter.setHasHeader(true);
                 recProcedure.setAdapter(adapter);
                 recProcedure.setLayoutManager(new LinearLayoutManager(SplitProcedureActivity.this, LinearLayoutManager
@@ -103,12 +111,12 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
 
             @Override
             public void onDataFailure(Call<APIResponse<GetProcedureResponse>> call, Throwable t) {
-                SnackbarUtil.showSnackbar(getWindow().getDecorView(),"网络连接失败，请稍后再试");
+                SnackbarUtil.showSnackbar(getWindow().getDecorView(), "网络连接失败，请稍后再试");
             }
 
             @Override
             public void dismissDialog() {
-                if (swipeSplitProcedure.isRefreshing()){
+                if (swipeSplitProcedure.isRefreshing()) {
                     swipeSplitProcedure.setRefreshing(false);
                 }
             }
@@ -117,7 +125,11 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
 
     @Override
     public void onItemClicked(ProcedureModel procedureModel, BaseRecyclerViewAdapter.ViewHolder holder) {
-
+        Intent intent = new Intent(this,UpdateProcedureActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Config.PROCEDURES,procedureModel);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 }

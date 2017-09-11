@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
+import net.hrsoft.transparent_factory_manager.common.Config;
 import net.hrsoft.transparent_factory_manager.home.models.GetProcedureResponse;
 import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
 import net.hrsoft.transparent_factory_manager.network.APIResponse;
@@ -20,9 +24,10 @@ import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -33,8 +38,7 @@ import retrofit2.Response;
  */
 
 public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerViewAdapter
-        .OnItemClicked<ProcedureModel>{
-    public static final String PROCEDURE = "procedure";
+        .OnItemClicked<ProcedureModel> {
 
     @BindView(R.id.swipe_order_info)
     SwipeRefreshLayout swipeOrderInfo;
@@ -61,6 +65,7 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
         setActivityTitle("订单详情");
         getProcedure(orderModel);
         setupSwipe();
+        setupToolbar();
     }
 
     @Override
@@ -87,8 +92,8 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
                 adapter.setHasHeader(true);
                 adapter.setOnItemClickedListener(OrderInfoActivity.this);
                 recProcedure.setAdapter(adapter);
-                recProcedure.setLayoutManager(new LinearLayoutManager(OrderInfoActivity.this,LinearLayoutManager
-                        .VERTICAL,false));
+                recProcedure.setLayoutManager(new LinearLayoutManager(OrderInfoActivity.this, LinearLayoutManager
+                        .VERTICAL, false));
             }
 
             @Override
@@ -113,13 +118,13 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
     public void onItemClicked(ProcedureModel procedureModel, BaseRecyclerViewAdapter.ViewHolder holder) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(PROCEDURE,procedureModel);
+        bundle.putSerializable(Config.PROCEDURE, procedureModel);
         intent.putExtras(bundle);
-        intent.setClass(this,ProcedureInfoActivity.class);
+        intent.setClass(this, ProcedureInfoActivity.class);
         startActivity(intent);
     }
 
-    private void setupSwipe(){
+    private void setupSwipe() {
         swipeOrderInfo.setRefreshing(true);
         swipeOrderInfo.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
         swipeOrderInfo.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -128,5 +133,39 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
                 getProcedure(orderModel);
             }
         });
+    }
+
+    private void setupToolbar() {
+        getToolbar().inflateMenu(R.menu.base_toolbar_menu);
+        getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.action_edit) {
+                    Intent intent = new Intent();
+                    intent.setClass(OrderInfoActivity.this, UpdateOrderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Config.ORDER, orderModel);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.base_toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @OnClick(R.id.fab_add_procedure)
+    public void onViewClicked() {
+        Intent intent = new Intent(this,CreateProcedureActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Config.ORDER,orderModel);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }
