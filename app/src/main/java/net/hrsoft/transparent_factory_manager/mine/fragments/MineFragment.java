@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.widget.AppCompatEditText;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import net.hrsoft.transparent_factory_manager.network.DataCallback;
 import net.hrsoft.transparent_factory_manager.network.RestClient;
 import net.hrsoft.transparent_factory_manager.utils.RegexUtil;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
+import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -195,7 +197,9 @@ public class MineFragment extends BaseFragment {
         RestClient.getService().updatePassword(userId, password).enqueue(new DataCallback<APIResponse>() {
             @Override
             public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
-                TFMApplication.getInstance().getCacheUtil().putSerializableObj(CacheKey.USER, user);
+                ToastUtil.showToast("修改成功，请重新登录");
+                TFMApplication.getInstance().exitAccount();
+//                TFMApplication.getInstance().getCacheUtil().putSerializableObj(CacheKey.USER, user);
             }
 
             @Override
@@ -219,12 +223,15 @@ public class MineFragment extends BaseFragment {
     private void updateMobile(final int userId, final UpdateMobileModel mobile) {
         progressDialog.setMessage("请稍候");
         progressDialog.show();
+
         RestClient.getService().updateMobile(userId, mobile).enqueue(new DataCallback<APIResponse>() {
             @Override
             public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
                 user.setMobile(mobile.getMobile());
                 txtMobile.setText(mobile.getMobile());
-                TFMApplication.getInstance().getCacheUtil().putSerializableObj(CacheKey.USER, user);
+                ToastUtil.showToast("修改成功，请重新登录");
+                TFMApplication.getInstance().exitAccount();
+//                TFMApplication.getInstance().getCacheUtil().putSerializableObj(CacheKey.USER, user);
             }
 
             @Override

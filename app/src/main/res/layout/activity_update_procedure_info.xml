@@ -20,24 +20,21 @@
             android:orientation="vertical"
             android:padding="@dimen/padding_left_right">
 
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="4"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
+
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_columnSpan="1"
-                    android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_order"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_columnSpan="3"
-                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="16dp">
 
                     <android.support.design.widget.TextInputEditText
@@ -50,23 +47,25 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_columnSpan="1"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="8dp"
                     android:src="@drawable/ic_count"/>
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_column="1"
-                    android:layout_columnWeight="1"
-                    android:layout_gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_row="1">
+                    android:layout_weight="4">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/edit_procedure_total_count"
@@ -79,13 +78,11 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_column="3"
-                    android:layout_columnSpan="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_row="1">
+                    android:layout_weight="1">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/edit_standard"
@@ -94,136 +91,120 @@
                         android:hint="单位"
                         android:textSize="@dimen/list_name_text"/>
                 </android.support.design.widget.TextInputLayout>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_columnSpan="1"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_date"/>
-
-                <LinearLayout
-                    android:layout_columnSpan="2"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="工序开始时间："/>
-
-                    <TextView
-                        android:id="@+id/txt_procedure_start_time"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="2017-09-01"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/btn_procedure_start_time_select"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_btn"
-                    android:padding="8dp"
-                    android:text=" 修  改 "
-                    android:textColor="@color/white"/>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_columnSpan="1"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_date"/>
-
-
-                <LinearLayout
-                    android:layout_columnSpan="2"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="工序结束时间："/>
-
-                    <TextView
-                        android:id="@+id/txt_procedure_end_time"
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="2017-09-01"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/btn_procedure_end_time_select"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_btn"
-                    android:padding="8dp"
-                    android:text=" 修  改 "
-                    android:textColor="@color/white"/>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_columnSpan="1"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_group"/>
-
-
-                <LinearLayout
-                    android:layout_column="1"
-                    android:layout_columnWeight="1"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_row="4"
-                    android:layout_rowSpan="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="班组："/>
-
-
-                    <TextView
-                        android:id="@+id/txt_group_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="尚未选定"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/btn_group_selector"
-                    android:layout_column="3"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_row="4"
-                    android:background="@drawable/bg_btn"
-                    android:padding="8dp"
-                    android:text=" 修  改 "
-                    android:textColor="@color/white"/>
-            </GridLayout>
+            </LinearLayout>
 
 
             <LinearLayout
+                android:id="@+id/btn_procedure_start_time_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_columnSpan="1"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_date"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="工序开始时间："/>
+
+                <TextView
+                    android:id="@+id/txt_procedure_start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2017-09-01"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginLeft="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:id="@+id/btn_procedure_end_time_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_date"/>
+
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="工序结束时间："/>
+
+                <TextView
+                    android:id="@+id/txt_procedure_end_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2017-09-01"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginLeft="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:id="@+id/btn_group_selector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="12dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+
+                    android:src="@drawable/ic_group"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_left_right"
+                    android:text="班组："/>
+
+
+                <TextView
+                    android:id="@+id/txt_group_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="尚未选定"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -233,29 +214,32 @@
                     android:src="@drawable/ic_order"/>
 
                 <android.support.v7.widget.AppCompatSeekBar
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="16dp"
+
                     android:id="@+id/seek_weight"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="1"/>
 
                 <TextView
-                    android:layout_marginLeft="16dp"
-                    android:text="权重："
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:text="权重："/>
+
                 <TextView
                     android:id="@+id/txt_procedure_weight"
-                    android:text="0%"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="0%"/>
             </LinearLayout>
 
-
         </LinearLayout>
+
+
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView

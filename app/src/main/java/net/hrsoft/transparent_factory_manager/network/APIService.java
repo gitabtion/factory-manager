@@ -22,6 +22,7 @@ import net.hrsoft.transparent_factory_manager.order.models.UpdateProcedureReques
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -114,5 +115,9 @@ public interface APIService {
     //获取工序详情
     @GET("procedure/detail/{procedureId}")
     Call<APIResponse<ProcedureModel>> getProcedureInfo(@Path("procedureId")int procedureId);
+
+    //删除工序
+    @DELETE("procedure/delete/{procedureId}")
+    Call<APIResponse> deleteProcedure(@Path("procedureId")int procedureId);
 
 }

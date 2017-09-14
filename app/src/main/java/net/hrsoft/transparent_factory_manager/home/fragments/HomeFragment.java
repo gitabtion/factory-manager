@@ -106,6 +106,9 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void dismissDialog() {
+                if (swipeHome.isRefreshing()){
+                    swipeHome.setRefreshing(false);
+                }
             }
         });
 
@@ -151,7 +154,6 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 swipeHome.setRefreshing(true);
-                ToastUtil.showToast(position+"  ");
                 getProcedure(orderModels.get(position));
                 HomeFragment.this.position = position;
             }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Transparent_Factory_Manager</string>
+    <string name="app_name">透明工厂经理</string>
     <string name="string_order_start_time">2017.08.01</string>
     <string name="string_order_name">制作100泥塑人偶</string>
     <string name="string_order_description">首钢集团</string>

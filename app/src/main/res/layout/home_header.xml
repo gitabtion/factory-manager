@@ -88,24 +88,26 @@
                     android:textColor="@color/title"/>
             </LinearLayout>
 
-            <RelativeLayout
-                style="@style/content_padding"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="12dp">
+                android:layout_height="wrap_content"
+                >
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pie_all"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"/>
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"/>
 
                 <com.github.mikephil.charting.charts.PieChart
+                    android:layout_weight="1"
                     android:id="@+id/pie_time"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"/>
 
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
 

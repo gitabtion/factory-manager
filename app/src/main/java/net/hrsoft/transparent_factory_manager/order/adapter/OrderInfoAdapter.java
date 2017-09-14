@@ -12,7 +12,8 @@ import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
 import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
-import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
+import net.hrsoft.transparent_factory_manager.utils.MPAndroidChartUtil;
+import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ import butterknife.BindView;
  */
 
 public class OrderInfoAdapter extends BaseRecyclerViewAdapter<ProcedureModel> {
+
 
     private OrderModel orderModel;
 
@@ -54,6 +56,10 @@ public class OrderInfoAdapter extends BaseRecyclerViewAdapter<ProcedureModel> {
         TextView txtProcedureName;
         @BindView(R.id.txt_group_name)
         TextView txtGroupName;
+        @BindView(R.id.txt_start_time)
+        TextView txtStartTime;
+        @BindView(R.id.txt_end_time)
+        TextView txtEndTime;
         @BindView(R.id.pie_all)
         PieChart pieAll;
         @BindView(R.id.pie_time)
@@ -67,9 +73,16 @@ public class OrderInfoAdapter extends BaseRecyclerViewAdapter<ProcedureModel> {
         protected void onBind(ProcedureModel procedureModel) {
             txtProcedureName.setText(procedureModel.getName());
             txtGroupName.setText(procedureModel.getWorkGroupName());
-            double allPercent = ((double)procedureModel.getSuccessCount())/((double)procedureModel.getTotalCount())*100;
-            pieAll.setCenterText(allPercent+"%");
-            pieAll.setHoleRadius((float) allPercent);
+            txtStartTime.setText(procedureModel.getStartTime());
+            txtEndTime.setText(procedureModel.getEndTime());
+
+
+            float allPercent = ((float) procedureModel.getSuccessCount()) / ((float) procedureModel.getTotalCount());
+            MPAndroidChartUtil.setPieChart(pieAll,allPercent,"完成率");
+            float timeData = ((float)(TimeUtil.getCurrentTimeStamp()-TimeUtil.setStringToStamp
+                    (procedureModel.getStartTime())))/((float)(TimeUtil.setStringToStamp(procedureModel.getEndTime())-TimeUtil
+                    .setStringToStamp(procedureModel.getStartTime())));
+            MPAndroidChartUtil.setPieChart(pieTime,timeData,"时间进度");
         }
     }
 
@@ -102,11 +115,11 @@ public class OrderInfoAdapter extends BaseRecyclerViewAdapter<ProcedureModel> {
         protected void onBind(OrderModel orderModel) {
             pieAll.setVisibility(View.GONE);
             pieTime.setVisibility(View.GONE);
-            txtHomeEndTime.setText(order.getEndTime()==null?"N/A":orderModel.getEndTime());
-            txtHomeStartTime.setText(order.getStartTime()==null?"N/A":orderModel.getStartTime());
-            txtHomeOrderName.setText(order.getTitle()==null?"N/A":orderModel.getTitle());
-            txtHomeOrderNumber.setText(order.getOrderCode()==null?"N/A":orderModel.getOrderCode());
-            txtHomeOrderDescription.setText(order.getCustomerInfo()==null?"N/A":orderModel.getCustomerInfo());
+            txtHomeEndTime.setText(order.getEndTime() == null ? "N/A" : orderModel.getEndTime());
+            txtHomeStartTime.setText(order.getStartTime() == null ? "N/A" : orderModel.getStartTime());
+            txtHomeOrderName.setText(order.getTitle() == null ? "N/A" : orderModel.getTitle());
+            txtHomeOrderNumber.setText(order.getOrderCode() == null ? "N/A" : orderModel.getOrderCode());
+            txtHomeOrderDescription.setText(order.getCustomerInfo() == null ? "N/A" : orderModel.getCustomerInfo());
         }
     }
 

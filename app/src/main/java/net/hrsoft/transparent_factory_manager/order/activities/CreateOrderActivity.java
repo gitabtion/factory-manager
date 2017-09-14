@@ -23,6 +23,7 @@ import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -56,6 +57,8 @@ public class CreateOrderActivity extends ToolBarActivity {
     TextView txtOrderEndTime;
     @BindView(R.id.edit_description)
     EditText editAddOn;
+    @BindView(R.id.edit_order_number)
+    TextInputEditText editOrderNumber;
 
     private CreateOrderRequest createOrderRequest;
     private OrderModel orderModel;
@@ -114,7 +117,7 @@ public class CreateOrderActivity extends ToolBarActivity {
      */
     @OnClick(R.id.btn_update_order_done)
     public void onBtnDoneToCreateProcedureClicked() {
-        if (isDataTrue()){
+        if (isDataTrue()) {
             createOrder();
         }
     }
@@ -137,15 +140,19 @@ public class CreateOrderActivity extends ToolBarActivity {
         if (editOrderName.getText().length() == 0) {
             showError(editOrderName, "订单名称不能为空");
             flag = false;
+        } else if (editOrderNumber.getText().length() == 0) {
+            showError(editOrderNumber, "订单号不能为空");
+            flag = false;
         } else if (editTotalCount.getText().length() == 0) {
-            showError(editTotalCount, "订单数量不可为空");
+            showError(editTotalCount, "订单数量不能为空");
             flag = false;
         }
         return flag;
     }
 
     private void bindData() {
-        createOrderRequest.setTotalCount(editTotalCount.getText().toString());
+        createOrderRequest.setOrderCode(editOrderNumber.getText().toString().trim());
+        createOrderRequest.setTotalCount(editTotalCount.getText().toString().trim());
         createOrderRequest.setCustomerInfo(editOrderClientName.getText().toString().trim());
         createOrderRequest.setDescription(editAddOn.getText().toString().trim());
         createOrderRequest.setEndTime(txtOrderEndTime.getText().toString().trim());
@@ -178,9 +185,9 @@ public class CreateOrderActivity extends ToolBarActivity {
                                        Response<APIResponse<CreateOrderResponse>> response) {
                 orderModel.setId(response.body().getData().getOrderId());
                 orderModel.setOrderCode(response.body().getData().getOrderCode());
-                Intent intent = new Intent(CreateOrderActivity.this, SplitProcedureActivity.class);
+                Intent intent = new Intent(CreateOrderActivity.this, OrderInfoActivity   .class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(Config.ORDER,orderModel);
+                bundle.putSerializable(Config.ORDER, orderModel);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();

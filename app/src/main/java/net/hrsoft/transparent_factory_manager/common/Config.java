@@ -19,7 +19,7 @@ public final class Config {
     /**
      * APP Server 网络请求BaseUrl
      */
-    public static final String APP_SERVER_BASE_URL = "http://192.168.0.101:3010/";
+    public static final String APP_SERVER_BASE_URL = "http://192.168.0.110:3010/";
 
     /**
      * APP Server 网络请求连接超时时间，单位：s

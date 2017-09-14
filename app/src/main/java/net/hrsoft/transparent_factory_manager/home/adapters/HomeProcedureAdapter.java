@@ -7,14 +7,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
 import net.hrsoft.transparent_factory_manager.order.models.CurrentOrderModel;
-import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
-import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
+import net.hrsoft.transparent_factory_manager.utils.MPAndroidChartUtil;
+import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,6 +30,7 @@ import butterknife.BindView;
  */
 
 public class HomeProcedureAdapter extends BaseRecyclerViewAdapter<ProcedureModel> {
+
 
     private CurrentOrderModel orderModel;
 
@@ -59,6 +64,10 @@ public class HomeProcedureAdapter extends BaseRecyclerViewAdapter<ProcedureModel
         PieChart pieAll;
         @BindView(R.id.pie_time)
         PieChart pieTime;
+        @BindView(R.id.txt_start_time)
+        TextView txtStartTime;
+        @BindView(R.id.txt_end_time)
+        TextView txtEndTime;
 
         ItemHolder(View itemView) {
             super(itemView);
@@ -68,9 +77,19 @@ public class HomeProcedureAdapter extends BaseRecyclerViewAdapter<ProcedureModel
         protected void onBind(ProcedureModel procedureModel) {
             txtProcedureName.setText(procedureModel.getName());
             txtGroupName.setText(procedureModel.getWorkGroupName());
-            double allPercent = ((double)procedureModel.getSuccessCount())/((double)procedureModel.getTotalCount())*100;
-            pieAll.setCenterText(allPercent+"%");
-            pieAll.setHoleRadius((float) allPercent);
+            txtStartTime.setText(procedureModel.getStartTime());
+            txtEndTime.setText(procedureModel.getEndTime());
+
+            float allPercent = ((float) procedureModel.getSuccessCount()) / ((float) procedureModel.getTotalCount
+                    ());
+            MPAndroidChartUtil.setPieChart(pieAll,allPercent,"完成率");
+            float timeData = ((float)(TimeUtil.getCurrentTimeStamp()-TimeUtil.setStringToStamp
+                    (procedureModel
+                            .getStartTime())))/((float)(TimeUtil.setStringToStamp(procedureModel.getEndTime())-TimeUtil
+                    .setStringToStamp
+                    (procedureModel
+                            .getStartTime())));
+            MPAndroidChartUtil.setPieChart(pieTime,timeData,"时间进度");
         }
     }
 
@@ -101,15 +120,23 @@ public class HomeProcedureAdapter extends BaseRecyclerViewAdapter<ProcedureModel
 
         @Override
         protected void onBind(CurrentOrderModel orderModel) {
-            txtHomeEndTime.setText(order.getEndTime()==null?"N/A":orderModel.getEndTime());
-            txtHomeStartTime.setText(order.getStartTime()==null?"N/A":orderModel.getStartTime());
-            txtHomeOrderName.setText(order.getTitle()==null?"N/A":orderModel.getTitle());
-            txtHomeOrderNumber.setText(order.getOrderCode()==null?"N/A":orderModel.getOrderCode());
-            txtHomeOrderDescription.setText(order.getCustomerInfo()==null?"N/A":orderModel.getCustomerInfo());
+            txtHomeEndTime.setText(order.getEndTime() == null ? "N/A" : orderModel.getEndTime());
+            txtHomeStartTime.setText(order.getStartTime() == null ? "N/A" : orderModel.getStartTime());
+            txtHomeOrderName.setText(order.getTitle() == null ? "N/A" : orderModel.getTitle());
+            txtHomeOrderNumber.setText(order.getOrderCode() == null ? "N/A" : orderModel.getOrderCode());
+            txtHomeOrderDescription.setText(order.getCustomerInfo() == null ? "N/A" : orderModel.getCustomerInfo());
+
+            MPAndroidChartUtil.setPieChart(pieAll, (float) orderModel.getCapacity(),"完成率");
+            float timeData = ((float)(TimeUtil.getCurrentTimeStamp()-TimeUtil.setStringToStamp
+                    (orderModel
+                    .getStartTime())))/((float)(TimeUtil.setStringToStamp(orderModel.getEndTime())-TimeUtil.setStringToStamp
+                    (orderModel
+                            .getStartTime())));
+            MPAndroidChartUtil.setPieChart(pieTime,timeData,"时间进度");
         }
     }
 
-    public void setHeader(CurrentOrderModel orderModel){
+    public void setHeader(CurrentOrderModel orderModel) {
         this.orderModel = orderModel;
         refresh();
     }

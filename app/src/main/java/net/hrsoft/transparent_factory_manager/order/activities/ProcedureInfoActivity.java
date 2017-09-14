@@ -1,8 +1,10 @@
 package net.hrsoft.transparent_factory_manager.order.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,13 +24,15 @@ import net.hrsoft.transparent_factory_manager.network.RestClient;
 import net.hrsoft.transparent_factory_manager.order.adapter.ProcedureDataAdapter;
 import net.hrsoft.transparent_factory_manager.order.models.GetProcedureDataResponse;
 import net.hrsoft.transparent_factory_manager.order.models.ProcedureDataModel;
+import net.hrsoft.transparent_factory_manager.utils.MPAndroidChartUtil;
+import net.hrsoft.transparent_factory_manager.utils.ProgressDialogUtil;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
+import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -52,8 +56,8 @@ public class ProcedureInfoActivity extends ToolBarActivity {
     TextView txtEndTime;
     @BindView(R.id.pie_done)
     PieChart pieDone;
-    @BindView(R.id.pie_success)
-    PieChart pieSuccess;
+    @BindView(R.id.pie_time)
+    PieChart pieTime;
     @BindView(R.id.rec_procedure_data)
     RecyclerView recProcedureData;
     @BindView(R.id.swipe_procedure_info)
@@ -80,6 +84,19 @@ public class ProcedureInfoActivity extends ToolBarActivity {
         setupToolbar();
         bindView();
         initSwipe();
+
+
+        float allPercent = ((float) procedureModel.getSuccessCount()) / ((float) procedureModel.getTotalCount
+                ());
+        MPAndroidChartUtil.setPieChart(pieDone,allPercent,"完成率");
+        float timeData = ((float)(TimeUtil.getCurrentTimeStamp()-TimeUtil.setStringToStamp
+                (procedureModel
+                        .getStartTime())))/((float)(TimeUtil.setStringToStamp(procedureModel.getEndTime())-TimeUtil
+                .setStringToStamp
+                        (procedureModel
+                                .getStartTime())));
+        MPAndroidChartUtil.setPieChart(pieTime,timeData,"时间进度");
+
     }
 
     @Override
@@ -88,6 +105,9 @@ public class ProcedureInfoActivity extends ToolBarActivity {
         getProcedureInfo();
     }
 
+    /**
+     * 获取工序记录数据
+     */
     private void getProcedureData() {
         RestClient.getService().getProcedureData(procedureModel.getId()).enqueue(new DataCallback<APIResponse<GetProcedureDataResponse>>() {
             @Override
@@ -121,29 +141,58 @@ public class ProcedureInfoActivity extends ToolBarActivity {
         });
     }
 
+    /**
+     * 设置toolbar的menu
+     */
     private void setupToolbar() {
-        getToolbar().inflateMenu(R.menu.base_toolbar_menu);
+        getToolbar().inflateMenu(R.menu.procedure_info_menu);
         getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.action_edit) {
-                    Intent intent = new Intent(ProcedureInfoActivity.this, UpdateProcedureActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(Config.PROCEDURE, procedureModel);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                switch (item.getItemId()){
+                    case R.id.action_delete:
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ProcedureInfoActivity.this);
+                        builder.setTitle("提示")
+                                .setMessage("删除工序后将不可删除，确认删除？")
+                                .setNegativeButton("取消",null)
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        deleteProcedure();
+                                    }
+                                }).show();
+
+                        break;
+                    case R.id.action_edit:
+                        Intent intent = new Intent(ProcedureInfoActivity.this, UpdateProcedureActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(Config.PROCEDURE, procedureModel);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        break;
+                    default:
+                        logicError();
+                        break;
                 }
                 return true;
             }
         });
     }
 
+    /**
+     * 显示toolbar的menu
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.base_toolbar_menu, menu);
+        getMenuInflater().inflate(R.menu.procedure_info_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * 绑定视图
+     */
     private void bindView() {
         txtEndTime.setText(procedureModel.getEndTime());
         txtStartTime.setText(procedureModel.getStartTime());
@@ -152,6 +201,9 @@ public class ProcedureInfoActivity extends ToolBarActivity {
         txtTotalCount.setText(String.valueOf(procedureModel.getTotalCount()));
     }
 
+    /**
+     * 获取工序信息
+     */
     private void getProcedureInfo() {
         RestClient.getService().getProcedureInfo(procedureModel.getId()).enqueue(new DataCallback<APIResponse<ProcedureModel>>() {
             @Override
@@ -175,6 +227,9 @@ public class ProcedureInfoActivity extends ToolBarActivity {
         });
     }
 
+    /**
+     * 初始化下拉刷新控件
+     */
     private void initSwipe(){
         swipeProcedureInfo.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
         swipeProcedureInfo.setRefreshing(true);
@@ -183,6 +238,35 @@ public class ProcedureInfoActivity extends ToolBarActivity {
             public void onRefresh() {
                 getProcedureData();
                 getProcedureInfo();
+            }
+        });
+    }
+
+    private void initLineChart(){
+
+    }
+
+    private void deleteProcedure(){
+        progressDialog.setMessage("请稍候");
+        progressDialog.show();
+
+        RestClient.getService().deleteProcedure(procedureModel.getId()).enqueue(new DataCallback<APIResponse>() {
+            @Override
+            public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
+                ToastUtil.showToast("删除成功，请刷新页面");
+                finish();
+            }
+
+            @Override
+            public void onDataFailure(Call<APIResponse> call, Throwable t) {
+                SnackbarUtil.showSnackbar(getWindow().getDecorView(),"网络连接失败，请稍后再试");
+            }
+
+            @Override
+            public void dismissDialog() {
+                if (progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
             }
         });
     }

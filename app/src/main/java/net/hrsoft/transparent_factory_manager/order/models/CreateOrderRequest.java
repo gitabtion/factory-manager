@@ -9,6 +9,7 @@ import net.hrsoft.transparent_factory_manager.base.models.BaseModel;
  */
 
 public class CreateOrderRequest extends BaseModel {
+    private String orderCode;
     private String title;
     private String startTime;
     private String endTime;
@@ -20,8 +21,10 @@ public class CreateOrderRequest extends BaseModel {
     public CreateOrderRequest() {
     }
 
-    public CreateOrderRequest(String title, String startTime, String endTime, int type, String totalCount, String
-            description, String customerInfo) {
+
+    public CreateOrderRequest(String orderCode, String title, String startTime, String endTime, int type, String
+            totalCount, String description, String customerInfo) {
+        this.orderCode = orderCode;
         this.title = title;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -29,6 +32,14 @@ public class CreateOrderRequest extends BaseModel {
         this.totalCount = totalCount;
         this.description = description;
         this.customerInfo = customerInfo;
+    }
+
+    public String getOrderCode() {
+        return orderCode;
+    }
+
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
     }
 
     public String getTitle() {

@@ -123,6 +123,7 @@ public class TFMApplication extends Application {
         removeAllActivity();
         getCacheUtil().clear();
         Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }

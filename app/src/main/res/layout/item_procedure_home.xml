@@ -66,20 +66,19 @@
         </LinearLayout>
 
         <RelativeLayout
-            style="@style/content_padding"
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="12dp">
+            android:layout_height="match_parent">
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pie_all"
-                android:layout_width="100dp"
-                android:layout_height="100dp"/>
+                android:layout_width="130dp"
+                android:layout_height="130dp"/>
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pie_time"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
 

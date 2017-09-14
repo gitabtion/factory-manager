@@ -75,7 +75,7 @@ public class WorkGroupInfoActivity extends ToolBarActivity {
         });
         swipeWorkGroupInfo.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
         swipeWorkGroupInfo.setRefreshing(true);
-        getProcedure(1, 20, REFRESH);
+        getProcedure(1, 100, REFRESH);
 
         txtGroupName.setText(groupModel.getName());
         txtLeaderName.setText(groupModel.getLeaderName());

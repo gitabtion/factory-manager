@@ -5,7 +5,7 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar:///usr/local/Cellar/gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.8.1/4f68b7085132dfeb48a0473bc589fdee8a3de757/butterknife-annotations-8.8.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.8.1/4f68b7085132dfeb48a0473bc589fdee8a3de757/butterknife-annotations-8.8.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -15,5 +15,6 @@
     <color name="progress_high">#1CC9CC</color>
     <color name="progress_medium">#FFBE14</color>
     <color name="black_primary">#212121</color>
+    <color name="trans_black">#32000000</color>
 
 </resources>

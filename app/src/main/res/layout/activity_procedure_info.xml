@@ -132,7 +132,7 @@
                             android:orientation="vertical">
 
                             <com.github.mikephil.charting.charts.PieChart
-                                android:id="@+id/pie_success"
+                                android:id="@+id/pie_time"
                                 android:layout_width="120dp"
                                 android:layout_height="120dp"/>
 

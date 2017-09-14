@@ -13,7 +13,7 @@ public class ProcedureDataModel extends BaseModel {
     private int status;
     private int procedureId;
     private String startTime;
-    private String endTime;
+    private String updatedAt;
     private int workGroupId;
     private int totalCount;
     private int successCount;
@@ -22,13 +22,13 @@ public class ProcedureDataModel extends BaseModel {
     public ProcedureDataModel() {
     }
 
-    public ProcedureDataModel(int id, int status, int procedureId, String startTime, String endTime, int workGroupId,
+    public ProcedureDataModel(int id, int status, int procedureId, String startTime, String updatedAt, int workGroupId,
                               int totalCount, int successCount, String leaderName) {
         this.id = id;
         this.status = status;
         this.procedureId = procedureId;
         this.startTime = startTime;
-        this.endTime = endTime;
+        this.updatedAt = updatedAt;
         this.workGroupId = workGroupId;
         this.totalCount = totalCount;
         this.successCount = successCount;
@@ -67,12 +67,12 @@ public class ProcedureDataModel extends BaseModel {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public String getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public int getWorkGroupId() {

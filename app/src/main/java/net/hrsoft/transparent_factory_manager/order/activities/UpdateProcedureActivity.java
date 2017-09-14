@@ -65,12 +65,12 @@ public class UpdateProcedureActivity extends ToolBarActivity {
     @BindView(R.id.btn_update_done)
     TextView btnDoneToCreateProcedure;
 
-    private CompositeDisposable compositeDisposable;
-    private GroupModel groupModel;
+//    private CompositeDisposable compositeDisposable;
+//    private GroupModel groupModel;
     private UpdateProcedureRequest updateProcedureRequest;
-    private ArrayList<WeightModel> weightModels;
+//    private ArrayList<WeightModel> weightModels;
     private ProcedureModel procedureModel;
-    private ArrayList<ProcedureModel> procedureModels;
+//    private ArrayList<ProcedureModel> procedureModels;
 
     @Override
     protected int getLayoutId() {
@@ -82,20 +82,20 @@ public class UpdateProcedureActivity extends ToolBarActivity {
         Bundle bundle = getIntent().getExtras();
         procedureModel = (ProcedureModel) bundle.getSerializable(Config.PROCEDURE);
         updateProcedureRequest = new UpdateProcedureRequest();
-        weightModels = new ArrayList<>();
+//        weightModels = new ArrayList<>();
     }
 
     @Override
     protected void initView() {
         btnDoneToCreateProcedure.setText("确认修改");
         setActivityTitle("修改工序信息");
-        initSeekBar();
+//        initSeekBar();
         bindView();
     }
 
     @Override
     protected void loadData() {
-        getProcedure();
+//        getProcedure();
     }
 
     /**
@@ -111,6 +111,10 @@ public class UpdateProcedureActivity extends ToolBarActivity {
         textInputEditText.requestFocus();
     }
 
+    /**
+     * 验证用户填充的数据是否符合规范
+     * @return true为规范
+     */
     private boolean isDataTrue() {
         boolean flag = true;
         if (editOrderName.getText().length() == 0) {
@@ -126,6 +130,9 @@ public class UpdateProcedureActivity extends ToolBarActivity {
         return flag;
     }
 
+    /**
+     * 绑定数据
+     */
     private void bindData() {
         updateProcedureRequest.setName(editOrderName.getText().toString().trim());
         updateProcedureRequest.setDescription(editDescription.getText().toString().trim());
@@ -134,12 +141,14 @@ public class UpdateProcedureActivity extends ToolBarActivity {
         updateProcedureRequest.setStandard(editStandard.getText().toString().trim());
         updateProcedureRequest.setTotalCount(Integer.valueOf(editProcedureTotalCount.getText().toString().trim()));
         updateProcedureRequest.setOrderId(procedureModel.getOrderId());
-        updateProcedureRequest.setWorkGroupId(groupModel == null ? procedureModel.getWorkGroupId() : groupModel.getId
-                ());
-        updateProcedureRequest.setWeight(((double) seekWeight.getProgress()) / 100);
-        updateProcedureRequest.setWeights(weightModels);
+        updateProcedureRequest.setWorkGroupId(procedureModel.getWorkGroupId());
+//        updateProcedureRequest.setWeight(((double) seekWeight.getProgress()) / 100);
+//        updateProcedureRequest.setWeights(weightModels);
     }
 
+    /**
+     * 获取同订单下所有的工序,权重修改依赖
+     */
     private void getProcedure() {
         progressDialog.setMessage("请稍后");
         progressDialog.show();
@@ -149,7 +158,7 @@ public class UpdateProcedureActivity extends ToolBarActivity {
             @Override
             public void onDataResponse(Call<APIResponse<GetProcedureResponse>> call,
                                        Response<APIResponse<GetProcedureResponse>> response) {
-                procedureModels = response.body().getData().getProcedures();
+//                procedureModels = response.body().getData().getProcedures();
             }
 
             @Override
@@ -167,6 +176,9 @@ public class UpdateProcedureActivity extends ToolBarActivity {
         });
     }
 
+    /**
+     * 更新工序信息网络请求
+     */
     private void updateProcedure() {
         progressDialog.setMessage("请稍候");
         progressDialog.show();
@@ -203,8 +215,8 @@ public class UpdateProcedureActivity extends ToolBarActivity {
         txtGroupName.setText(procedureModel.getWorkGroupName());
         txtProcedureEndTime.setText(procedureModel.getEndTime());
         txtProcedureStartTime.setText(procedureModel.getStartTime());
-        txtProcedureWeight.setText(String.valueOf((int) (procedureModel.getWeight() * 100)));
-        seekWeight.setProgress((int) (procedureModel.getWeight() * 100));
+//        txtProcedureWeight.setText(String.valueOf((int) (procedureModel.getWeight() * 100)));
+//        seekWeight.setProgress((int) (procedureModel.getWeight() * 100));
     }
 
     private void initSeekBar() {
@@ -248,52 +260,56 @@ public class UpdateProcedureActivity extends ToolBarActivity {
 
     @OnClick(R.id.btn_group_selector)
     public void onBtnGroupSelectorClicked() {
-        compositeDisposable = new CompositeDisposable();
-        RxBus.getInstance().toObservable(GroupModel.class).subscribe(new Observer<GroupModel>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                compositeDisposable.add(d);
-            }
-
-            @Override
-            public void onNext(GroupModel groupModel) {
-                UpdateProcedureActivity.this.groupModel = groupModel;
-                txtGroupName.setText(groupModel.getName());
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                ToastUtil.showToast(e.toString());
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-        Intent intent = new Intent(this, SelectGroupActivity.class);
-        startActivity(intent);
+//        compositeDisposable = new CompositeDisposable();
+//        RxBus.getInstance().toObservable(GroupModel.class).subscribe(new Observer<GroupModel>() {
+//            @Override
+//            public void onSubscribe(Disposable d) {
+//                compositeDisposable.add(d);
+//            }
+//
+//            @Override
+//            public void onNext(GroupModel groupModel) {
+//                UpdateProcedureActivity.this.groupModel = groupModel;
+//                txtGroupName.setText(groupModel.getName());
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                ToastUtil.showToast(e.toString());
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        });
+//        Intent intent = new Intent(this, SelectGroupActivity.class);
+//        startActivity(intent);
+        SnackbarUtil.showSnackbar(getWindow().getDecorView(),"工序已经创建，不能修改班组");
     }
 
     @OnClick(R.id.btn_update_done)
     public void onBtnDoneToCreateProcedureClicked() {
-        if (procedureModels != null && isDataTrue()) {
-            if (procedureModels.size() != 0) {
-
-                for (ProcedureModel procedureModel : procedureModels) {
-                    weightModels.add(new WeightModel(procedureModel.getId(), procedureModel.getWeight() * (1 - ((
-                            (double) seekWeight.getProgress()) / 100))));
-                }
-                weightModels.add(new WeightModel(procedureModel.getId(), ((double) seekWeight.getProgress())/100));
-                updateProcedureRequest.setWeights(weightModels);
-                updateProcedure();
-            } else {
-                updateProcedureRequest.setWeight(1);
-                updateProcedure();
-            }
-        } else if (procedureModels == null) {
-            SnackbarUtil.showSnackbar(getWindow().getDecorView(), "获取信息中，请稍后再试");
-            getProcedure();
+//        if (procedureModels != null && isDataTrue()) {
+//            if (procedureModels.size() != 0) {
+//
+//                for (ProcedureModel procedureModel : procedureModels) {
+//                    weightModels.add(new WeightModel(procedureModel.getId(), procedureModel.getWeight() * (1 - ((
+//                            (double) seekWeight.getProgress()) / 100))));
+//                }
+//                weightModels.add(new WeightModel(procedureModel.getId(), ((double) seekWeight.getProgress())/100));
+//                updateProcedureRequest.setWeights(weightModels);
+//                updateProcedure();
+//            } else {
+//                updateProcedureRequest.setWeight(1);
+//                updateProcedure();
+//            }
+//        } else if (procedureModels == null) {
+//            SnackbarUtil.showSnackbar(getWindow().getDecorView(), "获取信息中，请稍后再试");
+//            getProcedure();
+//        }
+        if (isDataTrue()){
+            updateProcedure();
         }
     }
 

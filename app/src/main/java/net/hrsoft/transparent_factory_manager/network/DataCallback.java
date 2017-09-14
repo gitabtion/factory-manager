@@ -28,14 +28,18 @@ public abstract class DataCallback<T> implements Callback<T> {
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
         dismissDialog();
-        onDataResponse(call, response);
+        if (response.code()>=400){
+            GlobalAPIErrorHandler.handler(response.code());
+        }else {
+            onDataResponse(call, response);
+        }
     }
 
     @Override
     public void onFailure(Call<T> call, Throwable t) {
         if (t instanceof ResultException) {
             dismissDialog();
-            GlobalAPIErrorHandler.handler((ResultException) t);
+            GlobalAPIErrorHandler.handler(((ResultException) t).getCode());
         } else {
             dismissDialog();
             onDataFailure(call, t);

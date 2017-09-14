@@ -58,7 +58,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
     private UpdateProcedureRequest updateProcedureRequest;
     private OrderModel orderModel;
     private ArrayList<ProcedureModel> procedureModels;
-    private ArrayList<WeightModel> weightModels;
+//    private ArrayList<WeightModel> weightModels;
 
     @BindView(R.id.edit_order_name)
     TextInputEditText editOrderName;
@@ -81,19 +81,19 @@ public class CreateProcedureActivity extends ToolBarActivity {
         updateProcedureRequest = new UpdateProcedureRequest();
         Bundle bundle = getIntent().getExtras();
         orderModel = (OrderModel) bundle.getSerializable(Config.ORDER);
-        weightModels = new ArrayList<>();
-        getProcedure();
+//        weightModels = new ArrayList<>();
+//        getProcedure();
     }
 
     @Override
     protected void initView() {
         setActivityTitle("新增工序");
-        initSeekBar();
+//        initSeekBar();
     }
 
     @Override
     protected void loadData() {
-        getProcedure();
+//        getProcedure();
     }
 
 
@@ -159,21 +159,27 @@ public class CreateProcedureActivity extends ToolBarActivity {
 
     @OnClick(R.id.btn_update_done)
     public void onBtnDoneToCreateProcedureClicked() {
-        if (procedureModels != null && isDataTrue()) {
-            if (procedureModels.size() != 0) {
+//        if (procedureModels != null && isDataTrue()) {
+//            if (procedureModels.size() != 0) {
+//
+//                for (ProcedureModel procedureModel : procedureModels) {
+//                    weightModels.add(new WeightModel(procedureModel.getId(), procedureModel.getWeight() * (1 - (((double) seekWeight.getProgress()) / 100))));
+//                }
+//                updateProcedureRequest.setWeights(weightModels);
+//                createProcedure();
+//            } else {
+//                updateProcedureRequest.setWeights(weightModels);
+//                updateProcedureRequest.setWeight(1);
+//                createProcedure();
+//            }
+//        } else if (procedureModels == null) {
+//            updateProcedureRequest.setWeights(weightModels);
+//            SnackbarUtil.showSnackbar(getWindow().getDecorView(), "获取信息中，请稍后再试");
+//            getProcedure();
+//        }
 
-                for (ProcedureModel procedureModel : procedureModels) {
-                    weightModels.add(new WeightModel(procedureModel.getId(), procedureModel.getWeight() * (1 - (((double) seekWeight.getProgress()) / 100))));
-                }
-                updateProcedureRequest.setWeights(weightModels);
-                createProcedure();
-            } else {
-                updateProcedureRequest.setWeight(1);
-                createProcedure();
-            }
-        } else if (procedureModels == null) {
-            SnackbarUtil.showSnackbar(getWindow().getDecorView(), "获取信息中，请稍后再试");
-            getProcedure();
+        if (isDataTrue()){
+            createProcedure();
         }
     }
 
@@ -194,13 +200,16 @@ public class CreateProcedureActivity extends ToolBarActivity {
         updateProcedureRequest.setTotalCount(Integer.valueOf(editTotalCount.getText().toString().trim()));
         updateProcedureRequest.setOrderId(orderModel.getId());
         updateProcedureRequest.setWorkGroupId(groupModel.getId());
-        if (procedureModels!=null&&procedureModels.size()!=0){
-            updateProcedureRequest.setWeight(((double) seekWeight.getProgress())/100);
-        }else if (procedureModels!=null){
-            updateProcedureRequest.setWeight(1);
-        }
+//        if (procedureModels!=null&&procedureModels.size()!=0){
+//            updateProcedureRequest.setWeight(((double) seekWeight.getProgress())/100);
+//        }else if (procedureModels!=null){
+//            updateProcedureRequest.setWeight(1);
+//        }
     }
 
+    /**
+     * 创建工序网络请求
+     */
     private void createProcedure() {
         bindData();
         progressDialog.setMessage("请稍候");
@@ -259,6 +268,9 @@ public class CreateProcedureActivity extends ToolBarActivity {
         return flag;
     }
 
+    /**
+     * 权重设置依赖
+     */
     private void getProcedure() {
         progressDialog.setMessage("请稍后");
         progressDialog.show();
@@ -268,7 +280,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
             @Override
             public void onDataResponse(Call<APIResponse<GetProcedureResponse>> call, Response<APIResponse<GetProcedureResponse>> response) {
                 procedureModels = response.body().getData().getProcedures();
-                updateProcedureRequest.setWeight(((double) seekWeight.getProgress())/100);
+//                updateProcedureRequest.setWeight(((double) seekWeight.getProgress())/100);
             }
 
             @Override
@@ -286,8 +298,12 @@ public class CreateProcedureActivity extends ToolBarActivity {
         });
     }
 
+    /**
+     * 应产品要求，取消权重自由选择
+     */
     private void initSeekBar() {
         seekWeight.setProgress(100);
+        txtProcedureWeight.setText("100%");
         seekWeight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -298,6 +314,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
             public void onStartTrackingTouch(SeekBar seekBar) {
                 if (procedureModels!=null && procedureModels.size()==0){
                     seekBar.setProgress(100);
+
                 }
             }
 
@@ -305,10 +322,10 @@ public class CreateProcedureActivity extends ToolBarActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (procedureModels!=null && procedureModels.size()==0){
                     seekBar.setProgress(100);
+                    SnackbarUtil.showSnackbar(getWindow().getDecorView(),"第一道工序权重必须为100%");
                 }
             }
         });
     }
 
-    // TODO: 17/9/11 权重设置存在一定出现bug可能，需改逻辑
 }

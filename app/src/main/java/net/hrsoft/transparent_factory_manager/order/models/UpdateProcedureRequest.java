@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class UpdateProcedureRequest extends BaseModel {
     private String name;
-    private double weight;
     private String standard;
     private String description;
     private int orderId;
@@ -20,23 +19,14 @@ public class UpdateProcedureRequest extends BaseModel {
     private int workGroupId;
     private String startTime;
     private String endTime;
-    private ArrayList<WeightModel> weights;
 
-    public ArrayList<WeightModel> getWeights() {
-        return weights;
-    }
-
-    public void setWeights(ArrayList<WeightModel> weights) {
-        this.weights = weights;
-    }
 
     public UpdateProcedureRequest() {
     }
 
-    public UpdateProcedureRequest(String name, double weight, String standard, String description, int orderId, int
-            totalCount, int workGroupId, String startTime, String endTime) {
+    public UpdateProcedureRequest(String name, String standard, String description, int orderId, int totalCount, int
+            workGroupId, String startTime, String endTime) {
         this.name = name;
-        this.weight = weight;
         this.standard = standard;
         this.description = description;
         this.orderId = orderId;
@@ -52,14 +42,6 @@ public class UpdateProcedureRequest extends BaseModel {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
     }
 
     public String getStandard() {
@@ -117,5 +99,4 @@ public class UpdateProcedureRequest extends BaseModel {
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
-
 }
