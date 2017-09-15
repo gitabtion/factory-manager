@@ -74,4 +74,10 @@ public class FirstActivity extends NoBarActivity {
             finish();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        timer.cancel();
+        super.onBackPressed();
+    }
 }
