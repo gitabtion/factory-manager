@@ -78,6 +78,8 @@ public class CreateOrderActivity extends ToolBarActivity {
     protected void initView() {
         setActivityTitle("创建订单");
         radioIn.setChecked(true);
+        txtOrderStartTime.setText(TimeUtil.getCurrentDate(TimeUtil.DATE_DEFAULT_FORMAT));
+        txtOrderEndTime.setText(TimeUtil.getCurrentDate(TimeUtil.DATE_DEFAULT_FORMAT));
     }
 
     @Override
@@ -184,7 +186,7 @@ public class CreateOrderActivity extends ToolBarActivity {
                                        Response<APIResponse<CreateOrderResponse>> response) {
                 orderModel.setId(response.body().getData().getOrderId());
                 orderModel.setOrderCode(response.body().getData().getOrderCode());
-                Intent intent = new Intent(CreateOrderActivity.this, OrderInfoActivity   .class);
+                Intent intent = new Intent(CreateOrderActivity.this, OrderInfoActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Config.ORDER, orderModel);
                 intent.putExtras(bundle);

@@ -70,21 +70,27 @@ public class WorkGroupInfoActivity extends ToolBarActivity {
         swipeWorkGroupInfo.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getProcedure(1, 20, REFRESH);
+                getProcedure(1, 100, REFRESH);
             }
         });
         swipeWorkGroupInfo.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+
+    }
+
+    @Override
+    protected void loadData() {
+
+    }
+
+    @Override
+    protected void onStart() {
         swipeWorkGroupInfo.setRefreshing(true);
         getProcedure(1, 100, REFRESH);
 
         txtGroupName.setText(groupModel.getName());
         txtLeaderName.setText(groupModel.getLeaderName());
         txtDescription.setText(groupModel.getDescription());
-    }
-
-    @Override
-    protected void loadData() {
-
+        super.onStart();
     }
 
     private void getProcedure(final int page, int size, final int type) {

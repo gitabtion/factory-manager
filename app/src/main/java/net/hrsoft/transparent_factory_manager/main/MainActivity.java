@@ -7,16 +7,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.TFMApplication;
 import net.hrsoft.transparent_factory_manager.base.activities.NoBarActivity;
 import net.hrsoft.transparent_factory_manager.home.fragments.HomeFragment;
 import net.hrsoft.transparent_factory_manager.mine.fragments.MineFragment;
 import net.hrsoft.transparent_factory_manager.order.fragments.OrderFragment;
+import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 
 public class MainActivity extends NoBarActivity {
+    private long firstTime;
 
     @BindView(R.id.frame_main_container)
     FrameLayout frameMainContainer;
@@ -148,5 +151,16 @@ public class MainActivity extends NoBarActivity {
         clearChoiceStatus();
         imgTabMenuMine.setImageResource(R.drawable.img_mine_selected);
         txtTabMenuMine.setTextColor(getResources().getColor(R.color.white));
+    }
+
+    @Override
+    public void onBackPressed() {
+        long secondTime = System.currentTimeMillis();
+        if (secondTime - firstTime > 2000) {
+            ToastUtil.showToast("再按一次退出");
+            firstTime = secondTime;
+        } else {
+            TFMApplication.getInstance().exitApp();
+        }
     }
 }

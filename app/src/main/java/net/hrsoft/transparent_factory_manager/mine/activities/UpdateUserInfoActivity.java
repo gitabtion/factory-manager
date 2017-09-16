@@ -105,7 +105,7 @@ public class UpdateUserInfoActivity extends ToolBarActivity {
 
             @Override
             public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
-                ToastUtil.showToast("修改成功，请刷新页面");
+                ToastUtil.showToast("修改成功");
                 finish();
             }
 

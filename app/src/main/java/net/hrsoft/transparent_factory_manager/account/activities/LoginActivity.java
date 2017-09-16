@@ -134,4 +134,5 @@ public class LoginActivity extends NoBarActivity {
         }
         return flag;
     }
+
 }

@@ -63,7 +63,6 @@ public class WorkGroupManageActivity extends ToolBarActivity implements BaseRecy
     protected void initView() {
         setActivityTitle("员工管理");
         setupSwipe();
-        getLeaderList();
         if (userModels.size()==0){
             emptyView.setVisibility(View.VISIBLE);
         }else {
@@ -74,6 +73,12 @@ public class WorkGroupManageActivity extends ToolBarActivity implements BaseRecy
     @Override
     protected void loadData() {
 
+    }
+
+    @Override
+    protected void onStart() {
+        getLeaderList();
+        super.onStart();
     }
 
     /**
@@ -109,7 +114,13 @@ public class WorkGroupManageActivity extends ToolBarActivity implements BaseRecy
                 }else {
                     emptyView.setVisibility(View.GONE);
                 }
+                if (userModels.size()==0){
+                    emptyView.setVisibility(View.VISIBLE);
+                }else {
+                    emptyView.setVisibility(View.GONE);
+                }
             }
+
 
             @Override
             public void onDataFailure(Call<APIResponse<UserModel[]>> call, Throwable t) {
@@ -119,6 +130,11 @@ public class WorkGroupManageActivity extends ToolBarActivity implements BaseRecy
                     emptyView.setVisibility(View.GONE);
                 }
                 SnackbarUtil.showSnackbar(getWindow().getDecorView(), "网络连接失败，请稍候再试");
+                if (userModels.size()==0){
+                    emptyView.setVisibility(View.VISIBLE);
+                }else {
+                    emptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override

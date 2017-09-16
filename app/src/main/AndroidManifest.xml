@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="net.hrsoft.transparent_factory_manager">
+    package="net.hrsoft.transparent_factory_manager">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".TFMApplication"
         android:allowBackup="true"
@@ -15,23 +16,27 @@
         android:theme="@style/AppTheme">
         <activity android:name=".main.FirstActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".order.activities.CreateOrderActivity"/>
-        <activity android:name=".main.MainActivity"/>
-        <activity android:name=".order.activities.SplitProcedureActivity"/>
-        <activity android:name=".order.activities.CreateProcedureActivity"/>
-        <activity android:name=".order.activities.SelectGroupActivity"/>
-        <activity android:name=".mine.activities.WorkGroupManageActivity"/>
-        <activity android:name=".order.activities.ProcedureInfoActivity"/>
-        <activity android:name=".order.activities.OrderInfoActivity"/>
-        <activity android:name=".mine.activities.UpdateUserInfoActivity"/>
-        <activity android:name=".mine.activities.AddLeaderActivity"/>
-        <activity android:name=".order.activities.WorkGroupInfoActivity"/>
-        <activity android:name=".order.activities.UpdateOrderActivity"/>
-        <activity android:name=".order.activities.UpdateProcedureActivity"/>
-        <activity android:name=".account.activities.LoginActivity"/>
+        <activity android:name=".order.activities.CreateOrderActivity" />
+        <activity android:name=".main.MainActivity"
+                    android:launchMode="singleTask"
+            />
+        <activity android:name=".order.activities.SplitProcedureActivity" />
+        <activity android:name=".order.activities.CreateProcedureActivity" />
+        <activity android:name=".order.activities.SelectGroupActivity" />
+        <activity android:name=".mine.activities.WorkGroupManageActivity" />
+        <activity android:name=".order.activities.ProcedureInfoActivity" />
+        <activity android:name=".order.activities.OrderInfoActivity" />
+        <activity android:name=".mine.activities.UpdateUserInfoActivity" />
+        <activity android:name=".mine.activities.AddLeaderActivity" />
+        <activity android:name=".order.activities.WorkGroupInfoActivity" />
+        <activity android:name=".order.activities.UpdateOrderActivity" />
+        <activity android:name=".order.activities.UpdateProcedureActivity" />
+        <activity
+            android:name=".account.activities.LoginActivity"
+            android:launchMode="singleTask" />
     </application>
 </manifest>

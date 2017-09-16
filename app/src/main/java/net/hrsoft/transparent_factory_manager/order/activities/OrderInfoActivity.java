@@ -64,7 +64,6 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
     @Override
     protected void initView() {
         setActivityTitle("订单详情");
-        getProcedure(orderModel);
         setupSwipe();
         setupToolbar();
     }
@@ -72,6 +71,13 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
     @Override
     protected void loadData() {
 
+    }
+
+    @Override
+    protected void onStart() {
+        getProcedure(orderModel);
+        refreshOrderInfo();
+        super.onStart();
     }
 
     /**

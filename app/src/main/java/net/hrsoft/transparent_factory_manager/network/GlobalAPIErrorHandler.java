@@ -16,6 +16,7 @@ public class GlobalAPIErrorHandler {
         switch (code){
             case APICode.NEED_LOGIN:
                 ToastUtil.showToast("身份信息过期，请重新登录");
+
                 TFMApplication.getInstance().exitAccount();
                 break;
             case APICode.PASSWORD_WRONG:

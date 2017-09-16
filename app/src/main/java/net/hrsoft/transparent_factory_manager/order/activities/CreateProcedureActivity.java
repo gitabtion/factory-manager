@@ -88,6 +88,8 @@ public class CreateProcedureActivity extends ToolBarActivity {
     @Override
     protected void initView() {
         setActivityTitle("新增工序");
+        txtProcedureStartTime.setText(TimeUtil.getCurrentDate(TimeUtil.DATE_DEFAULT_FORMAT));
+        txtProcedureEndTime.setText(TimeUtil.getCurrentDate(TimeUtil.DATE_DEFAULT_FORMAT));
 //        initSeekBar();
     }
 
@@ -218,7 +220,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
         RestClient.getService().createProcedure(updateProcedureRequest).enqueue(new DataCallback<APIResponse>() {
             @Override
             public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
-                ToastUtil.showToast("添加成功，请刷新页面");
+                ToastUtil.showToast("添加成功");
                 finish();
             }
 

@@ -72,7 +72,7 @@ public class AddLeaderActivity extends ToolBarActivity {
             RestClient.getService().createLeader(request).enqueue(new DataCallback<APIResponse>() {
                 @Override
                 public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
-                    ToastUtil.showToast("创建成功，请刷新页面");
+                    ToastUtil.showToast("创建成功");
                     finish();
                 }
 

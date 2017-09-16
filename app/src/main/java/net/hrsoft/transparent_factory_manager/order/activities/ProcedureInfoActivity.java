@@ -104,8 +104,14 @@ public class ProcedureInfoActivity extends ToolBarActivity {
 
     @Override
     protected void loadData() {
+
+    }
+
+    @Override
+    protected void onStart() {
         getProcedureData();
         getProcedureInfo();
+        super.onStart();
     }
 
     /**

@@ -91,7 +91,7 @@ public class TFMApplication extends Application {
      *
      * @param activity
      */
-    public static void removeActivity(Activity activity) {
+    public void removeActivity(Activity activity) {
         if (activity != null && !activity.isFinishing()) {
             activity.finish();
         }
@@ -123,7 +123,7 @@ public class TFMApplication extends Application {
         removeAllActivity();
         getCacheUtil().clear();
         Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }

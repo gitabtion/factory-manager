@@ -4,12 +4,19 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatEditText;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.TFMApplication;
+import net.hrsoft.transparent_factory_manager.account.activities.LoginActivity;
 import net.hrsoft.transparent_factory_manager.account.models.UserModel;
 import net.hrsoft.transparent_factory_manager.base.fragments.BaseFragment;
 import net.hrsoft.transparent_factory_manager.common.constants.CacheKey;
@@ -46,6 +53,7 @@ public class MineFragment extends BaseFragment {
     TextView txtMobile;
 
     private UserModel user;
+    private ViewGroup container;
 
 
     @Override
@@ -53,13 +61,26 @@ public class MineFragment extends BaseFragment {
         return R.layout.fragment_mine;
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        this.container = container;
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
     @Override
     protected void initVariable() {
         user = (UserModel) TFMApplication.getInstance().getCacheUtil().getSerializableObj(CacheKey.USER);
+
     }
 
     @Override
     protected void initView() {
+        if (user==null){
+            Intent intent = new Intent(getContext(),LoginActivity.class);
+            startActivity(intent);
+            TFMApplication.getInstance().removeActivity(getActivity());
+        }
         txtUsername.setText(user.getName());
         txtMobile.setText(user.getMobile());
 
@@ -97,15 +118,18 @@ public class MineFragment extends BaseFragment {
     @OnClick(R.id.rl_update_password)
     public void onRlUpdatePasswordClicked() {
         final AlertDialog.Builder editBuilder = new AlertDialog.Builder(getActivity());
-        final EditText editText = new EditText(getContext());
-        editBuilder.setView(editText).setNegativeButton("取消", null).setPositiveButton("确定", new DialogInterface
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_edit_text, container, false);
+        final TextInputEditText inputEditText = (TextInputEditText) view.findViewById(R.id.edit_dialog_input);
+        editBuilder.setView(view).setNegativeButton("取消", null).setPositiveButton("确定", new DialogInterface
                 .OnClickListener() {
-
-
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                UpdatePasswordModel passwordModel = new UpdatePasswordModel(editText.getText().toString().trim());
-                updatePassword(user.getId(), passwordModel);
+                UpdatePasswordModel passwordModel = new UpdatePasswordModel(inputEditText.getText().toString().trim());
+                if (passwordModel.getPassword().length()<6){
+                    SnackbarUtil.showSnackbar(getView(),"密码不得少于6位");
+                }else {
+                    updatePassword(user.getId(), passwordModel);
+                }
             }
         }).setTitle("修改密码").show();
     }
@@ -116,14 +140,15 @@ public class MineFragment extends BaseFragment {
     @OnClick(R.id.rl_edit_mobile)
     public void onRlEditMobileClicked() {
         AlertDialog.Builder editBuilder = new AlertDialog.Builder(getActivity());
-        final EditText editText = new EditText(getContext());
-        editBuilder.setView(editText).setNegativeButton("取消", null).setPositiveButton("确定", new DialogInterface
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_edit_text, container, false);
+        final TextInputEditText inputEditText = (TextInputEditText) view.findViewById(R.id.edit_dialog_input);
+        editBuilder.setView(view).setNegativeButton("取消", null).setPositiveButton("确定", new DialogInterface
                 .OnClickListener() {
 
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                UpdateMobileModel mobileModel = new UpdateMobileModel(editText.getText().toString().trim());
+                UpdateMobileModel mobileModel = new UpdateMobileModel(inputEditText.getText().toString().trim());
                 if (RegexUtil.checkMobile(mobileModel.getMobile())) {
                     updateMobile(user.getId(), mobileModel);
                 } else {
@@ -147,12 +172,12 @@ public class MineFragment extends BaseFragment {
     public void onRlExitAccountClicked() {
         new AlertDialog.Builder(getContext()).setMessage("确定退出账户并删除缓存信息？").setPositiveButton("确定", new
                 DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                TFMApplication.getInstance().exitAccount();
-                getActivity().finish();
-            }
-        }).setNegativeButton("取消", null).setCancelable(false).show();
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TFMApplication.getInstance().exitAccount();
+                        getActivity().finish();
+                    }
+                }).setNegativeButton("取消", null).setCancelable(false).show();
     }
 
     /**
@@ -201,6 +226,7 @@ public class MineFragment extends BaseFragment {
             public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
                 ToastUtil.showToast("修改成功，请重新登录");
                 TFMApplication.getInstance().exitAccount();
+                getActivity().finish();
 //                TFMApplication.getInstance().getCacheUtil().putSerializableObj(CacheKey.USER, user);
             }
 
@@ -233,6 +259,7 @@ public class MineFragment extends BaseFragment {
                 txtMobile.setText(mobile.getMobile());
                 ToastUtil.showToast("修改成功，请重新登录");
                 TFMApplication.getInstance().exitAccount();
+                getActivity().finish();
 //                TFMApplication.getInstance().getCacheUtil().putSerializableObj(CacheKey.USER, user);
             }
 
@@ -246,6 +273,19 @@ public class MineFragment extends BaseFragment {
                 progressDialog.dismiss();
             }
         });
+    }
+
+    /**
+     * 用于TextInputEditText控件显示错误信息
+     *
+     * @param textInputEditText 控件对象
+     * @param error             错误信息
+     */
+    private void showError(TextInputEditText textInputEditText, String error) {
+        textInputEditText.setError(error);
+        textInputEditText.setFocusable(true);
+        textInputEditText.setFocusableInTouchMode(true);
+        textInputEditText.requestFocus();
     }
 
 
