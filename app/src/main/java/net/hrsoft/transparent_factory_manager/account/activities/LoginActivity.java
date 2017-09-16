@@ -81,12 +81,16 @@ public class LoginActivity extends NoBarActivity {
                 public void onDataResponse(Call<APIResponse<LoginResponse>> call, Response<APIResponse<LoginResponse
                                         >> response) {
 
-                    TFMApplication.getInstance().getCacheUtil().putString(CacheKey.TOKEN,response.body().getData().getToken());
-                    TFMApplication.getInstance().getCacheUtil().putSerializableObj(CacheKey.USER,response.body()
-                            .getData().getUser());
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    if (response.body().getData().getUser().getRole().equals("manager")){
+                        TFMApplication.getInstance().getCacheUtil().putString(CacheKey.TOKEN,response.body().getData().getToken());
+                        TFMApplication.getInstance().getCacheUtil().putSerializableObj(CacheKey.USER,response.body()
+                                .getData().getUser());
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else {
+                        SnackbarUtil.showSnackbar(getWindow().getDecorView(),"您的账号无权登录此客户端，请确认您的账号为经理账号");
+                    }
                 }
 
                 @Override

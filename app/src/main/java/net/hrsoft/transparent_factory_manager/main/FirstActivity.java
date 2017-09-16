@@ -21,6 +21,7 @@ import butterknife.OnClick;
  */
 
 public class FirstActivity extends NoBarActivity {
+
     @BindView(R.id.txt_time_cut)
     TextView txtTimeCut;
     CountDownTimer timer;

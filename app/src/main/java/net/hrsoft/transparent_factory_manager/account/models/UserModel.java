@@ -14,13 +14,15 @@ public class UserModel extends BaseModel {
     private String password;
     private String mobile;
     private String email;
+    private String role;
     private int id;
 
-    public UserModel(String name, String password, String mobile, String email, int id) {
+    public UserModel(String name, String password, String mobile, String email, String role, int id) {
         this.name = name;
         this.password = password;
         this.mobile = mobile;
         this.email = email;
+        this.role = role;
         this.id = id;
     }
 
@@ -54,6 +56,14 @@ public class UserModel extends BaseModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public int getId() {

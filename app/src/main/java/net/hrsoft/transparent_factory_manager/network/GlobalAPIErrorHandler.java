@@ -43,7 +43,7 @@ public class GlobalAPIErrorHandler {
                 ToastUtil.showToast("用户不存在，请检查手机号是否正确");
                 break;
             default:
-                ToastUtil.showToast(r.getData(),r.getCode());
+                ToastUtil.showToast(r.getData());
                 break;
         }
     }
