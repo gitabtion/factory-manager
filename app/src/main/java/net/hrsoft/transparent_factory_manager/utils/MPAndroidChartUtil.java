@@ -94,6 +94,7 @@ public class MPAndroidChartUtil {
             LineDataSet dataSet = new LineDataSet(lineEntries, "产能进度");
             dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
             dataSet.setColors(Color.parseColor("#1cc9cc"));
+            lineChart.getLegend().setEnabled(false);
             LineData lineData = new LineData(dataSet);
             lineData.setValueTextSize(12);
 
