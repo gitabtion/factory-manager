@@ -120,9 +120,9 @@ public class TFMApplication extends Application {
      * 退出账户
      */
     public void exitAccount() {
-        removeAllActivity();
         getCacheUtil().clear();
-        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+        removeAllActivity();
+        Intent intent = new Intent(this,LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
