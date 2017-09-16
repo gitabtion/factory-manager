@@ -53,13 +53,13 @@ public class OrderPagerAdapter extends FragmentPagerAdapter {
      */
     private void initVariable(){
         if (processingOrderFragment == null){
-            processingOrderFragment = new OrderContentFragment(OrderContentFragment.PROCESSING);
+            processingOrderFragment = OrderContentFragment.setType(OrderContentFragment.PROCESSING);
         }
         if (toBeStartOrderFragment == null){
-            toBeStartOrderFragment = new OrderContentFragment(OrderContentFragment.TO_BE_START);
+            toBeStartOrderFragment = OrderContentFragment.setType(OrderContentFragment.TO_BE_START);
         }
         if (endedOrderFragment == null){
-            endedOrderFragment = new  OrderContentFragment(OrderContentFragment.ENDED);
+            endedOrderFragment = OrderContentFragment.setType(OrderContentFragment.ENDED);
         }
     }
 

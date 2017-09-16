@@ -19,7 +19,7 @@ public final class Config {
     /**
      * APP Server 网络请求BaseUrl
      */
-    public static final String APP_SERVER_BASE_URL = "http://192.168.0.110:3010/";
+    public static final String APP_SERVER_BASE_URL = "http://factory.hrsoft.net/";
 
     /**
      * APP Server 网络请求连接超时时间，单位：s
@@ -38,5 +38,6 @@ public final class Config {
     public static final String ORDER = "order";
     public static final String PROCEDURE = "procedure";
     public static final String PROCEDURES = "procedures";
+    public static final String ORDER_FRAGMENT_CONTENT_TYPE = "type";
 
 }

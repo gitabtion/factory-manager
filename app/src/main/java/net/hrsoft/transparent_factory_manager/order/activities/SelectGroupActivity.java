@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
@@ -41,6 +42,8 @@ public class SelectGroupActivity extends ToolBarActivity implements
     private GroupModel groupModel;
     @BindView(R.id.rec_group)
     RecyclerView recGroup;
+    @BindView(R.id.empty_view)
+    View emptyView;
 
     @Override
     protected int getLayoutId() {
@@ -56,6 +59,11 @@ public class SelectGroupActivity extends ToolBarActivity implements
     protected void initView() {
         setActivityTitle("选择班组");
         groupModels = new ArrayList<>();
+        if (groupModels.size()==0){
+            emptyView.setVisibility(View.VISIBLE);
+        }else {
+            emptyView.setVisibility(View.GONE);
+        }
 
         swipeGroup.setRefreshing(true);
         swipeGroup.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
@@ -98,11 +106,21 @@ public class SelectGroupActivity extends ToolBarActivity implements
                 adapter.setOnItemClickedListener(SelectGroupActivity.this);
                 recGroup.setLayoutManager(new LinearLayoutManager(SelectGroupActivity.this, LinearLayoutManager
                         .VERTICAL, false));
+                if (groupModels.size()==0){
+                    emptyView.setVisibility(View.VISIBLE);
+                }else {
+                    emptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onDataFailure(Call<APIResponse<GetGroupLIstResponse>> call, Throwable t) {
                 SnackbarUtil.showSnackbar(getWindow().getDecorView(), "网络连接失败，请稍后再试");
+                if (groupModels.size()==0){
+                    emptyView.setVisibility(View.VISIBLE);
+                }else {
+                    emptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override

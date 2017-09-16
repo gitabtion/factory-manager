@@ -2,6 +2,7 @@ package net.hrsoft.transparent_factory_manager.order.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 
 import net.hrsoft.transparent_factory_manager.R;
@@ -25,7 +27,6 @@ import net.hrsoft.transparent_factory_manager.order.adapter.ProcedureDataAdapter
 import net.hrsoft.transparent_factory_manager.order.models.GetProcedureDataResponse;
 import net.hrsoft.transparent_factory_manager.order.models.ProcedureDataModel;
 import net.hrsoft.transparent_factory_manager.utils.MPAndroidChartUtil;
-import net.hrsoft.transparent_factory_manager.utils.ProgressDialogUtil;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
@@ -62,6 +63,8 @@ public class ProcedureInfoActivity extends ToolBarActivity {
     RecyclerView recProcedureData;
     @BindView(R.id.swipe_procedure_info)
     SwipeRefreshLayout swipeProcedureInfo;
+    @BindView(R.id.line_procedure_data)
+    LineChart lineProcedureData;
 
     private ArrayList<ProcedureDataModel> procedureDataModels;
     private ProcedureModel procedureModel;
@@ -88,14 +91,14 @@ public class ProcedureInfoActivity extends ToolBarActivity {
 
         float allPercent = ((float) procedureModel.getSuccessCount()) / ((float) procedureModel.getTotalCount
                 ());
-        MPAndroidChartUtil.setPieChart(pieDone,allPercent,"完成率");
-        float timeData = ((float)(TimeUtil.getCurrentTimeStamp()-TimeUtil.setStringToStamp
+        MPAndroidChartUtil.setPieChart(pieDone, allPercent, "完成率");
+        float timeData = ((float) (TimeUtil.getCurrentTimeStamp() - TimeUtil.setStringToStamp
                 (procedureModel
-                        .getStartTime())))/((float)(TimeUtil.setStringToStamp(procedureModel.getEndTime())-TimeUtil
+                        .getStartTime()))) / ((float) (TimeUtil.setStringToStamp(procedureModel.getEndTime()) - TimeUtil
                 .setStringToStamp
                         (procedureModel
                                 .getStartTime())));
-        MPAndroidChartUtil.setPieChart(pieTime,timeData,"时间进度");
+        MPAndroidChartUtil.setPieChart(pieTime, timeData, "时间进度");
 
     }
 
@@ -116,11 +119,14 @@ public class ProcedureInfoActivity extends ToolBarActivity {
                      Response<APIResponse<GetProcedureDataResponse>> response) {
                 procedureDataModels
                         = response.body().getData().getLogs();
-                ProcedureDataAdapter adapter = new ProcedureDataAdapter(ProcedureInfoActivity.this, procedureDataModels);
+                ProcedureDataAdapter adapter = new ProcedureDataAdapter(ProcedureInfoActivity.this,
+                        procedureDataModels);
                 recProcedureData.setAdapter(adapter);
                 recProcedureData.setNestedScrollingEnabled(false);
-                recProcedureData.setLayoutManager(new LinearLayoutManager(ProcedureInfoActivity.this, LinearLayoutManager
-                                .VERTICAL,false));
+                recProcedureData.setLayoutManager(new LinearLayoutManager(ProcedureInfoActivity.this,
+                        LinearLayoutManager
+                        .VERTICAL, false));
+                MPAndroidChartUtil.setLineChart(response.body().getData(),lineProcedureData);
             }
 
             @Override
@@ -134,7 +140,7 @@ public class ProcedureInfoActivity extends ToolBarActivity {
             @Override
             public void
             dismissDialog() {
-                if (swipeProcedureInfo.isRefreshing()){
+                if (swipeProcedureInfo.isRefreshing()) {
                     swipeProcedureInfo.setRefreshing(false);
                 }
             }
@@ -149,12 +155,12 @@ public class ProcedureInfoActivity extends ToolBarActivity {
         getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.action_delete:
                         AlertDialog.Builder builder = new AlertDialog.Builder(ProcedureInfoActivity.this);
                         builder.setTitle("提示")
                                 .setMessage("删除工序后将不可删除，确认删除？")
-                                .setNegativeButton("取消",null)
+                                .setNegativeButton("取消", null)
                                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -181,8 +187,9 @@ public class ProcedureInfoActivity extends ToolBarActivity {
 
     /**
      * 显示toolbar的menu
-     * @param menu
-     * @return
+     *
+     * @param menu menu
+     * @return menu
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -220,7 +227,7 @@ public class ProcedureInfoActivity extends ToolBarActivity {
 
             @Override
             public void dismissDialog() {
-                if (swipeProcedureInfo.isRefreshing()){
+                if (swipeProcedureInfo.isRefreshing()) {
                     swipeProcedureInfo.setRefreshing(false);
                 }
             }
@@ -230,8 +237,8 @@ public class ProcedureInfoActivity extends ToolBarActivity {
     /**
      * 初始化下拉刷新控件
      */
-    private void initSwipe(){
-        swipeProcedureInfo.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+    private void initSwipe() {
+        swipeProcedureInfo.setColorSchemeColors(Color.parseColor("#FF3955"));
         swipeProcedureInfo.setRefreshing(true);
         swipeProcedureInfo.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -242,11 +249,8 @@ public class ProcedureInfoActivity extends ToolBarActivity {
         });
     }
 
-    private void initLineChart(){
 
-    }
-
-    private void deleteProcedure(){
+    private void deleteProcedure() {
         progressDialog.setMessage("请稍候");
         progressDialog.show();
 
@@ -259,15 +263,16 @@ public class ProcedureInfoActivity extends ToolBarActivity {
 
             @Override
             public void onDataFailure(Call<APIResponse> call, Throwable t) {
-                SnackbarUtil.showSnackbar(getWindow().getDecorView(),"网络连接失败，请稍后再试");
+                SnackbarUtil.showSnackbar(getWindow().getDecorView(), "网络连接失败，请稍后再试");
             }
 
             @Override
             public void dismissDialog() {
-                if (progressDialog.isShowing()){
+                if (progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
             }
         });
     }
+
 }

@@ -34,6 +34,8 @@ public class TimeUtil {
      */
     public static final String TIME_DEFAULT_FORMAT = "HH:mm:ss";
 
+    public static final String TIME_DEFAULT_MONTH = "yyyy-MM-dd";
+
     /**
      * 获取系统当前时间
      */

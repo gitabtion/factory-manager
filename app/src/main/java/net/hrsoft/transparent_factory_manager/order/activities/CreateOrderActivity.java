@@ -93,7 +93,6 @@ public class CreateOrderActivity extends ToolBarActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 txtOrderStartTime.setText(+year + "-" + (month + 1) + "-" + dayOfMonth);
-                SnackbarUtil.showSnackbar(getWindow().getDecorView(), "选择了" + txtOrderStartTime.getText());
             }
         }, TimeUtil.getNowYear(), TimeUtil.getNowMonth(), TimeUtil.getDayOfMonth()).show();
     }

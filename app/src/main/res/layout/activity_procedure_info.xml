@@ -166,8 +166,9 @@
                     android:padding="@dimen/padding_left_right">
 
                     <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/line_procedure_data"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="200dp"/>
                 </LinearLayout>
 
 

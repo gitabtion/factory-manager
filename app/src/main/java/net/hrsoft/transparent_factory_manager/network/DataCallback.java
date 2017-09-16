@@ -39,7 +39,7 @@ public abstract class DataCallback<T> implements Callback<T> {
     public void onFailure(Call<T> call, Throwable t) {
         if (t instanceof ResultException) {
             dismissDialog();
-            GlobalAPIErrorHandler.handler(((ResultException) t).getCode());
+            GlobalAPIErrorHandler.handler((ResultException) t);
         } else {
             dismissDialog();
             onDataFailure(call, t);

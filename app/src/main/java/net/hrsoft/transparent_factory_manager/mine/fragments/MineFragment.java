@@ -13,6 +13,7 @@ import net.hrsoft.transparent_factory_manager.TFMApplication;
 import net.hrsoft.transparent_factory_manager.account.models.UserModel;
 import net.hrsoft.transparent_factory_manager.base.fragments.BaseFragment;
 import net.hrsoft.transparent_factory_manager.common.constants.CacheKey;
+import net.hrsoft.transparent_factory_manager.main.MainActivity;
 import net.hrsoft.transparent_factory_manager.mine.activities.WorkGroupManageActivity;
 import net.hrsoft.transparent_factory_manager.mine.models.UpdateMobileModel;
 import net.hrsoft.transparent_factory_manager.mine.models.UpdatePasswordModel;
@@ -149,6 +150,7 @@ public class MineFragment extends BaseFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 TFMApplication.getInstance().exitAccount();
+                getActivity().finish();
             }
         }).setNegativeButton("取消", null).setCancelable(false).show();
     }

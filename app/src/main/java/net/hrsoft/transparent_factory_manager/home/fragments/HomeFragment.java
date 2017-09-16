@@ -1,5 +1,7 @@
 package net.hrsoft.transparent_factory_manager.home.fragments;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +10,9 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.base.fragments.BaseFragment;
+import net.hrsoft.transparent_factory_manager.common.Config;
 import net.hrsoft.transparent_factory_manager.home.adapters.HomeProcedureAdapter;
 import net.hrsoft.transparent_factory_manager.home.adapters.HomeSpinnerAdapter;
 import net.hrsoft.transparent_factory_manager.home.models.GetProcedureResponse;
@@ -16,6 +20,7 @@ import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
 import net.hrsoft.transparent_factory_manager.network.APIResponse;
 import net.hrsoft.transparent_factory_manager.network.DataCallback;
 import net.hrsoft.transparent_factory_manager.network.RestClient;
+import net.hrsoft.transparent_factory_manager.order.activities.ProcedureInfoActivity;
 import net.hrsoft.transparent_factory_manager.order.models.CurrentOrderModel;
 import net.hrsoft.transparent_factory_manager.order.models.OrderResponse;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
@@ -34,7 +39,7 @@ import retrofit2.Response;
  * email caiheng@hrsoft.net
  */
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements BaseRecyclerViewAdapter.OnItemClicked<ProcedureModel>{
     private ArrayList<ProcedureModel> procedureModels;
     private ArrayList<CurrentOrderModel> orderModels;
 
@@ -47,6 +52,8 @@ public class HomeFragment extends BaseFragment {
     RecyclerView recHomeProcedure;
     @BindView(R.id.spinner_home_order_list)
     Spinner spinnerHomeOrderList;
+    @BindView(R.id.empty_view)
+     View emptyView;
 
     @Override
     protected int getLayoutId() {
@@ -61,7 +68,12 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        getCurrentOrderList(1,20);
+        if (orderModels.size()==0){
+            emptyView.setVisibility(View.VISIBLE);
+        }else {
+            emptyView.setVisibility(View.GONE);
+        }
+        getCurrentOrderList(1,100);
         swipeHome.setRefreshing(true);
         swipeHome.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
     }
@@ -97,11 +109,21 @@ public class HomeFragment extends BaseFragment {
                     setOnSpinnerItemClick();
                     initSwipeHome();
                 }
+                if (orderModels.size()==0){
+                    emptyView.setVisibility(View.VISIBLE);
+                }else {
+                    emptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onDataFailure(Call<APIResponse<OrderResponse<CurrentOrderModel[]>>> call, Throwable t) {
                 SnackbarUtil.showSnackbar(getView(),"网络连接失败，请稍后再试");
+                if (orderModels.size()==0){
+                    emptyView.setVisibility(View.VISIBLE);
+                }else {
+                    emptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -127,8 +149,10 @@ public class HomeFragment extends BaseFragment {
                 procedureModels.clear();
                 procedureModels = response.body().getData().getProcedures();
                 HomeProcedureAdapter adapter = new HomeProcedureAdapter(getContext(),procedureModels,orderModel);
+                adapter.setOnItemClickedListener(HomeFragment.this);
                 adapter.setHasHeader(true);
                 recHomeProcedure.setAdapter(adapter);
+
             }
 
             @Override
@@ -174,8 +198,18 @@ public class HomeFragment extends BaseFragment {
         swipeHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
                 getProcedure(orderModels.get(position));
             }
         });
+    }
+
+    @Override
+    public void onItemClicked(ProcedureModel procedureModel, BaseRecyclerViewAdapter.ViewHolder holder) {
+        Intent intent = new Intent(getActivity(), ProcedureInfoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Config.PROCEDURE,procedureModel);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

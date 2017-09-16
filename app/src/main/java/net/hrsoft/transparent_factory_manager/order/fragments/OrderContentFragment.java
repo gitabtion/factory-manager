@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.base.fragments.BaseFragment;
+import net.hrsoft.transparent_factory_manager.common.Config;
 import net.hrsoft.transparent_factory_manager.common.constants.CacheKey;
 import net.hrsoft.transparent_factory_manager.network.APIResponse;
 import net.hrsoft.transparent_factory_manager.network.DataCallback;
@@ -34,7 +36,7 @@ import retrofit2.Response;
  * email caiheng@hrsoft.net
  */
 
-public class OrderContentFragment extends BaseFragment implements BaseRecyclerViewAdapter.OnItemClicked<OrderModel>{
+public class OrderContentFragment extends BaseFragment implements BaseRecyclerViewAdapter.OnItemClicked<OrderModel> {
     public static final String ORDER = "order";
     public static final String CURRENT_ORDER = "currentOrder";
 
@@ -42,6 +44,8 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
     RecyclerView orderRec;
     @BindView(R.id.swipe_order_content)
     SwipeRefreshLayout swipeOrderContent;
+    @BindView(R.id.empty_view)
+    View emptyView;
 
     private ArrayList<OrderModel> orderModels;
     private ArrayList<CurrentOrderModel> currentOrderModels;
@@ -57,11 +61,13 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
     private static final int ADD_DATA_STATUS = 1;
 
 
-    public OrderContentFragment(int type) {
-        super();
-        this.type = type;
+    public static OrderContentFragment setType(int type) {
+        OrderContentFragment orderContentFragment = new OrderContentFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Config.ORDER_FRAGMENT_CONTENT_TYPE, type);
+        orderContentFragment.setArguments(bundle);
+        return orderContentFragment;
     }
-
 
     @Override
     protected int getLayoutId() {
@@ -70,6 +76,10 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
 
     @Override
     protected void initVariable() {
+        if (getArguments() != null) {
+            this.type = getArguments().getInt(Config.ORDER_FRAGMENT_CONTENT_TYPE);
+        }
+
         orderModels = new ArrayList<>();
         currentOrderModels = new ArrayList<>();
         page = 1;
@@ -77,6 +87,7 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
 
     @Override
     protected void initView() {
+
         initSwipe();
         switch (type) {
             case OrderContentFragment.PROCESSING:
@@ -124,11 +135,20 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
                 } else {
                     orderRec.getAdapter().notifyDataSetChanged();
                 }
+                if (orderModels.size() == 0) {
+                    emptyView.setVisibility(View.VISIBLE);
+                } else {
+                    emptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onDataFailure(Call<APIResponse<OrderResponse<OrderModel[]>>> call, Throwable t) {
-
+                if (orderModels.size() == 0) {
+                    emptyView.setVisibility(View.VISIBLE);
+                } else {
+                    emptyView.setVisibility(View.GONE);
+                }
                 SnackbarUtil.showSnackbar(getView(), "网络连接失败，请稍后再试");
             }
 
@@ -166,12 +186,20 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
                 } else {
                     orderRec.getAdapter().notifyDataSetChanged();
                 }
-
+                if (orderModels.size() == 0) {
+                    emptyView.setVisibility(View.VISIBLE);
+                } else {
+                    emptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onDataFailure(Call<APIResponse<OrderResponse<OrderModel[]>>> call, Throwable t) {
-
+                if (orderModels.size() == 0) {
+                    emptyView.setVisibility(View.VISIBLE);
+                } else {
+                    emptyView.setVisibility(View.GONE);
+                }
                 SnackbarUtil.showSnackbar(getView(), "网络连接失败，请稍后再试");
             }
 
@@ -205,10 +233,11 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
                     CurrentOrderAdapter adapter = new CurrentOrderAdapter(getContext(), currentOrderModels);
                     adapter.setOnItemClickedListener(new BaseRecyclerViewAdapter.OnItemClicked<CurrentOrderModel>() {
                         @Override
-                        public void onItemClicked(CurrentOrderModel orderModel, BaseRecyclerViewAdapter.ViewHolder holder) {
-                            Intent intent = new Intent(getActivity(),OrderInfoActivity.class);
+                        public void onItemClicked(CurrentOrderModel orderModel, BaseRecyclerViewAdapter.ViewHolder
+                                holder) {
+                            Intent intent = new Intent(getActivity(), OrderInfoActivity.class);
                             Bundle bundle = new Bundle();
-                            bundle.putSerializable(ORDER,orderModel);
+                            bundle.putSerializable(ORDER, orderModel);
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }
@@ -219,12 +248,20 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
                 } else {
                     orderRec.getAdapter().notifyDataSetChanged();
                 }
-
+                if (currentOrderModels.size() == 0) {
+                    emptyView.setVisibility(View.VISIBLE);
+                } else {
+                    emptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onDataFailure(Call<APIResponse<OrderResponse<CurrentOrderModel[]>>> call, Throwable t) {
-
+                if (currentOrderModels.size() == 0) {
+                    emptyView.setVisibility(View.VISIBLE);
+                } else {
+                    emptyView.setVisibility(View.GONE);
+                }
                 SnackbarUtil.showSnackbar(getView(), "网络连接失败，请稍后再试");
             }
 
@@ -241,9 +278,11 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
      * 初始化下拉刷新控件
      */
     private void initSwipe() {
+
         swipeOrderContent.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
                 swipeOrderContent.setRefreshing(true);
                 switch (type) {
                     case OrderContentFragment.PROCESSING:
@@ -270,7 +309,7 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
     public void onItemClicked(OrderModel orderModel, BaseRecyclerViewAdapter.ViewHolder holder) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(ORDER,orderModel);
+        bundle.putSerializable(ORDER, orderModel);
         intent.putExtras(bundle);
         intent.setClass(getContext(), OrderInfoActivity.class);
         startActivity(intent);

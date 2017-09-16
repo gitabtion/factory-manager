@@ -197,11 +197,7 @@
             android:textColor="@color/text_warning"
             android:textSize="@dimen/main_text"/>
 
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_next"/>
+
     </RelativeLayout>
 
     <View

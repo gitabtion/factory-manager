@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/empty_view"
+        layout="@layout/empty_view"
+        android:visibility="gone"/>
 
     <LinearLayout
-        android:paddingTop="25dp"
         android:layout_width="match_parent"
-        android:layout_height="81dp"
-        android:background="@color/white"
-        android:elevation="4dp"
-        android:gravity="center"
-        android:outlineProvider="background">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/spinner_home_order_list"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:background="@color/white"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:outlineProvider="background"
+            android:paddingTop="25dp">
+
+            <Spinner
+                android:id="@+id/spinner_home_order_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_home"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
 
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rec_home_procedure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"/>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginBottom="4dp"
-            android:id="@+id/rec_home_procedure"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-
-</LinearLayout>
+</FrameLayout>

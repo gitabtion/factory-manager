@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.account.models.UserModel;
@@ -36,6 +37,8 @@ public class WorkGroupManageActivity extends ToolBarActivity implements BaseRecy
         .OnItemClicked<UserModel> {
     public static final String LEADER = "leader";
 
+    @BindView(R.id.empty_view)
+    View emptyView;
     @BindView(R.id.rec_work_group)
     RecyclerView recWorkGroup;
     @BindView(R.id.swipe_work_group)
@@ -61,6 +64,11 @@ public class WorkGroupManageActivity extends ToolBarActivity implements BaseRecy
         setActivityTitle("员工管理");
         setupSwipe();
         getLeaderList();
+        if (userModels.size()==0){
+            emptyView.setVisibility(View.VISIBLE);
+        }else {
+            emptyView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -96,10 +104,20 @@ public class WorkGroupManageActivity extends ToolBarActivity implements BaseRecy
                 recWorkGroup.setAdapter(adapter);
                 recWorkGroup.setLayoutManager(new LinearLayoutManager(WorkGroupManageActivity.this,
                         LinearLayoutManager.VERTICAL, false));
+                if (userModels.size()==0){
+                    emptyView.setVisibility(View.VISIBLE);
+                }else {
+                    emptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onDataFailure(Call<APIResponse<UserModel[]>> call, Throwable t) {
+                if (userModels.size()==0){
+                    emptyView.setVisibility(View.VISIBLE);
+                }else {
+                    emptyView.setVisibility(View.GONE);
+                }
                 SnackbarUtil.showSnackbar(getWindow().getDecorView(), "网络连接失败，请稍候再试");
             }
 
