@@ -23,6 +23,7 @@ import net.hrsoft.transparent_factory_manager.order.models.UpdateProcedureReques
 import net.hrsoft.transparent_factory_manager.order.models.WeightModel;
 import net.hrsoft.transparent_factory_manager.utils.RxBus;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
+import net.hrsoft.transparent_factory_manager.utils.SubTimeStringUtil;
 import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
@@ -213,8 +214,8 @@ public class UpdateProcedureActivity extends ToolBarActivity {
         editDescription.setText(procedureModel.getDescription());
         editStandard.setText(procedureModel.getStandard());
         txtGroupName.setText(procedureModel.getWorkGroupName());
-        txtProcedureEndTime.setText(procedureModel.getEndTime());
-        txtProcedureStartTime.setText(procedureModel.getStartTime());
+        txtProcedureEndTime.setText(SubTimeStringUtil.subTimeString(procedureModel.getEndTime()));
+        txtProcedureStartTime.setText(SubTimeStringUtil.subTimeString(procedureModel.getStartTime()));
 //        txtProcedureWeight.setText(String.valueOf((int) (procedureModel.getWeight() * 100)));
 //        seekWeight.setProgress((int) (procedureModel.getWeight() * 100));
     }

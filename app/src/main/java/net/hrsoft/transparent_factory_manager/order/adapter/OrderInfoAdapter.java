@@ -13,6 +13,7 @@ import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdap
 import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
 import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
 import net.hrsoft.transparent_factory_manager.utils.MPAndroidChartUtil;
+import net.hrsoft.transparent_factory_manager.utils.SubTimeStringUtil;
 import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 
 import java.util.List;
@@ -73,8 +74,8 @@ public class OrderInfoAdapter extends BaseRecyclerViewAdapter<ProcedureModel> {
         protected void onBind(ProcedureModel procedureModel) {
             txtProcedureName.setText(procedureModel.getName());
             txtGroupName.setText(procedureModel.getWorkGroupName());
-            txtStartTime.setText(procedureModel.getStartTime());
-            txtEndTime.setText(procedureModel.getEndTime());
+            txtStartTime.setText(SubTimeStringUtil.subTimeString(procedureModel.getStartTime()));
+            txtEndTime.setText(SubTimeStringUtil.subTimeString(procedureModel.getEndTime()));
 
 
             float allPercent = ((float) procedureModel.getSuccessCount()) / ((float) procedureModel.getTotalCount());
@@ -115,8 +116,8 @@ public class OrderInfoAdapter extends BaseRecyclerViewAdapter<ProcedureModel> {
         protected void onBind(OrderModel orderModel) {
             pieAll.setVisibility(View.GONE);
             pieTime.setVisibility(View.GONE);
-            txtHomeEndTime.setText(order.getEndTime() == null ? "N/A" : orderModel.getEndTime());
-            txtHomeStartTime.setText(order.getStartTime() == null ? "N/A" : orderModel.getStartTime());
+            txtHomeEndTime.setText(order.getEndTime() == null ? "N/A" : SubTimeStringUtil.subTimeString(orderModel.getEndTime()));
+            txtHomeStartTime.setText(order.getStartTime() == null ? "N/A" : SubTimeStringUtil.subTimeString(orderModel.getStartTime()));
             txtHomeOrderName.setText(order.getTitle() == null ? "N/A" : orderModel.getTitle());
             txtHomeOrderNumber.setText(order.getOrderCode() == null ? "N/A" : orderModel.getOrderCode());
             txtHomeOrderDescription.setText(order.getCustomerInfo() == null ? "N/A" : orderModel.getCustomerInfo());

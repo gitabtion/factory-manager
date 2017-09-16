@@ -10,6 +10,7 @@ import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
 import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
+import net.hrsoft.transparent_factory_manager.utils.SubTimeStringUtil;
 
 import java.util.List;
 
@@ -67,11 +68,11 @@ public class ProcedureAdapter extends BaseRecyclerViewAdapter<ProcedureModel> {
 
         @Override
         protected void onBind(OrderModel orderModel) {
-            txtHomeEndTime.setText(orderModel.getEndTime());
+            txtHomeEndTime.setText(SubTimeStringUtil.subTimeString(orderModel.getEndTime()));
             txtHomeOrderDescription.setText(orderModel.getDescription());
             txtHomeOrderName.setText(orderModel.getTitle());
             txtHomeOrderNumber.setText(orderModel.getOrderCode());
-            txtHomeStartTime.setText(orderModel.getStartTime());
+            txtHomeStartTime.setText(SubTimeStringUtil.subTimeString(orderModel.getStartTime()));
         }
     }
 

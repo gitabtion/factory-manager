@@ -120,4 +120,8 @@ public interface APIService {
     @DELETE("procedure/delete/{procedureId}")
     Call<APIResponse> deleteProcedure(@Path("procedureId")int procedureId);
 
+    //获取全部订单
+    @GET("order")
+    Call<APIResponse<OrderResponse<OrderModel[]>>> getAllOrder();
+
 }

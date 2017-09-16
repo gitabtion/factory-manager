@@ -21,12 +21,12 @@ import net.hrsoft.transparent_factory_manager.network.RestClient;
 import net.hrsoft.transparent_factory_manager.order.adapter.OrderInfoAdapter;
 import net.hrsoft.transparent_factory_manager.order.fragments.OrderContentFragment;
 import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
+import net.hrsoft.transparent_factory_manager.order.models.OrderResponse;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -42,11 +42,12 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
 
     @BindView(R.id.swipe_order_info)
     SwipeRefreshLayout swipeOrderInfo;
-    private ArrayList<ProcedureModel> procedureModels;
-    private OrderModel orderModel;
-
     @BindView(R.id.rec_procedure)
     RecyclerView recProcedure;
+
+    private ArrayList<ProcedureModel> procedureModels;
+    private OrderModel orderModel;
+    private OrderModel[] orderModels;
 
     @Override
     protected int getLayoutId() {
@@ -131,6 +132,7 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
             @Override
             public void onRefresh() {
                 getProcedure(orderModel);
+                refreshOrderInfo();
             }
         });
     }
@@ -153,6 +155,38 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
         });
     }
 
+    private void refreshOrderInfo(){
+        RestClient.getService().getAllOrder().enqueue(new DataCallback<APIResponse<OrderResponse<OrderModel[]>>>() {
+            @Override
+            public void onDataResponse(Call<APIResponse<OrderResponse<OrderModel[]>>> call, Response<APIResponse<OrderResponse<OrderModel[]>>> response) {
+                orderModels = response.body().getData().getOrders();
+                for (OrderModel orderModel :orderModels){
+                    if (orderModel.getId()==OrderInfoActivity.this.orderModel.getId()){
+                        OrderInfoActivity.this.orderModel = orderModel;
+                        OrderInfoAdapter adapter = new
+                                OrderInfoAdapter(OrderInfoActivity.this, procedureModels, orderModel);
+                        adapter.setHasHeader(true);
+                        adapter.setOnItemClickedListener(OrderInfoActivity.this);
+                        recProcedure.setAdapter(adapter);
+                        recProcedure.setLayoutManager(new LinearLayoutManager(OrderInfoActivity.this, LinearLayoutManager
+                                .VERTICAL, false));
+                    }
+                }
+            }
+
+            @Override
+            public void onDataFailure(Call<APIResponse<OrderResponse<OrderModel[]>>> call, Throwable t) {
+
+            }
+
+            @Override
+            public void dismissDialog() {
+
+            }
+        });
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.base_toolbar_menu, menu);
@@ -168,4 +202,6 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
         intent.putExtras(bundle);
         startActivity(intent);
     }
+
+
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.order.models.CurrentOrderModel;
+import net.hrsoft.transparent_factory_manager.utils.SubTimeStringUtil;
 
 import java.util.List;
 
@@ -71,9 +72,9 @@ public class CurrentOrderAdapter extends BaseRecyclerViewAdapter<CurrentOrderMod
             txtItemOrderCustomInfo.setText(currentOrderModel.getCustomerInfo() == null ? "N/A" : currentOrderModel
                     .getCustomerInfo());
             txtOrderNumber.setText(currentOrderModel.getOrderCode() == null ? "N/A" : currentOrderModel.getOrderCode());
-            txtOrderStartTime.setText(currentOrderModel.getStartTime() == null ? "N/A" : currentOrderModel
-                    .getStartTime());
-            txtOrderEndTime.setText(currentOrderModel.getEndTime() == null ? "N/A" : currentOrderModel.getEndTime());
+            txtOrderStartTime.setText(currentOrderModel.getStartTime() == null ? "N/A" : SubTimeStringUtil.subTimeString(currentOrderModel
+                    .getStartTime()));
+            txtOrderEndTime.setText(currentOrderModel.getEndTime() == null ? "N/A" : SubTimeStringUtil.subTimeString(currentOrderModel.getEndTime()));
         }
 
 

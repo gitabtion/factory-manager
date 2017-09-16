@@ -9,6 +9,7 @@ import android.widget.TextView;
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
+import net.hrsoft.transparent_factory_manager.utils.SubTimeStringUtil;
 
 import java.util.List;
 
@@ -57,8 +58,8 @@ public class OrderContentAdapter extends BaseRecyclerViewAdapter<OrderModel> {
             txtItemOrderTitle.setText(orderModel.getTitle()==null?"N/A":orderModel.getTitle());
             txtItemOrderCustomInfo.setText(orderModel.getCustomerInfo()==null?"N/A":orderModel.getCustomerInfo());
             txtOrderNumber.setText(orderModel.getOrderCode()==null?"N/A":orderModel.getOrderCode());
-            txtOrderStartTime.setText(orderModel.getStartTime()==null?"N/A":orderModel.getStartTime());
-            txtOrderEndTime.setText(orderModel.getEndTime()==null?"N/A":orderModel.getEndTime());
+            txtOrderStartTime.setText(orderModel.getStartTime()==null?"N/A":SubTimeStringUtil.subTimeString(orderModel.getStartTime()));
+            txtOrderEndTime.setText(orderModel.getEndTime()==null?"N/A": SubTimeStringUtil.subTimeString(orderModel.getEndTime()));
         }
     }
 }

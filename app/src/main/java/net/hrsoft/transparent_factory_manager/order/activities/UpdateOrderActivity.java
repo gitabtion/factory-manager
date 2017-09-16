@@ -18,6 +18,7 @@ import net.hrsoft.transparent_factory_manager.network.RestClient;
 import net.hrsoft.transparent_factory_manager.order.models.CreateOrderRequest;
 import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
+import net.hrsoft.transparent_factory_manager.utils.SubTimeStringUtil;
 import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
@@ -123,8 +124,8 @@ public class UpdateOrderActivity extends ToolBarActivity {
     }
 
     private void bindView() {
-        txtOrderEndTime.setText(orderModel.getEndTime());
-        txtOrderStartTime.setText(orderModel.getStartTime());
+        txtOrderEndTime.setText(SubTimeStringUtil.subTimeString(orderModel.getEndTime()));
+        txtOrderStartTime.setText(SubTimeStringUtil.subTimeString(orderModel.getStartTime()));
         editDescription.setText(orderModel.getDescription());
         editOrderClientName.setText(orderModel.getCustomerInfo());
         editOrderName.setText(orderModel.getTitle());
@@ -143,7 +144,6 @@ public class UpdateOrderActivity extends ToolBarActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 txtOrderStartTime.setText(+year + "-" + (month + 1) + "-" + dayOfMonth);
-                SnackbarUtil.showSnackbar(getWindow().getDecorView(), "选择了" + txtOrderStartTime.getText());
             }
         }, TimeUtil.getNowYear(), TimeUtil.getNowMonth(), TimeUtil.getDayOfMonth()).show();
     }
