@@ -28,6 +28,7 @@ import net.hrsoft.transparent_factory_manager.order.models.GetProcedureDataRespo
 import net.hrsoft.transparent_factory_manager.order.models.ProcedureDataModel;
 import net.hrsoft.transparent_factory_manager.utils.MPAndroidChartUtil;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
+import net.hrsoft.transparent_factory_manager.utils.SubTimeStringUtil;
 import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
@@ -207,8 +208,8 @@ public class ProcedureInfoActivity extends ToolBarActivity {
      * 绑定视图
      */
     private void bindView() {
-        txtEndTime.setText(procedureModel.getEndTime());
-        txtStartTime.setText(procedureModel.getStartTime());
+        txtEndTime.setText(SubTimeStringUtil.subTimeString(procedureModel.getEndTime()));
+        txtStartTime.setText(SubTimeStringUtil.subTimeString(procedureModel.getStartTime()));
         txtLeaderName.setText(procedureModel.getWorkGroupName());
         txtProcedureName.setText(procedureModel.getName());
         txtTotalCount.setText(String.valueOf(procedureModel.getTotalCount()));

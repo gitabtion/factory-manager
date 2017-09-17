@@ -62,6 +62,7 @@
                 android:layout_height="48dp"/>
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/btn_forget_password"
                 android:layout_marginTop="8dp"
                 android:layout_gravity="center_horizontal"
