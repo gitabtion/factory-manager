@@ -17,6 +17,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.hrsoft.transparent_factory_manager.R;
@@ -52,6 +53,8 @@ public class MPAndroidChartUtil {
         pieChart.setUsePercentValues(true);
         pieChart.setEntryLabelColor(Color.WHITE);
         pieChart.getLegend().setEnabled(false);
+        pieChart.setRotationEnabled(true);
+        pieChart.setHighlightPerTapEnabled(true);
         colors.add(0xFF1CC9CC);
         pieChart.setTransparentCircleColor(Color.WHITE);
         pieChart.setTransparentCircleAlpha(110);
@@ -63,6 +66,9 @@ public class MPAndroidChartUtil {
         pieChart.getDescription().setEnabled(false);
         pieDataSet.setDrawIcons(false);
         PieData pieData = new PieData(pieDataSet);
+        pieData.setValueFormatter(new PercentFormatter());
+        pieData.setValueTextSize(10f);
+//        pieData.setValueTextColor(Color.WHITE);
         pieChart.setData(pieData);
     }
 
@@ -93,7 +99,7 @@ public class MPAndroidChartUtil {
             }
             LineDataSet dataSet = new LineDataSet(lineEntries, "产能进度");
             dataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-            dataSet.setColors(Color.parseColor("#1cc9cc"));
+            dataSet.setColors(Color.parseColor("#1CC9CC"));
             lineChart.getLegend().setEnabled(false);
             LineData lineData = new LineData(dataSet);
             lineData.setValueTextSize(12);

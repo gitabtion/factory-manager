@@ -4,46 +4,58 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <LinearLayout
-        android:background="@drawable/bg_mine"
-        android:layout_width="match_parent"
-        android:layout_height="203dp"
+
+    <FrameLayout
         android:elevation="2dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingBottom="24dp"
-        android:paddingTop="24dp">
+        android:outlineProvider="bounds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:visibility="gone"
-            android:id="@+id/img_avatar"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:src="@mipmap/ic_launcher_round"/>
+        <ImageView
+            android:src="@drawable/bg_mine"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"/>
 
-        <TextView
-            android:id="@+id/txt_username"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="刘明傻逼"
-            android:textColor="@color/white"
-            android:textSize="@dimen/main_text"/>
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="24dp"
+            android:paddingTop="24dp">
 
-        <TextView
-            android:id="@+id/txt_mobile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="15600000000"
-            android:textColor="@color/white"
-            android:textSize="@dimen/main_text"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@mipmap/ic_launcher_round"
+                android:visibility="gone"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/txt_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="刘明傻逼"
+                android:textColor="@color/white"
+                android:textSize="@dimen/main_text"/>
 
+            <TextView
+                android:id="@+id/txt_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="15600000000"
+                android:textColor="@color/white"
+                android:textSize="@dimen/main_text"/>
+
+        </LinearLayout>
+    </FrameLayout>
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/rl_personal_info"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -53,7 +65,8 @@
         android:gravity="center_vertical"
         android:outlineProvider="background"
         android:paddingLeft="@dimen/padding_left_right"
-        android:paddingRight="@dimen/padding_left_right">
+        android:paddingRight="@dimen/padding_left_right"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,10 +89,10 @@
 
 
     <RelativeLayout
-        android:layout_marginTop="8dp"
         android:id="@+id/rl_update_password"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
         android:elevation="2dp"
         android:gravity="center_vertical"
