@@ -1,7 +1,6 @@
 package net.hrsoft.transparent_factory_manager.main;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.TextView;
 

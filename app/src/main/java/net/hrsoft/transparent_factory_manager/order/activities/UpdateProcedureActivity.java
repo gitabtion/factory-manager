@@ -1,7 +1,6 @@
 package net.hrsoft.transparent_factory_manager.order.activities;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatSeekBar;
@@ -15,26 +14,18 @@ import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.common.Config;
 import net.hrsoft.transparent_factory_manager.home.models.GetProcedureResponse;
 import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
-import net.hrsoft.transparent_factory_manager.mine.models.GroupModel;
 import net.hrsoft.transparent_factory_manager.network.APIResponse;
 import net.hrsoft.transparent_factory_manager.network.DataCallback;
 import net.hrsoft.transparent_factory_manager.network.RestClient;
 import net.hrsoft.transparent_factory_manager.order.models.UpdateProcedureRequest;
-import net.hrsoft.transparent_factory_manager.order.models.WeightModel;
-import net.hrsoft.transparent_factory_manager.utils.RxBus;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 import net.hrsoft.transparent_factory_manager.utils.SubTimeStringUtil;
 import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
-import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observer;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Response;
 

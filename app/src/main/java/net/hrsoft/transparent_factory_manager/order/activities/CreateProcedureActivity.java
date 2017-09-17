@@ -21,7 +21,6 @@ import net.hrsoft.transparent_factory_manager.network.DataCallback;
 import net.hrsoft.transparent_factory_manager.network.RestClient;
 import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
 import net.hrsoft.transparent_factory_manager.order.models.UpdateProcedureRequest;
-import net.hrsoft.transparent_factory_manager.order.models.WeightModel;
 import net.hrsoft.transparent_factory_manager.utils.RxBus;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 import net.hrsoft.transparent_factory_manager.utils.TimeUtil;

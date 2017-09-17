@@ -1,9 +1,7 @@
 package net.hrsoft.transparent_factory_manager.account.activities;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 
 import net.hrsoft.transparent_factory_manager.R;
@@ -11,19 +9,15 @@ import net.hrsoft.transparent_factory_manager.TFMApplication;
 import net.hrsoft.transparent_factory_manager.account.models.LoginRequest;
 import net.hrsoft.transparent_factory_manager.account.models.LoginResponse;
 import net.hrsoft.transparent_factory_manager.base.activities.NoBarActivity;
-import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.common.constants.CacheKey;
 import net.hrsoft.transparent_factory_manager.main.MainActivity;
 import net.hrsoft.transparent_factory_manager.network.APIResponse;
 import net.hrsoft.transparent_factory_manager.network.DataCallback;
 import net.hrsoft.transparent_factory_manager.network.RestClient;
-import net.hrsoft.transparent_factory_manager.utils.ProgressDialogUtil;
 import net.hrsoft.transparent_factory_manager.utils.RegexUtil;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
-import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Response;

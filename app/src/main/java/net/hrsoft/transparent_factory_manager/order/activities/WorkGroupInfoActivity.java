@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import net.hrsoft.transparent_factory_manager.R;
-import net.hrsoft.transparent_factory_manager.TFMApplication;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.home.models.GetProcedureResponse;
 import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
@@ -20,10 +19,8 @@ import net.hrsoft.transparent_factory_manager.utils.RxBus;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Response;

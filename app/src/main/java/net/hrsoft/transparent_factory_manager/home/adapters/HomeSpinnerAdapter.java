@@ -8,7 +8,6 @@ import android.widget.TextView;
 import net.hrsoft.transparent_factory_manager.R;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseListViewAdapter;
 import net.hrsoft.transparent_factory_manager.order.models.CurrentOrderModel;
-import net.hrsoft.transparent_factory_manager.order.models.OrderModel;
 
 import java.util.List;
 

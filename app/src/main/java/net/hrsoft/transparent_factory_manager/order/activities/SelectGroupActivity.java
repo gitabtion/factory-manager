@@ -1,6 +1,5 @@
 package net.hrsoft.transparent_factory_manager.order.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -22,7 +21,6 @@ import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Response;
 
