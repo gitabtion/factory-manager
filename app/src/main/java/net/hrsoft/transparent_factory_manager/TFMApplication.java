@@ -26,7 +26,7 @@ public class TFMApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        //RichText.initCacheDir(this);
+        registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
     }
 
     /**
@@ -112,7 +112,6 @@ public class TFMApplication extends Application {
      */
     public void exitApp() {
         removeAllActivity();
-        // TODO: 2017/7/25 退出的后续操作
         System.exit(0);
     }
 
