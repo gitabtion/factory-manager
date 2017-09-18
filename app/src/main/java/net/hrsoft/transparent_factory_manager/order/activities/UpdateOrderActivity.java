@@ -23,6 +23,7 @@ import net.hrsoft.transparent_factory_manager.utils.TimeUtil;
 import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -54,6 +55,8 @@ public class UpdateOrderActivity extends ToolBarActivity {
     EditText editDescription;
     @BindView(R.id.btn_update_order_done)
     TextView btnDoneToCreateProcedure;
+    @BindView(R.id.edit_order_number)
+    TextInputEditText editOrderNumber;
 
     private CreateOrderRequest createOrderRequest;
     private OrderModel orderModel;
@@ -103,12 +106,16 @@ public class UpdateOrderActivity extends ToolBarActivity {
         } else if (editTotalCount.getText().length() == 0) {
             showError(editTotalCount, "订单数量不可为空");
             flag = false;
+        } else if (editOrderNumber.getText().toString().length() == 0) {
+            flag = false;
+            showError(editOrderNumber, "订单号不可为空");
         }
         return flag;
     }
 
     private void bindData() {
-        createOrderRequest.setTotalCount(editTotalCount.getText().toString());
+        createOrderRequest.setOrderCode(editOrderNumber.getText().toString().trim());
+        createOrderRequest.setTotalCount(editTotalCount.getText().toString().trim());
         createOrderRequest.setCustomerInfo(editOrderClientName.getText().toString().trim());
         createOrderRequest.setDescription(editDescription.getText().toString().trim());
         createOrderRequest.setEndTime(txtOrderEndTime.getText().toString().trim());
@@ -123,6 +130,7 @@ public class UpdateOrderActivity extends ToolBarActivity {
     }
 
     private void bindView() {
+        editOrderNumber.setText(orderModel.getOrderCode());
         txtOrderEndTime.setText(SubTimeStringUtil.subTimeString(orderModel.getEndTime()));
         txtOrderStartTime.setText(SubTimeStringUtil.subTimeString(orderModel.getStartTime()));
         editDescription.setText(orderModel.getDescription());
@@ -189,5 +197,4 @@ public class UpdateOrderActivity extends ToolBarActivity {
             }
         });
     }
-
 }

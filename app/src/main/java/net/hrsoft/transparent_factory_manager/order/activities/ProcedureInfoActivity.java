@@ -166,7 +166,7 @@ public class ProcedureInfoActivity extends ToolBarActivity {
                     case R.id.action_delete:
                         AlertDialog.Builder builder = new AlertDialog.Builder(ProcedureInfoActivity.this);
                         builder.setTitle("提示")
-                                .setMessage("删除工序后将不可删除，确认删除？")
+                                .setMessage("删除工序后将不可恢复，确认删除？")
                                 .setNegativeButton("取消", null)
                                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                     @Override
@@ -264,7 +264,7 @@ public class ProcedureInfoActivity extends ToolBarActivity {
         RestClient.getService().deleteProcedure(procedureModel.getId()).enqueue(new DataCallback<APIResponse>() {
             @Override
             public void onDataResponse(Call<APIResponse> call, Response<APIResponse> response) {
-                ToastUtil.showToast("删除成功，请刷新页面");
+                ToastUtil.showToast("删除成功");
                 finish();
             }
 

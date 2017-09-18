@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="刘明傻逼"
+                android:text="UserName"
                 android:textColor="@color/white"
                 android:textSize="@dimen/main_text"/>
 
@@ -188,7 +188,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="退出账户"
+            android:text="退出账号"
             android:textColor="@color/text_warning"
             android:textSize="@dimen/main_text"/>
 

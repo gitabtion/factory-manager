@@ -170,7 +170,7 @@ public class MineFragment extends BaseFragment {
 
     @OnClick(R.id.rl_exit_account)
     public void onRlExitAccountClicked() {
-        new AlertDialog.Builder(getContext()).setMessage("确定退出账户并删除缓存信息？").setPositiveButton("确定", new
+        new AlertDialog.Builder(getContext()).setMessage("确定退出账号并清除缓存信息？").setPositiveButton("确定", new
                 DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
