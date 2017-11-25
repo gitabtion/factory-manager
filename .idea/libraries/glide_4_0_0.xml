@@ -5,7 +5,7 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/4.0.0/2827ce511da801b34cb5c75ecc91958492848904/glide-4.0.0-sources.jar!/" />
+      <root url="jar:///usr/local/Cellar/gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/4.0.0/2827ce511da801b34cb5c75ecc91958492848904/glide-4.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
