@@ -6,23 +6,9 @@
 
 ## 软件截图
 
-<figure class = "half">
-	<img src="http://oum3tk6e0.bkt.clouddn.com//android/factory/Screenshot_2018-04-11-20-30-05-427_net.hrsoft.tra.png">
-	<img src="http://oum3tk6e0.bkt.clouddn.com//android/factory/Screenshot_2018-04-11-20-30-11-025_net.hrsoft.tra.png">
-</figure>
----
-<figure class="third">
-    <img src="http://oum3tk6e0.bkt.clouddn.com//android/factory/IMG_20180411_203350.jpg">
-    <img src="http://oum3tk6e0.bkt.clouddn.com//android/factory/Screenshot_2018-04-11-20-30-24-711_net.hrsoft.tra.png">
-    <img src="http://oum3tk6e0.bkt.clouddn.com//android/factory/Screenshot_2018-04-11-20-30-40-809_net.hrsoft.tra.png">
-</figure>
----
-<figure class="third">
-    <img src="http://oum3tk6e0.bkt.clouddn.com//android/factory/Screenshot_2018-04-11-20-30-51-916_net.hrsoft.tra.png">
-    <img src="http://oum3tk6e0.bkt.clouddn.com//android/factory/Screenshot_2018-04-11-20-33-59-034_net.hrsoft.tra.png">
-    <img src="http://oum3tk6e0.bkt.clouddn.com//android/factory/Screenshot_2018-04-11-20-31-01-873_net.hrsoft.tra.png">
-</figure>
----
+![](http://oum3tk6e0.bkt.clouddn.com//android/factory/Slice%201.jpg)
+![](http://oum3tk6e0.bkt.clouddn.com//android/factory/2.jpg)
+![](http://oum3tk6e0.bkt.clouddn.com//android/factory/3.jpg)
 
 ## Powered By
 - [Retrofit 2.0](https://github.com/square/retrofit)
