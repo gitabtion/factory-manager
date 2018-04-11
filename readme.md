@@ -6,9 +6,9 @@
 
 ## 软件截图
 
-![](http://oum3tk6e0.bkt.clouddn.com//android/factory/Slice%201.jpg)
-![](http://oum3tk6e0.bkt.clouddn.com//android/factory/2.jpg)
-![](http://oum3tk6e0.bkt.clouddn.com//android/factory/3.jpg)
+![](https://github.com/gitabtion/factory-manager/blob/master/res/1.jpg)
+![](https://github.com/gitabtion/factory-manager/blob/master/res/2.jpg)
+![](https://github.com/gitabtion/factory-manager/blob/master/res/3.jpg)
 
 ## Powered By
 - [Retrofit 2.0](https://github.com/square/retrofit)
