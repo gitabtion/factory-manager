@@ -1,6 +1,6 @@
 package net.hrsoft.transparent_factory_manager.utils;
 
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 import android.widget.Toast;
 
 import net.hrsoft.transparent_factory_manager.TFMApplication;

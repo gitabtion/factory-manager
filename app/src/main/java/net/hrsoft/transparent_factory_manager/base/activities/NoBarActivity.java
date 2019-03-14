@@ -1,7 +1,7 @@
 package net.hrsoft.transparent_factory_manager.base.activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * @author abtion.

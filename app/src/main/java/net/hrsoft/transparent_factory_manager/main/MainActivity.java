@@ -1,12 +1,12 @@
 package net.hrsoft.transparent_factory_manager.main;
 
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.TFMApplication;
 import net.hrsoft.transparent_factory_manager.base.activities.NoBarActivity;
 import net.hrsoft.transparent_factory_manager.home.fragments.HomeFragment;
@@ -21,19 +21,19 @@ import butterknife.OnClick;
 public class MainActivity extends NoBarActivity {
     private long firstTime;
 
-    @BindView(R.id.frame_main_container)
+    @BindView(R2.id.frame_main_container)
     FrameLayout frameMainContainer;
-    @BindView(R.id.img_tab_menu_home)
+    @BindView(R2.id.img_tab_menu_home)
     ImageView imgTabMenuHome;
-    @BindView(R.id.txt_tab_menu_home)
+    @BindView(R2.id.txt_tab_menu_home)
     TextView txtTabMenuHome;
-    @BindView(R.id.img_tab_menu_order)
+    @BindView(R2.id.img_tab_menu_order)
     ImageView imgTabMenuOrder;
-    @BindView(R.id.txt_tab_menu_order)
+    @BindView(R2.id.txt_tab_menu_order)
     TextView txtTabMenuOrder;
-    @BindView(R.id.img_tab_menu_mine)
+    @BindView(R2.id.img_tab_menu_mine)
     ImageView imgTabMenuMine;
-    @BindView(R.id.txt_tab_menu_mine)
+    @BindView(R2.id.txt_tab_menu_mine)
     TextView txtTabMenuMine;
     private HomeFragment homeFragment;
     private OrderFragment orderFragment;
@@ -42,7 +42,7 @@ public class MainActivity extends NoBarActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_main;
+        return R2.layout.activity_main;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MainActivity extends NoBarActivity {
 
     @Override
     protected void initView() {
-        addFragment(R.id.frame_main_container, homeFragment, null);
+        addFragment(R2.id.frame_main_container, homeFragment, null);
         changeHomeMenuStatus();
     }
 
@@ -73,11 +73,11 @@ public class MainActivity extends NoBarActivity {
     }
 
     private void addFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_main_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R2.id.frame_main_container, fragment).commit();
     }
 
 
-    @OnClick(R.id.ly_tab_menu_home)
+    @OnClick(R2.id.ly_tab_menu_home)
     public void onLyTabMenuHomeClicked() {
         changeHomeMenuStatus();
         hideAllFragment();
@@ -89,7 +89,7 @@ public class MainActivity extends NoBarActivity {
         }
     }
 
-    @OnClick(R.id.ly_tab_menu_order)
+    @OnClick(R2.id.ly_tab_menu_order)
     public void onLyTabMenuOrderClicked() {
         changeOrderMenuStatus();
         hideAllFragment();
@@ -101,7 +101,7 @@ public class MainActivity extends NoBarActivity {
         }
     }
 
-    @OnClick(R.id.ly_tab_menu_mine)
+    @OnClick(R2.id.ly_tab_menu_mine)
     public void onLyTabMenuMineClicked() {
         changMineMenuStatus();
         hideAllFragment();
@@ -127,30 +127,30 @@ public class MainActivity extends NoBarActivity {
 
 
     private void clearChoiceStatus(){
-        txtTabMenuHome.setTextColor(getResources().getColor(R.color.subtitle));
-        txtTabMenuOrder.setTextColor(getResources().getColor(R.color.subtitle));
-        txtTabMenuMine.setTextColor(getResources().getColor(R.color.subtitle));
+        txtTabMenuHome.setTextColor(getResources().getColor(R2.color.subtitle));
+        txtTabMenuOrder.setTextColor(getResources().getColor(R2.color.subtitle));
+        txtTabMenuMine.setTextColor(getResources().getColor(R2.color.subtitle));
 
-        imgTabMenuHome.setImageResource(R.drawable.img_home_primary);
-        imgTabMenuOrder.setImageResource(R.drawable.img_order_primary);
-        imgTabMenuMine.setImageResource(R.drawable.img_mine_primary);
+        imgTabMenuHome.setImageResource(R2.drawable.img_home_primary);
+        imgTabMenuOrder.setImageResource(R2.drawable.img_order_primary);
+        imgTabMenuMine.setImageResource(R2.drawable.img_mine_primary);
 
     }
 
     private void changeHomeMenuStatus(){
         clearChoiceStatus();
-        imgTabMenuHome.setImageResource(R.drawable.img_home_selected);
-        txtTabMenuHome.setTextColor(getResources().getColor(R.color.white));
+        imgTabMenuHome.setImageResource(R2.drawable.img_home_selected);
+        txtTabMenuHome.setTextColor(getResources().getColor(R2.color.white));
     }
     private void changeOrderMenuStatus(){
         clearChoiceStatus();
-        imgTabMenuOrder.setImageResource(R.drawable.img_order_selected);
-        txtTabMenuOrder.setTextColor(getResources().getColor(R.color.white));
+        imgTabMenuOrder.setImageResource(R2.drawable.img_order_selected);
+        txtTabMenuOrder.setTextColor(getResources().getColor(R2.color.white));
     }
     private void changMineMenuStatus(){
         clearChoiceStatus();
-        imgTabMenuMine.setImageResource(R.drawable.img_mine_selected);
-        txtTabMenuMine.setTextColor(getResources().getColor(R.color.white));
+        imgTabMenuMine.setImageResource(R2.drawable.img_mine_selected);
+        txtTabMenuMine.setTextColor(getResources().getColor(R2.color.white));
     }
 
     @Override

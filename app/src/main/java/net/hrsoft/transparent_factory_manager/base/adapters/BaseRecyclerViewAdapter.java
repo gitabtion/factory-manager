@@ -1,11 +1,9 @@
 package net.hrsoft.transparent_factory_manager.base.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-
-import com.github.mikephil.charting.formatter.IFillFormatter;
 
 import java.util.Collection;
 import java.util.List;

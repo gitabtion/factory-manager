@@ -2,12 +2,12 @@ package net.hrsoft.transparent_factory_manager.mine.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.account.models.UserModel;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -37,11 +36,11 @@ public class WorkGroupManageActivity extends ToolBarActivity implements BaseRecy
         .OnItemClicked<UserModel> {
     public static final String LEADER = "leader";
 
-    @BindView(R.id.empty_view)
+    @BindView(R2.id.empty_view)
     View emptyView;
-    @BindView(R.id.rec_work_group)
+    @BindView(R2.id.rec_work_group)
     RecyclerView recWorkGroup;
-    @BindView(R.id.swipe_work_group)
+    @BindView(R2.id.swipe_work_group)
     SwipeRefreshLayout swipeWorkGroup;
     ArrayList<GroupModel> groupModels;
     ArrayList<UserModel> userModels;
@@ -49,7 +48,7 @@ public class WorkGroupManageActivity extends ToolBarActivity implements BaseRecy
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_work_group_manage;
+        return R2.layout.activity_work_group_manage;
     }
 
     @Override
@@ -86,7 +85,7 @@ public class WorkGroupManageActivity extends ToolBarActivity implements BaseRecy
      */
     private void setupSwipe() {
         swipeWorkGroup.setRefreshing(true);
-        swipeWorkGroup.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        swipeWorkGroup.setColorSchemeColors(getResources().getColor(R2.color.colorAccent));
         swipeWorkGroup.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -157,7 +156,7 @@ public class WorkGroupManageActivity extends ToolBarActivity implements BaseRecy
     }
 
 
-    @OnClick(R.id.fat_add_leader)
+    @OnClick(R2.id.fat_add_leader)
     public void onViewClicked() {
         Intent intent = new Intent(this,AddLeaderActivity.class);
         startActivity(intent);

@@ -1,13 +1,7 @@
 package net.hrsoft.transparent_factory_manager.utils;
 
-import android.app.Activity;
-import android.app.Application;
-import android.app.Fragment;
-import android.content.Context;
-import android.support.design.widget.Snackbar;
+import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
-
-import net.hrsoft.transparent_factory_manager.TFMApplication;
 
 /**
  * @author abtion.

@@ -2,12 +2,12 @@ package net.hrsoft.transparent_factory_manager.order.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.mine.models.GetGroupLIstResponse;
@@ -34,18 +34,18 @@ public class SelectGroupActivity extends ToolBarActivity implements
         BaseRecyclerViewAdapter.OnItemClicked<GroupModel> {
     public static final String WORK_GROUP = "workGroup";
 
-    @BindView(R.id.swipe_group)
+    @BindView(R2.id.swipe_group)
     SwipeRefreshLayout swipeGroup;
     private ArrayList<GroupModel> groupModels;
     private GroupModel groupModel;
-    @BindView(R.id.rec_group)
+    @BindView(R2.id.rec_group)
     RecyclerView recGroup;
-    @BindView(R.id.empty_view)
+    @BindView(R2.id.empty_view)
     View emptyView;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_select_group;
+        return R2.layout.activity_select_group;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class SelectGroupActivity extends ToolBarActivity implements
         }
 
         swipeGroup.setRefreshing(true);
-        swipeGroup.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        swipeGroup.setColorSchemeColors(getResources().getColor(R2.color.colorAccent));
         swipeGroup.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

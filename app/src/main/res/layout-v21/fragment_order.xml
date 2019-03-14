@@ -4,7 +4,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:paddingTop="25dp"
         android:id="@+id/tab_order"
         android:layout_width="match_parent"
@@ -13,16 +13,16 @@
         android:elevation="4dp"
         android:outlineProvider="bounds">
 
-    </android.support.design.widget.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:layout_below="@+id/tab_order"
         android:id="@+id/vp_order"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="0dp"/>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_order"
         android:padding="32dp"
         android:src="@drawable/ic_add"

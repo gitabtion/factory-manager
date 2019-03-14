@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.widget.TextView;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.TFMApplication;
 import net.hrsoft.transparent_factory_manager.account.activities.LoginActivity;
 import net.hrsoft.transparent_factory_manager.base.activities.NoBarActivity;
@@ -21,13 +21,13 @@ import butterknife.OnClick;
 
 public class FirstActivity extends NoBarActivity {
 
-    @BindView(R.id.txt_time_cut)
+    @BindView(R2.id.txt_time_cut)
     TextView txtTimeCut;
     CountDownTimer timer;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_first;
+        return R2.layout.activity_first;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class FirstActivity extends NoBarActivity {
 
 
 
-    @OnClick(R.id.btn_jump)
+    @OnClick(R2.id.btn_jump)
     public void onViewClicked() {
         startAct();
         timer.cancel();

@@ -1,12 +1,9 @@
 package net.hrsoft.transparent_factory_manager.utils;
 
-import android.support.annotation.NonNull;
-
-import java.util.Vector;
+import androidx.annotation.NonNull;
 
 import io.reactivex.Observable;
 import io.reactivex.subjects.*;
-import io.reactivex.subscribers.SerializedSubscriber;
 
 /**
  * @author abtion.

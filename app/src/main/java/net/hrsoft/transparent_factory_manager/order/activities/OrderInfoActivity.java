@@ -2,14 +2,14 @@ package net.hrsoft.transparent_factory_manager.order.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.common.Config;
@@ -40,9 +40,9 @@ import retrofit2.Response;
 public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerViewAdapter
         .OnItemClicked<ProcedureModel> {
 
-    @BindView(R.id.swipe_order_info)
+    @BindView(R2.id.swipe_order_info)
     SwipeRefreshLayout swipeOrderInfo;
-    @BindView(R.id.rec_procedure)
+    @BindView(R2.id.rec_procedure)
     RecyclerView recProcedure;
 
     private ArrayList<ProcedureModel> procedureModels;
@@ -51,7 +51,7 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_order_info;
+        return R2.layout.activity_order_info;
     }
 
     @Override
@@ -133,7 +133,7 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
 
     private void setupSwipe() {
         swipeOrderInfo.setRefreshing(true);
-        swipeOrderInfo.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        swipeOrderInfo.setColorSchemeColors(getResources().getColor(R2.color.colorAccent));
         swipeOrderInfo.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -144,11 +144,11 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
     }
 
     private void setupToolbar() {
-        getToolbar().inflateMenu(R.menu.base_toolbar_menu);
+        getToolbar().inflateMenu(R2.menu.base_toolbar_menu);
         getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.action_edit) {
+                if (item.getItemId() == R2.id.action_edit) {
                     Intent intent = new Intent();
                     intent.setClass(OrderInfoActivity.this, UpdateOrderActivity.class);
                     Bundle bundle = new Bundle();
@@ -195,12 +195,12 @@ public class OrderInfoActivity extends ToolBarActivity implements BaseRecyclerVi
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.base_toolbar_menu, menu);
+        getMenuInflater().inflate(R2.menu.base_toolbar_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
 
-    @OnClick(R.id.fab_add_procedure)
+    @OnClick(R2.id.fab_add_procedure)
     public void onViewClicked() {
         Intent intent = new Intent(this,CreateProcedureActivity.class);
         Bundle bundle = new Bundle();

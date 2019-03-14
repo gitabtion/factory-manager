@@ -3,17 +3,15 @@ package net.hrsoft.transparent_factory_manager.base.activities;
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.hrsoft.transparent_factory_manager.base.fragments.BaseFragment;
 import net.hrsoft.transparent_factory_manager.common.exceptions.LogicErrorException;
-import net.hrsoft.transparent_factory_manager.utils.Utility;
 
 import butterknife.ButterKnife;
 

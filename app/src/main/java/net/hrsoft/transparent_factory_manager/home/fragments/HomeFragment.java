@@ -2,14 +2,14 @@ package net.hrsoft.transparent_factory_manager.home.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.base.fragments.BaseFragment;
 import net.hrsoft.transparent_factory_manager.common.Config;
@@ -24,7 +24,6 @@ import net.hrsoft.transparent_factory_manager.order.activities.ProcedureInfoActi
 import net.hrsoft.transparent_factory_manager.order.models.CurrentOrderModel;
 import net.hrsoft.transparent_factory_manager.order.models.OrderResponse;
 import net.hrsoft.transparent_factory_manager.utils.SnackbarUtil;
-import net.hrsoft.transparent_factory_manager.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,18 +45,18 @@ public class HomeFragment extends BaseFragment implements BaseRecyclerViewAdapte
     private int position;
 
 
-    @BindView(R.id.swipe_home)
+    @BindView(R2.id.swipe_home)
     SwipeRefreshLayout swipeHome;
-    @BindView(R.id.rec_home_procedure)
+    @BindView(R2.id.rec_home_procedure)
     RecyclerView recHomeProcedure;
-    @BindView(R.id.spinner_home_order_list)
+    @BindView(R2.id.spinner_home_order_list)
     Spinner spinnerHomeOrderList;
-    @BindView(R.id.empty_view)
+    @BindView(R2.id.empty_view)
      View emptyView;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_home;
+        return R2.layout.fragment_home;
     }
 
     @Override
@@ -75,7 +74,7 @@ public class HomeFragment extends BaseFragment implements BaseRecyclerViewAdapte
         }
         getCurrentOrderList(1,100);
         swipeHome.setRefreshing(true);
-        swipeHome.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        swipeHome.setColorSchemeColors(getResources().getColor(R2.color.colorAccent));
     }
 
     @Override
@@ -194,7 +193,7 @@ public class HomeFragment extends BaseFragment implements BaseRecyclerViewAdapte
      */
     private void initSwipeHome(){
         swipeHome.setRefreshing(true);
-        swipeHome.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        swipeHome.setColorSchemeColors(getResources().getColor(R2.color.colorAccent));
         swipeHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

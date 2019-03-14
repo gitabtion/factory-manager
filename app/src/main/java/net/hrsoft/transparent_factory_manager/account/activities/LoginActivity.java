@@ -2,9 +2,9 @@ package net.hrsoft.transparent_factory_manager.account.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.design.widget.TextInputEditText;
+import com.google.android.material.textfield.TextInputEditText;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.TFMApplication;
 import net.hrsoft.transparent_factory_manager.account.models.LoginRequest;
 import net.hrsoft.transparent_factory_manager.account.models.LoginResponse;
@@ -29,15 +29,15 @@ import retrofit2.Response;
  */
 
 public class LoginActivity extends NoBarActivity {
-    @BindView(R.id.edit_account)
+    @BindView(R2.id.edit_account)
     TextInputEditText editAccount;
-    @BindView(R.id.edit_password)
+    @BindView(R2.id.edit_password)
     TextInputEditText editPassword;
     private LoginRequest loginRequest;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_login;
+        return R2.layout.activity_login;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class LoginActivity extends NoBarActivity {
     }
 
 
-    @OnClick(R.id.btn_login)
+    @OnClick(R2.id.btn_login)
     public void onBtnLoginClicked() {
         if (isDataTrue()){
 
@@ -83,7 +83,7 @@ public class LoginActivity extends NoBarActivity {
                         startActivity(intent);
                         finish();
                     }else {
-                        SnackbarUtil.showSnackbar(getWindow().getDecorView(),"您的账号无权登录此客户端，请确认您的账号为经理账号");
+                        SnackbarUtil.showSnackbar(getWindow().getDecorView(),"您的账号无权登录此客户端，请确认您的账号是否为经理账号");
                     }
                 }
 
@@ -101,7 +101,7 @@ public class LoginActivity extends NoBarActivity {
 
     }
 
-    @OnClick(R.id.btn_forget_password)
+    @OnClick(R2.id.btn_forget_password)
     public void onBtnForgetPasswordClicked() {
     }
 

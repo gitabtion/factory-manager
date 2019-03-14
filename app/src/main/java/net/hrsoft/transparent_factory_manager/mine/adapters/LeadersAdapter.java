@@ -1,15 +1,14 @@
 package net.hrsoft.transparent_factory_manager.mine.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.account.models.UserModel;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
-import net.hrsoft.transparent_factory_manager.base.models.BaseModel;
 
 import java.util.List;
 
@@ -30,14 +29,14 @@ public class LeadersAdapter extends BaseRecyclerViewAdapter<UserModel> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_leaders, parent, false);
+        View view = inflater.inflate(R2.layout.item_leaders, parent, false);
         return new ItemHolder(view);
     }
 
     static class ItemHolder extends ViewHolder<UserModel> {
-        @BindView(R.id.txt_name)
+        @BindView(R2.id.txt_name)
         TextView txtName;
-        @BindView(R.id.txt_mobile)
+        @BindView(R2.id.txt_mobile)
         TextView txtMobile;
         public ItemHolder(View itemView) {
             super(itemView);

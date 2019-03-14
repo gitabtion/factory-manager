@@ -1,26 +1,23 @@
 package net.hrsoft.transparent_factory_manager.mine.fragments;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.widget.AppCompatEditText;
+import androidx.annotation.Nullable;
+import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.widget.AppCompatEditText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.TFMApplication;
 import net.hrsoft.transparent_factory_manager.account.activities.LoginActivity;
 import net.hrsoft.transparent_factory_manager.account.models.UserModel;
 import net.hrsoft.transparent_factory_manager.base.fragments.BaseFragment;
 import net.hrsoft.transparent_factory_manager.common.constants.CacheKey;
-import net.hrsoft.transparent_factory_manager.main.MainActivity;
 import net.hrsoft.transparent_factory_manager.mine.activities.WorkGroupManageActivity;
 import net.hrsoft.transparent_factory_manager.mine.models.UpdateMobileModel;
 import net.hrsoft.transparent_factory_manager.mine.models.UpdatePasswordModel;
@@ -45,11 +42,11 @@ import retrofit2.Response;
  */
 
 public class MineFragment extends BaseFragment {
-    @BindView(R.id.img_avatar)
+    @BindView(R2.id.img_avatar)
     CircleImageView imgAvatar;
-    @BindView(R.id.txt_username)
+    @BindView(R2.id.txt_username)
     TextView txtUsername;
-    @BindView(R.id.txt_mobile)
+    @BindView(R2.id.txt_mobile)
     TextView txtMobile;
 
     private UserModel user;
@@ -58,7 +55,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_mine;
+        return R2.layout.fragment_mine;
     }
 
     @Nullable
@@ -96,7 +93,7 @@ public class MineFragment extends BaseFragment {
      * 修改姓名
      * 应产品要求取消该需求
      */
-    @OnClick(R.id.rl_personal_info)
+    @OnClick(R2.id.rl_personal_info)
     public void onRlPersonalInfoClicked() {
 //        AlertDialog.Builder editBuilder = new AlertDialog.Builder(getActivity());
 //        final EditText editText = new EditText(getContext());
@@ -115,11 +112,11 @@ public class MineFragment extends BaseFragment {
     /**
      * 修改密码
      */
-    @OnClick(R.id.rl_update_password)
+    @OnClick(R2.id.rl_update_password)
     public void onRlUpdatePasswordClicked() {
         final AlertDialog.Builder editBuilder = new AlertDialog.Builder(getActivity());
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_edit_text, container, false);
-        final TextInputEditText inputEditText = (TextInputEditText) view.findViewById(R.id.edit_dialog_input);
+        View view = LayoutInflater.from(getContext()).inflate(R2.layout.dialog_edit_text, container, false);
+        final TextInputEditText inputEditText = (TextInputEditText) view.findViewById(R2.id.edit_dialog_input);
         editBuilder.setView(view).setNegativeButton("取消", null).setPositiveButton("确定", new DialogInterface
                 .OnClickListener() {
             @Override
@@ -137,11 +134,11 @@ public class MineFragment extends BaseFragment {
     /**
      * 修改手机号
      */
-    @OnClick(R.id.rl_edit_mobile)
+    @OnClick(R2.id.rl_edit_mobile)
     public void onRlEditMobileClicked() {
         AlertDialog.Builder editBuilder = new AlertDialog.Builder(getActivity());
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_edit_text, container, false);
-        final TextInputEditText inputEditText = (TextInputEditText) view.findViewById(R.id.edit_dialog_input);
+        View view = LayoutInflater.from(getContext()).inflate(R2.layout.dialog_edit_text, container, false);
+        final TextInputEditText inputEditText = (TextInputEditText) view.findViewById(R2.id.edit_dialog_input);
         editBuilder.setView(view).setNegativeButton("取消", null).setPositiveButton("确定", new DialogInterface
                 .OnClickListener() {
 
@@ -162,13 +159,13 @@ public class MineFragment extends BaseFragment {
     /**
      * 员工管理
      */
-    @OnClick(R.id.rl_employ_manager)
+    @OnClick(R2.id.rl_employ_manager)
     public void onRlEmployManagerClicked() {
         Intent intent = new Intent(getActivity(), WorkGroupManageActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.rl_exit_account)
+    @OnClick(R2.id.rl_exit_account)
     public void onRlExitAccountClicked() {
         new AlertDialog.Builder(getContext()).setMessage("确定退出账号并清除缓存信息？").setPositiveButton("确定", new
                 DialogInterface.OnClickListener() {

@@ -3,14 +3,14 @@ package net.hrsoft.transparent_factory_manager.order.activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.widget.AppCompatSeekBar;
+import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.widget.AppCompatSeekBar;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.common.Config;
 import net.hrsoft.transparent_factory_manager.home.models.GetProcedureResponse;
@@ -43,13 +43,13 @@ import retrofit2.Response;
  */
 
 public class CreateProcedureActivity extends ToolBarActivity {
-    @BindView(R.id.edit_procedure_total_count)
+    @BindView(R2.id.edit_procedure_total_count)
     TextInputEditText editTotalCount;
-    @BindView(R.id.edit_standard)
+    @BindView(R2.id.edit_standard)
     TextInputEditText editStandard;
-    @BindView(R.id.seek_weight)
+    @BindView(R2.id.seek_weight)
     AppCompatSeekBar seekWeight;
-    @BindView(R.id.txt_procedure_weight)
+    @BindView(R2.id.txt_procedure_weight)
     TextView txtProcedureWeight;
 
     private CompositeDisposable compositeDisposable;
@@ -59,20 +59,20 @@ public class CreateProcedureActivity extends ToolBarActivity {
     private ArrayList<ProcedureModel> procedureModels;
 //    private ArrayList<WeightModel> weightModels;
 
-    @BindView(R.id.edit_order_name)
+    @BindView(R2.id.edit_order_name)
     TextInputEditText editOrderName;
-    @BindView(R.id.txt_procedure_start_time)
+    @BindView(R2.id.txt_procedure_start_time)
     TextView txtProcedureStartTime;
-    @BindView(R.id.txt_procedure_end_time)
+    @BindView(R2.id.txt_procedure_end_time)
     TextView txtProcedureEndTime;
-    @BindView(R.id.txt_group_name)
+    @BindView(R2.id.txt_group_name)
     TextView txtGroupName;
-    @BindView(R.id.edit_description)
+    @BindView(R2.id.edit_description)
     EditText editDescription;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_update_procedure_info;
+        return R2.layout.activity_update_procedure_info;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
     /**
      * 选择工序开始时间按钮点击事件
      */
-    @OnClick(R.id.btn_procedure_start_time_select)
+    @OnClick(R2.id.btn_procedure_start_time_select)
     public void onBtnProcedureStartTimeSelectClicked() {
         new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -114,7 +114,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
     /**
      * 选择工序结束时间按钮点击事件
      */
-    @OnClick(R.id.btn_procedure_end_time_select)
+    @OnClick(R2.id.btn_procedure_end_time_select)
     public void onBtnProcedureEndTimeSelectClicked() {
         new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -128,7 +128,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
     /**
      * 选择班组按钮点击事件
      */
-    @OnClick(R.id.btn_group_selector)
+    @OnClick(R2.id.btn_group_selector)
     public void onBtnOrderSelectorClicked() {
         compositeDisposable = new CompositeDisposable();
         RxBus.getInstance().toObservable(GroupModel.class).subscribe(new Observer<GroupModel>() {
@@ -158,7 +158,7 @@ public class CreateProcedureActivity extends ToolBarActivity {
     }
 
 
-    @OnClick(R.id.btn_update_done)
+    @OnClick(R2.id.btn_update_done)
     public void onBtnDoneToCreateProcedureClicked() {
 //        if (procedureModels != null && isDataTrue()) {
 //            if (procedureModels.size() != 0) {

@@ -2,12 +2,12 @@ package net.hrsoft.transparent_factory_manager.order.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.base.fragments.BaseFragment;
 import net.hrsoft.transparent_factory_manager.common.Config;
@@ -39,11 +39,11 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
     public static final String ORDER = "order";
     public static final String CURRENT_ORDER = "currentOrder";
 
-    @BindView(R.id.rec_order)
+    @BindView(R2.id.rec_order)
     RecyclerView orderRec;
-    @BindView(R.id.swipe_order_content)
+    @BindView(R2.id.swipe_order_content)
     SwipeRefreshLayout swipeOrderContent;
-    @BindView(R.id.empty_view)
+    @BindView(R2.id.empty_view)
     View emptyView;
 
     private ArrayList<OrderModel> orderModels;
@@ -70,7 +70,7 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_order_content;
+        return R2.layout.fragment_order_content;
     }
 
     @Override
@@ -299,7 +299,7 @@ public class OrderContentFragment extends BaseFragment implements BaseRecyclerVi
             }
         });
         swipeOrderContent.setRefreshing(true);
-        swipeOrderContent.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        swipeOrderContent.setColorSchemeColors(getResources().getColor(R2.color.colorAccent));
 
 
     }

@@ -1,12 +1,12 @@
 package net.hrsoft.transparent_factory_manager.mine.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.mine.models.GroupModel;
 
@@ -31,16 +31,16 @@ public class WorkGroupAdapter extends BaseRecyclerViewAdapter<GroupModel> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_group, parent, false);
+        View view = inflater.inflate(R2.layout.item_group, parent, false);
         return new ItemHolder(view);
     }
 
     static class ItemHolder extends ViewHolder<GroupModel> {
-        @BindView(R.id.txt_group_name)
+        @BindView(R2.id.txt_group_name)
         TextView txtGroupName;
-        @BindView(R.id.txt_leader_name)
+        @BindView(R2.id.txt_leader_name)
         TextView txtLeaderName;
-        @BindView(R.id.txt_description)
+        @BindView(R2.id.txt_description)
         TextView txtDescription;
 
         public ItemHolder(View itemView) {

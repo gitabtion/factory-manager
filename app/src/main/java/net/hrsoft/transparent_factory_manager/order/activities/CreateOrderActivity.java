@@ -3,14 +3,14 @@ package net.hrsoft.transparent_factory_manager.order.activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
+import com.google.android.material.textfield.TextInputEditText;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.common.Config;
 import net.hrsoft.transparent_factory_manager.network.APIResponse;
@@ -36,27 +36,27 @@ import retrofit2.Response;
 public class CreateOrderActivity extends ToolBarActivity {
 
 
-    @BindView(R.id.edit_total_count)
+    @BindView(R2.id.edit_total_count)
     TextInputEditText editTotalCount;
 
-    @BindView(R.id.radio_in)
+    @BindView(R2.id.radio_in)
     RadioButton radioIn;
-    @BindView(R.id.radio_out)
+    @BindView(R2.id.radio_out)
     RadioButton radioOut;
-    @BindView(R.id.radio_group_type)
+    @BindView(R2.id.radio_group_type)
     RadioGroup radioGroupType;
 
-    @BindView(R.id.edit_order_name)
+    @BindView(R2.id.edit_order_name)
     TextInputEditText editOrderName;
-    @BindView(R.id.edit_order_client_name)
+    @BindView(R2.id.edit_order_client_name)
     TextInputEditText editOrderClientName;
-    @BindView(R.id.txt_order_start_time)
+    @BindView(R2.id.txt_order_start_time)
     TextView txtOrderStartTime;
-    @BindView(R.id.txt_order_end_time)
+    @BindView(R2.id.txt_order_end_time)
     TextView txtOrderEndTime;
-    @BindView(R.id.edit_description)
+    @BindView(R2.id.edit_description)
     EditText editAddOn;
-    @BindView(R.id.edit_order_number)
+    @BindView(R2.id.edit_order_number)
     TextInputEditText editOrderNumber;
 
     private CreateOrderRequest createOrderRequest;
@@ -64,7 +64,7 @@ public class CreateOrderActivity extends ToolBarActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_create_order;
+        return R2.layout.activity_create_order;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class CreateOrderActivity extends ToolBarActivity {
     /**
      * 选择订单开始时间按钮点击事件
      */
-    @OnClick(R.id.btn_order_start_time_select)
+    @OnClick(R2.id.btn_order_start_time_select)
     public void onBtnOrderStartTimeSelectClicked() {
         new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -101,7 +101,7 @@ public class CreateOrderActivity extends ToolBarActivity {
     /**
      * 结束订单开始时间按钮点击事件
      */
-    @OnClick(R.id.btn_order_end_time_select)
+    @OnClick(R2.id.btn_order_end_time_select)
     public void onBtnOrderEndTimeSelectClicked() {
 
         new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -115,7 +115,7 @@ public class CreateOrderActivity extends ToolBarActivity {
     /**
      * 确认按钮点击事件
      */
-    @OnClick(R.id.btn_update_order_done)
+    @OnClick(R2.id.btn_update_order_done)
     public void onBtnDoneToCreateProcedureClicked() {
         if (isDataTrue()) {
             createOrder();

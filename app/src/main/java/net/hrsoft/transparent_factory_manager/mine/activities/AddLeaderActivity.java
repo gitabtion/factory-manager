@@ -1,10 +1,9 @@
 package net.hrsoft.transparent_factory_manager.mine.activities;
 
-import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
+import com.google.android.material.textfield.TextInputEditText;
 import android.widget.TextView;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.mine.models.CreateLeaderRequest;
 import net.hrsoft.transparent_factory_manager.mine.models.LeaderAccountModel;
@@ -27,18 +26,18 @@ import retrofit2.Response;
  */
 
 public class AddLeaderActivity extends ToolBarActivity {
-    @BindView(R.id.edit_name)
+    @BindView(R2.id.edit_name)
     TextInputEditText editName;
-    @BindView(R.id.edit_mobile)
+    @BindView(R2.id.edit_mobile)
     TextInputEditText editMobile;
-    @BindView(R.id.edit_password)
+    @BindView(R2.id.edit_password)
     TextInputEditText editPassword;
-    @BindView(R.id.btn_edit_done)
+    @BindView(R2.id.btn_edit_done)
     TextView btnEditDone;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_update_user_info;
+        return R2.layout.activity_update_user_info;
     }
 
     @Override
@@ -58,7 +57,7 @@ public class AddLeaderActivity extends ToolBarActivity {
     }
 
 
-    @OnClick(R.id.btn_edit_done)
+    @OnClick(R2.id.btn_edit_done)
     public void onViewClicked() {
         if (isDataTrue()) {
             progressDialog.setMessage("请稍候");

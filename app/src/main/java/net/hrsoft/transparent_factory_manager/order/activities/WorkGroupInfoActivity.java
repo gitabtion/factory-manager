@@ -1,12 +1,12 @@
 package net.hrsoft.transparent_factory_manager.order.activities;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.widget.TextView;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.home.models.GetProcedureResponse;
 import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
@@ -37,21 +37,21 @@ public class WorkGroupInfoActivity extends ToolBarActivity {
     private static final int REFRESH = 0;
     private static final int ADD = 1;
 
-    @BindView(R.id.txt_leader_name)
+    @BindView(R2.id.txt_leader_name)
     TextView txtLeaderName;
-    @BindView(R.id.txt_group_name)
+    @BindView(R2.id.txt_group_name)
     TextView txtGroupName;
-    @BindView(R.id.txt_description)
+    @BindView(R2.id.txt_description)
     TextView txtDescription;
-    @BindView(R.id.rec_work_group_procedure)
+    @BindView(R2.id.rec_work_group_procedure)
     RecyclerView recWorkGroupProcedure;
-    @BindView(R.id.swipe_work_group_info)
+    @BindView(R2.id.swipe_work_group_info)
     SwipeRefreshLayout swipeWorkGroupInfo;
     private GroupModel groupModel;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_work_group_info;
+        return R2.layout.activity_work_group_info;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class WorkGroupInfoActivity extends ToolBarActivity {
                 getProcedure(1, 100, REFRESH);
             }
         });
-        swipeWorkGroupInfo.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        swipeWorkGroupInfo.setColorSchemeColors(getResources().getColor(R2.color.colorAccent));
 
     }
 
@@ -125,7 +125,7 @@ public class WorkGroupInfoActivity extends ToolBarActivity {
     }
 
 
-    @OnClick(R.id.btn_select)
+    @OnClick(R2.id.btn_select)
     public void onViewClicked() {
         RxBus.getInstance().post(groupModel);
         finish();

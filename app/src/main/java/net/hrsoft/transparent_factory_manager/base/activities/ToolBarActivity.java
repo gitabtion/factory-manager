@@ -1,20 +1,16 @@
 package net.hrsoft.transparent_factory_manager.base.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import net.hrsoft.transparent_factory_manager.R;
-import net.hrsoft.transparent_factory_manager.common.Config;
-import net.hrsoft.transparent_factory_manager.order.activities.OrderInfoActivity;
-import net.hrsoft.transparent_factory_manager.order.activities.UpdateOrderActivity;
+import net.hrsoft.transparent_factory_manager.R2;
 
 /**
  * @author abtion.
@@ -40,8 +36,8 @@ public abstract class ToolBarActivity extends BaseActivity {
      */
     private View getToolbarView() {
         LayoutInflater inflater = getLayoutInflater();
-        RelativeLayout viewRoot = (RelativeLayout) inflater.inflate(R.layout.view_toolbar_base, null);
-        FrameLayout viewContainer = (FrameLayout) viewRoot.findViewById(R.id.view_container);
+        RelativeLayout viewRoot = (RelativeLayout) inflater.inflate(R2.layout.view_toolbar_base, null);
+        FrameLayout viewContainer = (FrameLayout) viewRoot.findViewById(R2.id.view_container);
         viewContainer.addView(inflater.inflate(getLayoutId(), null));
         initToolbar(viewRoot);
         return viewRoot;
@@ -53,7 +49,7 @@ public abstract class ToolBarActivity extends BaseActivity {
      * @param root 页面rootView
      */
     private void initToolbar(View root) {
-        toolbar = (Toolbar) root.findViewById(R.id.toolbar);
+        toolbar = (Toolbar) root.findViewById(R2.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -92,7 +88,7 @@ public abstract class ToolBarActivity extends BaseActivity {
     protected void setActivityTitle(CharSequence charSequence) {
         if (toolbar != null) {
             toolbar.setTitle(charSequence);
-            toolbar.setTitleTextColor(getResources().getColor(R.color.black_primary));
+            toolbar.setTitleTextColor(getResources().getColor(R2.color.black_primary));
         }
     }
 

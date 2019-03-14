@@ -4,11 +4,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.common.Config;
 import net.hrsoft.transparent_factory_manager.home.models.ProcedureModel;
@@ -46,25 +46,25 @@ import retrofit2.Response;
 
 public class ProcedureInfoActivity extends ToolBarActivity {
 
-    @BindView(R.id.txt_total_count)
+    @BindView(R2.id.txt_total_count)
     TextView txtTotalCount;
-    @BindView(R.id.txt_leader_name)
+    @BindView(R2.id.txt_leader_name)
     TextView txtLeaderName;
-    @BindView(R.id.txt_procedure_name)
+    @BindView(R2.id.txt_procedure_name)
     TextView txtProcedureName;
-    @BindView(R.id.txt_start_time)
+    @BindView(R2.id.txt_start_time)
     TextView txtStartTime;
-    @BindView(R.id.txt_end_time)
+    @BindView(R2.id.txt_end_time)
     TextView txtEndTime;
-    @BindView(R.id.pie_done)
+    @BindView(R2.id.pie_done)
     PieChart pieDone;
-    @BindView(R.id.pie_time)
+    @BindView(R2.id.pie_time)
     PieChart pieTime;
-    @BindView(R.id.rec_procedure_data)
+    @BindView(R2.id.rec_procedure_data)
     RecyclerView recProcedureData;
-    @BindView(R.id.swipe_procedure_info)
+    @BindView(R2.id.swipe_procedure_info)
     SwipeRefreshLayout swipeProcedureInfo;
-    @BindView(R.id.line_procedure_data)
+    @BindView(R2.id.line_procedure_data)
     LineChart lineProcedureData;
 
     private ArrayList<ProcedureDataModel> procedureDataModels;
@@ -72,7 +72,7 @@ public class ProcedureInfoActivity extends ToolBarActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_procedure_info;
+        return R2.layout.activity_procedure_info;
     }
 
     @Override
@@ -158,12 +158,12 @@ public class ProcedureInfoActivity extends ToolBarActivity {
      * 设置toolbar的menu
      */
     private void setupToolbar() {
-        getToolbar().inflateMenu(R.menu.procedure_info_menu);
+        getToolbar().inflateMenu(R2.menu.procedure_info_menu);
         getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.action_delete:
+                    case R2.id.action_delete:
                         AlertDialog.Builder builder = new AlertDialog.Builder(ProcedureInfoActivity.this);
                         builder.setTitle("提示")
                                 .setMessage("删除工序后将不可恢复，确认删除？")
@@ -176,7 +176,7 @@ public class ProcedureInfoActivity extends ToolBarActivity {
                                 }).show();
 
                         break;
-                    case R.id.action_edit:
+                    case R2.id.action_edit:
                         Intent intent = new Intent(ProcedureInfoActivity.this, UpdateProcedureActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable(Config.PROCEDURE, procedureModel);
@@ -200,7 +200,7 @@ public class ProcedureInfoActivity extends ToolBarActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.procedure_info_menu, menu);
+        getMenuInflater().inflate(R2.menu.procedure_info_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

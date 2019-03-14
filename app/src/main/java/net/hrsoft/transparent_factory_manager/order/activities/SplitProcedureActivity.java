@@ -2,11 +2,11 @@ package net.hrsoft.transparent_factory_manager.order.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import net.hrsoft.transparent_factory_manager.R;
+import net.hrsoft.transparent_factory_manager.R2;
 import net.hrsoft.transparent_factory_manager.base.activities.ToolBarActivity;
 import net.hrsoft.transparent_factory_manager.base.adapters.BaseRecyclerViewAdapter;
 import net.hrsoft.transparent_factory_manager.common.Config;
@@ -34,16 +34,16 @@ import retrofit2.Response;
 
 public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyclerViewAdapter
         .OnItemClicked<ProcedureModel> {
-    @BindView(R.id.swipe_split_procedure)
+    @BindView(R2.id.swipe_split_procedure)
     SwipeRefreshLayout swipeSplitProcedure;
-    @BindView(R.id.rec_procedure)
+    @BindView(R2.id.rec_procedure)
     RecyclerView recProcedure;
     private ArrayList<ProcedureModel> procedureModels;
     private OrderModel orderModel;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_split_procedure;
+        return R2.layout.activity_split_procedure;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
     /**
      * 确认创建工序按钮点击事件
      */
-    @OnClick(R.id.btn_create_procedure)
+    @OnClick(R2.id.btn_create_procedure)
     public void onViewClicked() {
         Intent intent = new Intent(this, CreateProcedureActivity.class);
         Bundle bundle = new Bundle();
@@ -82,7 +82,7 @@ public class SplitProcedureActivity extends ToolBarActivity implements BaseRecyc
      */
     private void initRecSwipe() {
         swipeSplitProcedure.setRefreshing(true);
-        swipeSplitProcedure.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        swipeSplitProcedure.setColorSchemeColors(getResources().getColor(R2.color.colorAccent));
         swipeSplitProcedure.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
